@@ -1,0 +1,14 @@
+{
+    "CorUrls": [ "http://localhost:3343" ],
+    "IdentityServer": {
+        "Enable": true,
+        "ApiName": "quickframe_api",
+        "ApiSecret": "quickframe_api_secrets",
+        "RequireHttps": false,
+        "Url": "http://localhost:5080"
+    },
+    "Swagger": true,
+    "MachineId": 5,
+    "DatacenterId": 6,
+    "IdWorkerProvid": 0
+}

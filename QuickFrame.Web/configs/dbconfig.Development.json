@@ -1,0 +1,26 @@
+{
+    "Work": "(local)mssql_workdb",
+    "Back": "(local)mssql_backdb",
+    "ConnStrings": [
+        {
+            "Name": "(local)mssql_workdb",
+            "Type": 0,
+            "ConnectionString": "server=(localdb)\\MSSQLLocalDB;database=workdb;Trusted_Connection=True;Connection Timeout=30;"
+        },
+        {
+            "Name": "(local)mssql_backdb",
+            "Type": 0,
+            "ConnectionString": "server=(localdb)\\MSSQLLocalDB;database=backdb;Trusted_Connection=True;Connection Timeout=30;"
+        },
+        {
+            "Name": "sqlite_workdb",
+            "Type": 1,
+            "ConnectionString": "Data Source=bin\\Debug\\net5.0\\workdb.db"
+        },
+        {
+            "Name": "sqlite_backdb",
+            "Type": 1,
+            "ConnectionString": "Data Source=bin\\Debug\\net5.0\\backdb.db"
+        }
+    ]
+}

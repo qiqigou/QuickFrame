@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <LangVersion>9.0</LangVersion>
+        <Nullable>enable</Nullable>
+        <Version>1.0.1.100</Version>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>1701;1702;1591</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="DynamicTypeMap" Version="[1.1.4]" />
+        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="[5.0.1]" />
+        <PackageReference Include="Qiqigou.Mapster" Version="[6.5.1]" />
+        <PackageReference Include="Mapster.DependencyInjection" Version="[1.0.0]" />
+        <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="[3.0.1]" />
+        <PackageReference Include="CSRedisCore" Version="[3.6.5]" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="[5.0.1]" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="[5.0.1]" />
+        <PackageReference Include="ObjAssignMap" Version="[1.1.1]" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="[2.2.5]" />
+        <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="[7.1.0]" />
+        <PackageReference Include="Autofac.Extras.DynamicProxy" Version="[6.0.0]" />
+    </ItemGroup>
+
+</Project>

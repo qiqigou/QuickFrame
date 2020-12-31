@@ -1,0 +1,7 @@
+{
+    "Issuer": "pc-5050",
+    "Audience": "any",
+    "SecurityKey": "asf89*ss@&#2897*&&%#op",
+    "Expires": 120,
+    "RefreshExpires": 1440
+}

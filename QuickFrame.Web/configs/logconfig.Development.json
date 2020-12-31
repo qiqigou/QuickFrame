@@ -1,0 +1,18 @@
+{
+    "Serilog": {
+        "MinimumLevel": {
+            "Default": "Debug",
+            "Override": {
+                "Microsoft": "Information",
+                "Microsoft.Hosting.Lifetime": "Information",
+                "Microsoft.AspNetCore.Hosting.Diagnostics": "Fatal",
+                "Microsoft.AspNetCore.StaticFiles": "Fatal"
+            }
+        },
+        "FilePath": "bin\\Debug\\net5.0\\logs\\log-.log",
+        "ConsoleTemplate": "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}",
+        "FileTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {SourceContext} {Message:lj}{NewLine}{Exception}",
+        "RollingInterval": 3,
+        "FileCountLimit": 7
+    }
+}

@@ -8,8 +8,5 @@ namespace QuickFrame.Controllers
     [Authorize]
     [ApiController]
     [Produces(MediaTypeNames.Application.Json)]
-    public class BaseController : ControllerBase
-    {
-
-    }
+    public abstract class BaseController : ControllerBase { }
 }

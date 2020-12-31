@@ -33,7 +33,7 @@
         {
             Code = messageCode.Code;
             Title = messageCode.Title;
-            MsgDetail = messageCode.MsgDetail != default ? new[] { messageCode.MsgDetail } : default;
+            MsgDetail = messageCode.MsgTemplate != default ? new[] { messageCode.MsgTemplate } : default;
         }
     }
 }

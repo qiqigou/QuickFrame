@@ -10,7 +10,7 @@ namespace QuickFrame.Common
         /// <summary>
         /// 消息码
         /// </summary>
-        public MessageCode MessageCode { get; }
+        public MessageCode MsgCode { get; }
         /// <summary>
         /// 处理过程异常
         /// </summary>
@@ -19,11 +19,11 @@ namespace QuickFrame.Common
         public HandelException(MessageCode messageCode, params object[] msgobj)
         {
             var args = msgobj.Length > 0 ? msgobj : messageCode.MsgArgs;
-            MessageCode = new MessageCode(messageCode.Code, messageCode.Title, messageCode.MsgDetail, args);
+            MsgCode = new MessageCode(messageCode.Code, messageCode.Title, messageCode.MsgTemplate, args);
         }
         /// <summary>
         /// 消息内容
         /// </summary>
-        public override string Message => MessageCode.MsgArgs?.Length > 0 ? string.Format(MessageCode.MsgDetail ?? string.Empty, MessageCode.MsgArgs) : MessageCode.MsgDetail ?? string.Empty;
+        public override string Message => MsgCode.Message;
     }
 }

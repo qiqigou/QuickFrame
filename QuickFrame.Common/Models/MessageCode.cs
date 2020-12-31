@@ -14,19 +14,23 @@
         /// </summary>
         public string Title { get; init; }
         /// <summary>
-        /// 详细信息
+        /// 消息模板
         /// </summary>
-        public string? MsgDetail { get; init; }
+        public string? MsgTemplate { get; init; }
         /// <summary>
         /// 消息参数
         /// </summary>
         public object[]? MsgArgs { get; init; }
+        /// <summary>
+        /// 消息内容
+        /// </summary>
+        public string Message => MsgArgs?.Length > 0 ? string.Format(MsgTemplate ?? string.Empty, MsgArgs) : MsgTemplate ?? string.Empty;
 
-        public MessageCode(int code, string title, string? msgdetail = default, object[]? msgargs = default)
+        public MessageCode(int code, string title, string? msgtemplate = default, object[]? msgargs = default)
         {
             Code = code;
             Title = title;
-            MsgDetail = msgdetail;
+            MsgTemplate = msgtemplate;
             MsgArgs = msgargs;
         }
     }

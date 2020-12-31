@@ -3,23 +3,20 @@
     /// <summary>
     /// 下拉选项输出
     /// </summary>
-    public class OptionOutput : IMEntity
+    public class OptionOutput<TValue> : IMEntity
+        where TValue : notnull
     {
         /// <summary>
-        /// 名称
+        /// 显示名
         /// </summary>
         public string Label { get; set; } = string.Empty;
         /// <summary>
-        /// 值
+        /// 真实值
         /// </summary>
-        public object? Value { get; set; }
+        public TValue Value { get; set; } = default!;
         /// <summary>
         /// 禁用
         /// </summary>
         public bool Disabled { get; set; }
-        /// <summary>
-        /// 额外数据
-        /// </summary>
-        public object? Data { get; set; }
     }
 }

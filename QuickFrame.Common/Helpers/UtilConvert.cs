@@ -72,13 +72,25 @@ namespace QuickFrame.Common
         /// <summary>
         /// 去除空值
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
         /// <param name="array"></param>
         /// <returns></returns>
-        public static T[]? RemoveNull<T>(this T[]? array)
-            where T : class
+        public static TValue[]? RemoveNull<TValue>(this TValue[]? array) => array?.Where(x => x != null)?.ToArray();
+        /// <summary>
+        /// 获取枚举的Options
+        /// </summary>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <returns></returns>
+        public static IEnumerable<OptionOutput<int>> GetOptions<TEnum>()
+            where TEnum : Enum
         {
-            return array?.Where(x => x != null)?.ToArray();
+            var enumType = typeof(TEnum);
+            if (!enumType.IsEnum) Array.Empty<OptionOutput<int>>();
+            return Enum.GetValues(enumType).Cast<Enum>().Select(x => new OptionOutput<int>
+            {
+                Label = x.GetDescription(),
+                Value = Convert.ToInt32(x)
+            }).ToArray();
         }
     }
 }

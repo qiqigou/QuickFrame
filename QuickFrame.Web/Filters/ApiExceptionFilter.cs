@@ -31,7 +31,7 @@ namespace QuickFrame.Web
             switch (context.Exception)
             {
                 case HandelException ex:
-                    var result = new MsgOutput(ex.MessageCode)
+                    var result = new MsgOutput(ex.MsgCode)
                     {
                         MsgDetail = new[] { ex.Message }
                     };
@@ -39,7 +39,7 @@ namespace QuickFrame.Web
                     _logger.LogWarning(LogEventsOption.Bad, ex.Message);
                     break;
                 case HandelArrayException ex:
-                    result = new MsgOutput(ex.Exceptions[0].MessageCode)
+                    result = new MsgOutput(ex.Exceptions[0].MsgCode)
                     {
                         MsgDetail = ex.ArrayMessage
                     };

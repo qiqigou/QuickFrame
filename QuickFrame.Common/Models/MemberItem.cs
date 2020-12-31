@@ -18,7 +18,7 @@ namespace QuickFrame.Common
         /// <summary>
         /// 参数
         /// </summary>
-        public NameValueItem[] Param { get; set; } = Array.Empty<NameValueItem>();
+        public NameValueItem<string>[] Param { get; set; } = Array.Empty<NameValueItem<string>>();
         /// <summary>
         /// 返回值
         /// </summary>
@@ -26,6 +26,6 @@ namespace QuickFrame.Common
         /// <summary>
         /// 泛型参数
         /// </summary>
-        public NameValueItem[] TypeParam { get; set; } = Array.Empty<NameValueItem>();
+        public NameValueItem<string>[] TypeParam { get; set; } = Array.Empty<NameValueItem<string>>();
     }
 }

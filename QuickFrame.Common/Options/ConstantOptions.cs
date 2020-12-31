@@ -28,7 +28,7 @@ namespace QuickFrame.Common
         /// <summary>
         /// 数据库Boolean值常量
         /// </summary>
-        public static class DbFlag
+        public static class DbFlagConstant
         {
             /// <summary>
             /// 1

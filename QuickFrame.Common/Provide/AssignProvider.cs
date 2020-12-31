@@ -49,11 +49,11 @@ namespace QuickFrame.Common
             //审核标识
             config.ForField<string>(AssignOption.Auth)
                 .SetRule(field => field.EndsWith("_cauditflag") || field.EndsWith("_cmtflag"))
-                .SetVal(p => ConstantOptions.DbFlag.DbTrue);
+                .SetVal(p => ConstantOptions.DbFlagConstant.DbTrue);
             //弃审标识
             config.ForField<string>(AssignOption.UnAuth)
                 .SetRule(field => field.EndsWith("_cauditflag") || field.EndsWith("_cmtflag"))
-                .SetVal(p => ConstantOptions.DbFlag.DbFalse);
+                .SetVal(p => ConstantOptions.DbFlagConstant.DbFalse);
             return config.Build();
         }
     }

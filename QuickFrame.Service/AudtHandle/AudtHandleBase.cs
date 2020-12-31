@@ -14,9 +14,9 @@ namespace QuickFrame.Service
         where TKey : notnull
     {
         protected readonly string code = string.Empty;
-        protected readonly string flag = ConstantOptions.DbFlag.DbTrue;
-        protected readonly string dbtrue = ConstantOptions.DbFlag.DbTrue;
-        protected readonly string dbfalse = ConstantOptions.DbFlag.DbFalse;
+        protected readonly string flag = ConstantOptions.DbFlagConstant.DbTrue;
+        protected readonly string dbtrue = ConstantOptions.DbFlagConstant.DbTrue;
+        protected readonly string dbfalse = ConstantOptions.DbFlagConstant.DbFalse;
         protected string Option => flag == dbtrue ? AssignOption.Auth : AssignOption.UnAuth;
         /// <summary>
         /// 数量统一控制.

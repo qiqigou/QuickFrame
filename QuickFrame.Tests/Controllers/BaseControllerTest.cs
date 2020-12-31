@@ -103,11 +103,11 @@ namespace QuickFrame.Controllers.Tests
             var tokenResponse = await httpClient.RequestPasswordTokenAsync(new PasswordTokenRequest
             {
                 Address = disco.TokenEndpoint,
-                ClientId = "zxsofterp_core_tests",
-                ClientSecret = "zxsofterp_core_tests",
+                ClientId = "quickframe_test",
+                ClientSecret = "quickframe_test",
                 UserName = "admin",
                 Password = "123123",
-                Scope = "zxsofterp_core",
+                Scope = "quickframe",
             });
             Assert.IsFalse(tokenResponse.IsError);
             return tokenResponse.AccessToken;

@@ -33,10 +33,7 @@ namespace QuickFrame.Web
         /// 未使用，不需要实现
         /// </summary>
         /// <returns></returns>
-        protected override Task<AuthenticateResult> HandleAuthenticateAsync()
-        {
-            throw new NotImplementedException();
-        }
+        protected override Task<AuthenticateResult> HandleAuthenticateAsync() => throw new NotImplementedException();
         /// <summary>
         /// 未认证
         /// </summary>

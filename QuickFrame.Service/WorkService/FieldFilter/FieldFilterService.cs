@@ -11,7 +11,7 @@ namespace QuickFrame.Service
     /// <summary>
     /// 字段过滤器服务
     /// </summary>
-    public class FieldFilterService : BillMainChildServiceBase<fieldfilter_fg, fieldfilterc_fgc, FieldFilterInput, FieldFilterUpdInput, FieldFiltercInput, FieldFiltercUpdInput, v_fieldfilter, v_fieldfilterc, long, int>, IFieldFilterService
+    public class FieldFilterService : BillMainChildServiceBase<fieldfilter_fg, fieldfilterc_fgc, v_fieldfilter, v_fieldfilterc, FieldFilterInput, FieldFilterUpdInput, FieldFiltercInput, FieldFiltercUpdInput, long, int>, IFieldFilterService
     {
         private readonly IFieldFilterProvider _filterProvider;
 

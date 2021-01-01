@@ -17,15 +17,15 @@ namespace QuickFrame.Service
     /// </summary>
     /// <typeparam name="TMain">主表</typeparam>
     /// <typeparam name="TChild">子表</typeparam>
+    /// <typeparam name="TMainView">主视图</typeparam>
+    /// <typeparam name="TChildView">子视图</typeparam>
     /// <typeparam name="TMainInput">新增主表时输入模型</typeparam>
     /// <typeparam name="TMainUpdInput">修改主表时输入模型</typeparam>
     /// <typeparam name="TChildInput">新增子表时输入模型</typeparam>
     /// <typeparam name="TChildUpdInput">修改子表时输入模型</typeparam>
-    /// <typeparam name="TMainView">主视图</typeparam>
-    /// <typeparam name="TChildView">子视图</typeparam>
     /// <typeparam name="TKey">主表主键</typeparam>
     /// <typeparam name="TCKey">子表项次键</typeparam>
-    public abstract class BillMainChildServiceBase<TMain, TChild, TMainInput, TMainUpdInput, TChildInput, TChildUpdInput, TMainView, TChildView, TKey, TCKey> : IHandleMainChild<TMainInput, TMainUpdInput, TChildInput, TChildUpdInput, TKey>, IQueryMainChild<TMainView, TChildView, TKey>
+    public abstract class BillMainChildServiceBase<TMain, TChild, TMainView, TChildView, TMainInput, TMainUpdInput, TChildInput, TChildUpdInput, TKey, TCKey> : IHandleMainChild<TMainInput, TMainUpdInput, TChildInput, TChildUpdInput, TKey>, IQueryMainChild<TMainView, TChildView, TKey>
         where TMain : WithStampTable, new()
         where TChild : TableEntity, new()
         where TMainInput : IDataInput, new()
@@ -35,6 +35,7 @@ namespace QuickFrame.Service
         where TMainView : WithStampView, new()
         where TChildView : ViewEntity, new()
         where TKey : notnull
+        where TCKey : notnull
     {
         private static Func<TMain, TKey>? _mainKeyFunc;
         private static Func<TMain, IEnumerable<TChild>?>? _childTableFunc;

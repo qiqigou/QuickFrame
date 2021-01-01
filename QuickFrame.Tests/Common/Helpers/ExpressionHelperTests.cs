@@ -12,7 +12,7 @@ namespace QuickFrame.Common.Tests
         [TestMethod()]
         public void WhereEqualOrTest()
         {
-            var whereExp1 = ExpressionHelper.WhereEqualOr<userinfo_us, int>(nameof(userinfo_us.uid), new[] { 1, 98, 89 });
+            var whereExp1 = ExpressionHelper.WhereEqualOr<userinfo_us, int>(new[] { nameof(userinfo_us.uid) }, new[] { 1, 98, 89 });
             Expression<Func<userinfo_us, bool>> whereExp2 = px => px.uid == 1 || px.uid == 98 || px.uid == 89;
             Assert.AreEqual(whereExp1.ToString(), whereExp2.ToString());
         }
@@ -20,7 +20,7 @@ namespace QuickFrame.Common.Tests
         [TestMethod()]
         public void WhereLambdaTest()
         {
-            var whereExp1 = ExpressionHelper.WhereLambda<userinfo_us, string>(nameof(userinfo_us.name), "wyl");
+            var whereExp1 = ExpressionHelper.WhereLambda<userinfo_us, string>(new[] { nameof(userinfo_us.name) }, "wyl");
             Expression<Func<userinfo_us, bool>> whereExp2 = px => px.name == "wyl";
             Assert.AreEqual(whereExp1.ToString(), whereExp2.ToString());
         }
@@ -28,7 +28,7 @@ namespace QuickFrame.Common.Tests
         [TestMethod()]
         public void MemberLambdaTest()
         {
-            var member1 = ExpressionHelper.MemberLambda<userinfo_us, int>(nameof(userinfo_us.uid));
+            var member1 = ExpressionHelper.MemberLambda<userinfo_us, int>(new[] { nameof(userinfo_us.uid) });
             Expression<Func<userinfo_us, int>> member2 = px => px.uid;
             Assert.AreEqual(member1.ToString(), member2.ToString());
         }

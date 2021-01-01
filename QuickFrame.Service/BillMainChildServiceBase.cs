@@ -24,7 +24,8 @@ namespace QuickFrame.Service
     /// <typeparam name="TMainView">主视图</typeparam>
     /// <typeparam name="TChildView">子视图</typeparam>
     /// <typeparam name="TKey">主表主键</typeparam>
-    public abstract class BillMainChildServiceBase<TMain, TChild, TMainInput, TMainUpdInput, TChildInput, TChildUpdInput, TMainView, TChildView, TKey> : IHandleMainChild<TMainInput, TMainUpdInput, TChildInput, TChildUpdInput, TKey>, IQueryMainChild<TMainView, TChildView, TKey>
+    /// <typeparam name="TCKey">子表项次键</typeparam>
+    public abstract class BillMainChildServiceBase<TMain, TChild, TMainInput, TMainUpdInput, TChildInput, TChildUpdInput, TMainView, TChildView, TKey, TCKey> : IHandleMainChild<TMainInput, TMainUpdInput, TChildInput, TChildUpdInput, TKey>, IQueryMainChild<TMainView, TChildView, TKey>
         where TMain : WithStampTable, new()
         where TChild : TableEntity, new()
         where TMainInput : IDataInput, new()
@@ -80,11 +81,11 @@ namespace QuickFrame.Service
         /// <summary>
         /// 子表项次
         /// </summary>
-        protected abstract Func<TChild, int> ChildIorder { get; }
+        protected abstract Func<TChild, TCKey> ChildIorder { get; }
         /// <summary>
         /// 子表修改时输入模型项次
         /// </summary>
-        protected abstract Func<TChildUpdInput, int> ChildUpdInputIorder { get; }
+        protected abstract Func<TChildUpdInput, TCKey> ChildUpdInputIorder { get; }
         /// <summary>
         /// 查询子视图集合
         /// </summary>
@@ -208,7 +209,6 @@ namespace QuickFrame.Service
         /// <summary>
         /// 子表赋值的委托
         /// </summary>
-        protected Action<TMain, IEnumerable<TChild>?> ChildTableAction
-        => _childTableAction ??= ExpressionHelper.AssignLambda<TMain, IEnumerable<TChild>>(((MemberExpression)ChildTable.Body).Member.Name).Compile();
+        protected Action<TMain, IEnumerable<TChild>?> ChildTableAction => _childTableAction ??= ExpressionHelper.AssignLambda<TMain, IEnumerable<TChild>>(((MemberExpression)ChildTable.Body).Member.Name).Compile();
     }
 }

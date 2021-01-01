@@ -23,7 +23,7 @@ namespace QuickFrame.Controllers.Tests
         protected string BackUrl(string controller, string action, params object[] query)
             => $"/api/{ConstantOptions.ModulesConstant.Back}/{controller.Replace("Controller", "")}/{action.Replace("Async", "")}{JoinParams(query)}";
 
-        public static LoginInput User => new LoginInput { UserName = "wyl", PassWord = "123123", DbName = "zxsccore" };
+        public static LoginInput User => new LoginInput { UserName = "wyl", PassWord = "123123", DbName = "workdb" };
 
         /// <summary>
         /// 创建请求HttpContext

@@ -13,42 +13,10 @@ namespace QuickFrame.Common
         /// <summary>
         /// 拼接条件表达式
         /// </summary>
-        /// <typeparam name="TEntity">实体类型</typeparam>
-        /// <typeparam name="TValue">值类型</typeparam>
-        /// <param name="propName">属性名</param>
-        /// <param name="values">值</param>
-        /// <returns></returns>
-        public static Expression<Func<TEntity, bool>> WhereEqualOr<TEntity, TValue>(string propName, TValue[] values)
-            where TEntity : class
-            where TValue : notnull
-        {
-            _ = values.Any() ? true : throw new ArgumentNullException($"参数{nameof(values)}没有任何值");
-            var px = Expression.Parameter(typeof(TEntity), "px");
-            var left = Expression.Property(px, propName);
-            Expression? where = default;
-            foreach (var item in values)
-            {
-                var right = Expression.Constant(item);
-                var comp = Expression.Equal(left, right);
-                if (where == default)
-                {
-                    where = comp;
-                }
-                else
-                {
-                    where = Expression.OrElse(where, comp);
-                }
-            }
-            _ = where ?? throw new ArgumentNullException($"条件表达式{nameof(where)}为空");
-            return Expression.Lambda<Func<TEntity, bool>>(where, px);
-        }
-        /// <summary>
-        /// 拼接条件表达式(支持元组)
-        /// </summary>
-        /// <typeparam name="TEntity">实体类型</typeparam>
-        /// <typeparam name="TValue">元组类型</typeparam>
         /// <param name="propNames">属性名</param>
-        /// <param name="values">值(元组类型)</param>
+        /// <param name="values">值</param>
+        /// <typeparam name="TEntity">参数类型</typeparam>
+        /// <typeparam name="TValue">值类型(支持元组)</typeparam>
         /// <returns></returns>
         public static Expression<Func<TEntity, bool>> WhereEqualOr<TEntity, TValue>(string[] propNames, TValue[] values)
             where TEntity : class
@@ -97,34 +65,33 @@ namespace QuickFrame.Common
             }
             else
             {
-                return WhereEqualOr<TEntity, TValue>(propNames[0], values);
+                var px = Expression.Parameter(typeof(TEntity), "px");
+                var left = Expression.Property(px, propNames[0]);
+                Expression? where = default;
+                foreach (var item in values)
+                {
+                    var right = Expression.Constant(item);
+                    var comp = Expression.Equal(left, right);
+                    if (where == default)
+                    {
+                        where = comp;
+                    }
+                    else
+                    {
+                        where = Expression.OrElse(where, comp);
+                    }
+                }
+                _ = where ?? throw new ArgumentNullException($"条件表达式{nameof(where)}为空");
+                return Expression.Lambda<Func<TEntity, bool>>(where, px);
             }
         }
         /// <summary>
         /// 拼接条件表达式
         /// </summary>
-        /// <param name="propName">属性</param>
-        /// <param name="value">值</param>
-        /// <typeparam name="TEntity">实体类型</typeparam>
-        /// <typeparam name="TValue">值类型</typeparam>
-        /// <returns></returns>
-        public static Expression<Func<TEntity, bool>> WhereLambda<TEntity, TValue>(string propName, TValue value)
-            where TEntity : class
-            where TValue : notnull
-        {
-            var px = Expression.Parameter(typeof(TEntity), "px");
-            var left = Expression.Property(px, propName);
-            var right = Expression.Constant(value);
-            var comp = Expression.Equal(left, right);
-            return Expression.Lambda<Func<TEntity, bool>>(comp, px);
-        }
-        /// <summary>
-        /// 拼接条件表达式(支持元组)
-        /// </summary>
         /// <param name="propNames">属性集合</param>
-        /// <param name="value">值(支持元组)</param>
-        /// <typeparam name="TEntity">实体类型</typeparam>
-        /// <typeparam name="TValue">值类型</typeparam>
+        /// <param name="value">值</param>
+        /// <typeparam name="TEntity">参数类型</typeparam>
+        /// <typeparam name="TValue">值类型(支持元组)</typeparam>
         /// <returns></returns>
         public static Expression<Func<TEntity, bool>> WhereLambda<TEntity, TValue>(string[] propNames, TValue value)
             where TEntity : class
@@ -155,29 +122,18 @@ namespace QuickFrame.Common
             }
             else
             {
-                return WhereLambda<TEntity, TValue>(propNames[0], value);
+                var px = Expression.Parameter(typeof(TEntity), "px");
+                var left = Expression.Property(px, propNames[0]);
+                var right = Expression.Constant(value);
+                var comp = Expression.Equal(left, right);
+                return Expression.Lambda<Func<TEntity, bool>>(comp, px);
             }
         }
         /// <summary>
         /// 拼接属性访问表达式
         /// </summary>
-        /// <param name="propName"></param>
-        /// <typeparam name="TEntity"></typeparam>
-        /// <typeparam name="TKey"></typeparam>
-        /// <returns></returns>
-        public static Expression<Func<TEntity, TKey>> MemberLambda<TEntity, TKey>(string propName)
-            where TEntity : class
-            where TKey : notnull
-        {
-            var px = Expression.Parameter(typeof(TEntity), "px");
-            var member = Expression.Property(px, propName);
-            return Expression.Lambda<Func<TEntity, TKey>>(member, px);
-        }
-        /// <summary>
-        /// 拼接属性访问表达式(支持元组)
-        /// </summary>
         /// <param name="propNames">属性</param>
-        /// <typeparam name="TEntity">实体类型</typeparam>
+        /// <typeparam name="TEntity">参数类型</typeparam>
         /// <typeparam name="TValue">值类型(支持元组)</typeparam>
         /// <returns></returns>
         public static Expression<Func<TEntity, TValue>> MemberLambda<TEntity, TValue>(string[] propNames)
@@ -198,7 +154,9 @@ namespace QuickFrame.Common
             }
             else
             {
-                return MemberLambda<TEntity, TValue>(propNames[0]);
+                var px = Expression.Parameter(typeof(TEntity), "px");
+                var member = Expression.Property(px, propNames[0]);
+                return Expression.Lambda<Func<TEntity, TValue>>(member, px);
             }
         }
         /// <summary>

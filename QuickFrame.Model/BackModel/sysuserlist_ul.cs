@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using QuickFrame.Common;
+﻿using QuickFrame.Common;
+using System.ComponentModel.DataAnnotations;
 
 namespace QuickFrame.Model
 {

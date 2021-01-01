@@ -3,9 +3,9 @@ using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
-using System;
 using QuickFrame.Common;
 using QuickFrame.Web;
+using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

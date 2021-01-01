@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using QuickFrame.Common;
 using QuickFrame.Model;
 using QuickFrame.Repository;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace QuickFrame.Service
 {

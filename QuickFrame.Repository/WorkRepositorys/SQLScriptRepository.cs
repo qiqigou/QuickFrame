@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using QuickFrame.Model;
 using System;
 using System.Threading.Tasks;
-using QuickFrame.Model;
 
 namespace QuickFrame.Repository
 {

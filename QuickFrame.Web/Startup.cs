@@ -10,13 +10,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Reflection;
 using QuickFrame.Common;
 using QuickFrame.Model;
 using QuickFrame.Repository;
 using QuickFrame.Service;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Reflection;
 
 namespace QuickFrame.Web
 {

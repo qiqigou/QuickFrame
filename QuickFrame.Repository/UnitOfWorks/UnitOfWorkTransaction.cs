@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
+using QuickFrame.Common;
 using System;
 using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
-using QuickFrame.Common;
 
 namespace QuickFrame.Repository
 {

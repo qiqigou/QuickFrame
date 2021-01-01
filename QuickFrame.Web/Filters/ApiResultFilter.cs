@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
-using System.Threading.Tasks;
 using QuickFrame.Common;
+using System.Threading.Tasks;
 
 namespace QuickFrame.Web
 {

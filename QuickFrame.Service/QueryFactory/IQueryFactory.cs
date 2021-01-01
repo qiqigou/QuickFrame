@@ -1,6 +1,6 @@
-﻿using System;
+﻿using QuickFrame.Model;
+using System;
 using System.Linq.Expressions;
-using QuickFrame.Model;
 
 namespace QuickFrame.Service
 {

@@ -1,11 +1,11 @@
 ﻿using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using QuickFrame.Common;
 using QuickFrame.Model;
 using QuickFrame.Repository;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace QuickFrame.Service
 {

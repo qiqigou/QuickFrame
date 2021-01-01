@@ -1,11 +1,11 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using QuickFrame.Common;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
-using QuickFrame.Common;
 
 namespace QuickFrame.Model
 {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Linq.Expressions;
 using QuickFrame.Model;
 using QuickFrame.Tests;
+using System;
+using System.Linq.Expressions;
 
 namespace QuickFrame.Common.Tests
 {

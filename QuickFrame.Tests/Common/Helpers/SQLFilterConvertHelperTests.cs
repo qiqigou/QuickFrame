@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using QuickFrame.Tests;
 using System;
 using System.Linq.Expressions;
-using QuickFrame.Tests;
 
 namespace QuickFrame.Common.Tests
 {

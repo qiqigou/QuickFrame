@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using QuickFrame.Common;
 using System;
 using System.Threading.Tasks;
-using QuickFrame.Common;
 
 namespace QuickFrame.Web
 {

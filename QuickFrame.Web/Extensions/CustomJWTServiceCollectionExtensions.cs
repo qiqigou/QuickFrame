@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Text;
 using QuickFrame.Common;
 using QuickFrame.Web;
+using System;
+using System.Text;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

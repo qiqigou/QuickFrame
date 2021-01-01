@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using QuickFrame.Common;
+﻿using QuickFrame.Common;
+using System.Threading.Tasks;
 
 namespace QuickFrame.Service
 {

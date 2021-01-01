@@ -1,8 +1,8 @@
-﻿using System;
+﻿using QuickFrame.Common;
+using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using QuickFrame.Common;
 
 namespace QuickFrame.Service
 {

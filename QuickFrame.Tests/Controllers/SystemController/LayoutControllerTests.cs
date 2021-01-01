@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
 using QuickFrame.Model;
+using System.Threading.Tasks;
 
 namespace QuickFrame.Controllers.Tests
 {

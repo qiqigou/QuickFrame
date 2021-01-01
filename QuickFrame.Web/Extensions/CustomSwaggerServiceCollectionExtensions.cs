@@ -1,9 +1,9 @@
 ﻿using Microsoft.OpenApi.Models;
+using QuickFrame.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using QuickFrame.Common;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

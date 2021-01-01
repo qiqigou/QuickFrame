@@ -1,5 +1,5 @@
-﻿using System.Reflection;
-using QuickFrame.Common;
+﻿using QuickFrame.Common;
+using System.Reflection;
 
 namespace Microsoft.AspNetCore.Builder
 {

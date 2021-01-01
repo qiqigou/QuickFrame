@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Linq.Expressions;
 using QuickFrame.Common;
 using QuickFrame.Model;
 using QuickFrame.Repository;
+using System;
+using System.Linq.Expressions;
 
 namespace QuickFrame.Service
 {

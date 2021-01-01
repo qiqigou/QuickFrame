@@ -10,7 +10,7 @@ namespace QuickFrame.Repository
     /// 视图查询仓储
     /// </summary>
     /// <typeparam name="TOption">DbContext类别</typeparam>
-    public interface IQueryRepository<out TOption> : IQueryRepository where TOption : IContextOption { }
+    public interface IQueryRepository<TOption> : IQueryRepository where TOption : IContextOption { }
     /// <summary>
     /// 视图查询仓储
     /// </summary>

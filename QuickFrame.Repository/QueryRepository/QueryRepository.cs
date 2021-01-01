@@ -10,21 +10,7 @@ using System.Threading.Tasks;
 namespace QuickFrame.Repository
 {
     /// <summary>
-    /// 后端管理库视图查询仓储
-    /// </summary>
-    internal class BackQueryRepository : QueryRepository, IQueryRepository<BackOption>
-    {
-        public BackQueryRepository(IUnitOfWork<BackOption> unitOfWork) : base(unitOfWork) { }
-    }
-    /// <summary>
-    /// 业务库视图查询仓储
-    /// </summary>
-    internal class WorkQueryRepository : QueryRepository, IQueryRepository<WorkOption>
-    {
-        public WorkQueryRepository(IUnitOfWork<WorkOption> unitOfWork) : base(unitOfWork) { }
-    }
-    /// <summary>
-    /// 视图查询仓储
+    /// 视图仓储抽象(只读仓储)
     /// </summary>
     internal abstract class QueryRepository : IQueryRepository
     {
@@ -120,5 +106,19 @@ namespace QuickFrame.Repository
             }
             _unitOfWork = default;
         }
+    }
+    /// <summary>
+    /// 后端库视图仓储
+    /// </summary>
+    internal class BackQueryRepository : QueryRepository, IQueryRepository<BackOption>
+    {
+        public BackQueryRepository(IUnitOfWork<BackOption> unitOfWork) : base(unitOfWork) { }
+    }
+    /// <summary>
+    /// 业务库视图仓储
+    /// </summary>
+    internal class WorkQueryRepository : QueryRepository, IQueryRepository<WorkOption>
+    {
+        public WorkQueryRepository(IUnitOfWork<WorkOption> unitOfWork) : base(unitOfWork) { }
     }
 }

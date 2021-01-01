@@ -3,33 +3,15 @@ using QuickFrame.Common;
 using QuickFrame.Model;
 using System;
 using System.Data;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace QuickFrame.Repository
 {
     /// <summary>
-    /// 后台管理库工作单元
-    /// </summary>
-    [ScopeInjection]
-    internal class BackUnitOfWork : UnitOfWork, IUnitOfWork<BackOption>
-    {
-        public BackUnitOfWork(BackDbContext dbContext) : base(dbContext) { }
-    }
-    /// <summary>
-    /// 业务库工作单元
-    /// </summary>
-    [ScopeInjection]
-    internal class WorkUnitOfWork : UnitOfWork, IUnitOfWork<WorkOption>
-    {
-        public WorkUnitOfWork(WorkDbContext dbContext) : base(dbContext) { }
-    }
-    /// <summary>
-    /// 工作单元实现类
+    /// 工作单元抽象
     /// </summary>
     internal abstract class UnitOfWork : IUnitOfWork
     {
-        private static CancellationTokenSource TokenSource => TaskCancelOption.DbTask;
         private DbContext? _dbContext;
 
         /// <summary>
@@ -67,7 +49,7 @@ namespace QuickFrame.Repository
         /// 保存更改(异步)
         /// </summary>
         /// <returns></returns>
-        public Task<int> SaveChangesAsync() => CurrentContext.SaveChangesAsync(TokenSource.Token);
+        public Task<int> SaveChangesAsync() => CurrentContext.SaveChangesAsync(TaskCancelOption.DbTask.Token);
         /// <summary>
         /// 自动保存
         /// </summary>
@@ -124,5 +106,21 @@ namespace QuickFrame.Repository
             }
             _dbContext = default;
         }
+    }
+    /// <summary>
+    /// 后台库工作单元
+    /// </summary>
+    [ScopeInjection]
+    internal class BackUnitOfWork : UnitOfWork, IUnitOfWork<BackOption>
+    {
+        public BackUnitOfWork(BackDbContext dbContext) : base(dbContext) { }
+    }
+    /// <summary>
+    /// 业务库工作单元
+    /// </summary>
+    [ScopeInjection]
+    internal class WorkUnitOfWork : UnitOfWork, IUnitOfWork<WorkOption>
+    {
+        public WorkUnitOfWork(WorkDbContext dbContext) : base(dbContext) { }
     }
 }

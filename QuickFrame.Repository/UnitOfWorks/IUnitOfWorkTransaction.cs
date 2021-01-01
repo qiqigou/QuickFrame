@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace QuickFrame.Repository
 {
+    /// <summary>
+    /// 工作单元事务
+    /// </summary>
     public interface IUnitOfWorkTransaction : IDisposable, IAsyncDisposable
     {
         /// <summary>

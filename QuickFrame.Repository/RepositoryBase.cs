@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace QuickFrame.Repository
 {
     /// <summary>
-    /// 基础仓储抽象实现
+    /// 表仓储抽象
     /// </summary>
     public abstract class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey>
         where TEntity : TableEntity, new()
@@ -266,7 +266,7 @@ namespace QuickFrame.Repository
         public virtual async Task<IEnumerable<TEntity>?> FindAsync(TKey[] arrayKeyValue)
         {
             var whereExp = ExpressionHelper.WhereEqualOr<TEntity, TKey>(Keys, arrayKeyValue);
-            return await Set.Where(whereExp).ToArrayAsync();
+            return await Set.Where(whereExp).ToArrayAsync(TokenSource.Token);
         }
         /// <summary>
         /// 根据主键查找

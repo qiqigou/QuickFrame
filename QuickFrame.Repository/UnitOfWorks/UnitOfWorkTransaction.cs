@@ -2,7 +2,6 @@
 using QuickFrame.Common;
 using System;
 using System.Data.Common;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace QuickFrame.Repository
@@ -12,7 +11,6 @@ namespace QuickFrame.Repository
     /// </summary>
     internal class UnitOfWorkTransaction : IUnitOfWorkTransaction
     {
-        private static CancellationTokenSource TokenSource => TaskCancelOption.DbTask;
         private IDbContextTransaction? _contextTran;
         /// <summary>
         /// 上下文事务
@@ -48,13 +46,13 @@ namespace QuickFrame.Repository
         /// 提交(异步)
         /// </summary>
         /// <returns></returns>
-        public async Task CommitAsync() => await ContextTran.CommitAsync(TokenSource.Token);
+        public async Task CommitAsync() => await ContextTran.CommitAsync(TaskCancelOption.DbTask.Token);
         /// <summary>
         /// 回滚(异步)
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task RollbackAsync() => await ContextTran.RollbackAsync(TokenSource.Token);
+        public async Task RollbackAsync() => await ContextTran.RollbackAsync(TaskCancelOption.DbTask.Token);
         /// <summary>
         /// 析构
         /// </summary>

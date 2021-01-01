@@ -8,6 +8,16 @@
         "Url": "http://localhost:5080"
     },
     "Swagger": true,
+    "SwaggerScope": "quickframe",
+    "SwaggerScopeName": "quickframe WebAPIÏîÄ¿",
+    "Test": {
+        "UserName": "admin",
+        "PassWord": "123123",
+        "WorkDbName": "workdb",
+        "ClientId": "quickframe_test",
+        "ClientSecret": "quickframe_test",
+        "Scope": "quickframe"
+    },
     "MachineId": 5,
     "DatacenterId": 6,
     "IdWorkerProvid": 0

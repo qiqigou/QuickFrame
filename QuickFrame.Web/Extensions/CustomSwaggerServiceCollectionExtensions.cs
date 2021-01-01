@@ -54,7 +54,7 @@ namespace Microsoft.Extensions.DependencyInjection
                                 AuthorizationUrl = new Uri($"{appConfig.IdentityServer.Url}/connect/authorize"),
                                 Scopes =
                                 {
-                                    { "quickframe","quickframe项目" }
+                                    { appConfig.SwaggerScope,appConfig.SwaggerScopeName }
                                 }
                             }
                         }

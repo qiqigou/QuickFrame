@@ -2,14 +2,13 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using QuickFrame.Common;
+using QuickFrame.Tests;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using QuickFrame.Common;
-using QuickFrame.Service;
-using QuickFrame.Tests;
 
 namespace QuickFrame.Controllers.Tests
 {
@@ -22,8 +21,6 @@ namespace QuickFrame.Controllers.Tests
             => $"/api/{ConstantOptions.ModulesConstant.Work}/{controller.Replace("Controller", "")}/{action.Replace("Async", "")}{JoinParams(query)}";
         protected string BackUrl(string controller, string action, params object[] query)
             => $"/api/{ConstantOptions.ModulesConstant.Back}/{controller.Replace("Controller", "")}/{action.Replace("Async", "")}{JoinParams(query)}";
-
-        public static LoginInput User => new LoginInput { UserName = "wyl", PassWord = "123123", DbName = "workdb" };
 
         /// <summary>
         /// 创建请求HttpContext
@@ -88,7 +85,7 @@ namespace QuickFrame.Controllers.Tests
             }
             else
             {
-                _client.SetBearerToken(await GetApiKeyAsync(User));
+                _client.SetBearerToken(await GetApiKeyAsync());
             }
         }
         /// <summary>
@@ -103,11 +100,11 @@ namespace QuickFrame.Controllers.Tests
             var tokenResponse = await httpClient.RequestPasswordTokenAsync(new PasswordTokenRequest
             {
                 Address = disco.TokenEndpoint,
-                ClientId = "quickframe_test",
-                ClientSecret = "quickframe_test",
-                UserName = "admin",
-                Password = "123123",
-                Scope = "quickframe",
+                ClientId = _appConfig.Test.ClientId,
+                ClientSecret = _appConfig.Test.ClientSecret,
+                UserName = _appConfig.Test.UserName,
+                Password = _appConfig.Test.PassWord,
+                Scope = _appConfig.Test.Scope,
             });
             Assert.IsFalse(tokenResponse.IsError);
             return tokenResponse.AccessToken;
@@ -116,10 +113,10 @@ namespace QuickFrame.Controllers.Tests
         /// apikey登录
         /// </summary>
         /// <returns></returns>
-        protected async Task<string> GetApiKeyAsync(LoginInput input)
+        protected async Task<string> GetApiKeyAsync()
         {
             var api = SystemUrl(nameof(AuthController), nameof(AuthController.TokenAsync));
-            var res = await _client.GetAsync($"{api}?username={input.UserName}&password={input.PassWord}&dbname={input.DbName}");
+            var res = await _client.GetAsync($"{api}?username={_appConfig.Test.UserName}&password={_appConfig.Test.PassWord}&dbname={_appConfig.Test.WorkDbName}");
             if (!res.IsSuccessStatusCode) Assert.Fail();
             var json = await res.Content.ReadAsStringAsync();
             var data = JSONObject(json);

@@ -10,14 +10,14 @@ namespace QuickFrame.Controllers.Tests
         [TestMethod()]
         public Task TokenAsyncTest()
         {
-            return GetApiKeyAsync(User);
+            return GetApiKeyAsync();
         }
 
         [TestMethod()]
         public async Task RefreshTokenAsyncTest()
         {
             await LoginAsync();
-            var token = _client.DefaultRequestHeaders.Authorization?.Parameter ?? await GetApiKeyAsync(User);
+            var token = _client.DefaultRequestHeaders.Authorization?.Parameter ?? await GetApiKeyAsync();
             var api = SystemUrl(nameof(AuthController), nameof(AuthController.RefreshTokenAsync), token);
             var res = await _client.GetAsync(api);
             Assert.IsTrue(res.IsSuccessStatusCode);

@@ -30,7 +30,7 @@ namespace QuickFrame.Repository
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <returns></returns>
-        public IQueryable<TEntity> Select<TEntity>() where TEntity : ViewEntity, new()
+        public virtual IQueryable<TEntity> Select<TEntity>() where TEntity : ViewEntity, new()
             => Work.Context.Set<TEntity>().AsNoTracking();
         /// <summary>
         /// 是否有一项满足条件(条件lambda树)

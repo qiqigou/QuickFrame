@@ -15,11 +15,11 @@ namespace QuickFrame.Common
         /// 处理过程异常
         /// </summary>
         /// <param name="messageCode"></param>
-        /// <param name="msgobj"></param>
-        public HandelException(MessageCode messageCode, params object[] msgobj)
+        /// <param name="msgargs"></param>
+        public HandelException(MessageCode messageCode, params object[] msgargs)
         {
-            var args = msgobj.Length > 0 ? msgobj : messageCode.MsgArgs;
-            MsgCode = new MessageCode(messageCode.Code, messageCode.Title, messageCode.MsgTemplate, args);
+            var args = msgargs.Length > 0 ? msgargs : messageCode.MsgArgs;
+            MsgCode = messageCode with { MsgArgs = args };
         }
         /// <summary>
         /// 消息内容

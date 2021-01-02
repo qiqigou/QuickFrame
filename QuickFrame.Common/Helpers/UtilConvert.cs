@@ -75,7 +75,7 @@ namespace QuickFrame.Common
         /// <typeparam name="TValue"></typeparam>
         /// <param name="array"></param>
         /// <returns></returns>
-        public static TValue[]? RemoveNull<TValue>(this TValue[]? array) => array?.Where(x => x != null)?.ToArray();
+        public static TValue[]? RemoveNull<TValue>(this TValue[]? array) where TValue : notnull => array?.Where(x => x != null)?.ToArray();
         /// <summary>
         /// 获取枚举的Options
         /// </summary>

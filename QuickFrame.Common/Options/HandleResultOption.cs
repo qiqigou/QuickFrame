@@ -13,6 +13,11 @@
         /// <returns></returns>
         public static HandleResult<TValue> Success<TValue>(TValue? value) => new HandleResult<TValue> { Value = value };
         /// <summary>
+        /// 成功
+        /// </summary>
+        /// <returns></returns>
+        public static HandleResult Success() => new HandleResult();
+        /// <summary>
         /// 失败
         /// </summary>
         /// <typeparam name="TValue"></typeparam>
@@ -23,6 +28,17 @@
         {
             var args = msgargs.Length > 0 ? msgargs : msgcode.MsgArgs;
             return new HandleResult<TValue> { Success = false, MsgCode = msgcode with { MsgArgs = args } };
+        }
+        /// <summary>
+        /// 失败
+        /// </summary>
+        /// <param name="msgcode"></param>
+        /// <param name="msgargs"></param>
+        /// <returns></returns>
+        public static HandleResult Bad(MessageCode msgcode, params object[] msgargs)
+        {
+            var args = msgargs.Length > 0 ? msgargs : msgcode.MsgArgs;
+            return new HandleResult { Success = false, MsgCode = msgcode with { MsgArgs = args } };
         }
     }
 }

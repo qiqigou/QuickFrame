@@ -3,16 +3,22 @@
     /// <summary>
     /// 返回值记录
     /// </summary>
-    public record HandleResult<TValue>
+    public record HandleResult<TValue> : HandleResult
+    {
+        /// <summary>
+        /// 值
+        /// </summary>
+        public TValue? Value { get; init; }
+    }
+    /// <summary>
+    /// 返回值记录
+    /// </summary>
+    public record HandleResult
     {
         /// <summary>
         /// 是否成功
         /// </summary>
         public bool Success { get; init; } = true;
-        /// <summary>
-        /// 值
-        /// </summary>
-        public TValue? Value { get; init; }
         /// <summary>
         /// 消息码集合
         /// </summary>

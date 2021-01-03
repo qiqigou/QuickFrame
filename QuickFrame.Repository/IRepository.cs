@@ -3,7 +3,7 @@
 namespace QuickFrame.Repository
 {
     /// <summary>
-    /// 标识仓储
+    /// 仓储标志
     /// </summary>
     public interface IRepository : IDisposable, IAsyncDisposable { }
 }

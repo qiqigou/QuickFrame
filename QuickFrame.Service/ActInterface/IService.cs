@@ -1,7 +1,7 @@
 ﻿namespace QuickFrame.Service
 {
     /// <summary>
-    /// 服务标识
+    /// 服务标志
     /// </summary>
     public interface IService { }
 }

@@ -36,21 +36,21 @@ namespace QuickFrame.Repository
         public virtual IQueryable<TEntity> Select<TEntity>() where TEntity : ViewEntity, new()
             => Work.Context.Set<TEntity>().AsNoTracking();
         /// <summary>
-        /// 是否有一项满足条件(条件lambda树)
+        /// 是否有一项满足条件
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
         public virtual Task<bool> AnyAsync<TEntity>(Expression<Func<TEntity, bool>>? predicate = default) where TEntity : ViewEntity, new()
             => predicate == default ? Select<TEntity>().AnyAsync(TokenSource.Token) : Select<TEntity>().AnyAsync(predicate, TokenSource.Token);
         /// <summary>
-        /// 是否有一项满足条件(条件lambda树)
+        /// 是否有一项满足条件
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
         public virtual bool Any<TEntity>(Expression<Func<TEntity, bool>>? predicate = default) where TEntity : ViewEntity, new()
             => predicate == default ? Select<TEntity>().Any() : Select<TEntity>().Any(predicate);
         /// <summary>
-        /// 计数
+        /// 计数(异步)
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>

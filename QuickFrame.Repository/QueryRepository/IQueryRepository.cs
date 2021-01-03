@@ -23,21 +23,21 @@ namespace QuickFrame.Repository
         /// <returns></returns>
         IQueryable<TEntity> Select<TEntity>() where TEntity : ViewEntity, new();
         /// <summary>
-        /// 是否有一项满足条件(条件lambda树)
+        /// 是否有一项满足条件
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="predicate"></param>
         /// <returns></returns>
         Task<bool> AnyAsync<TEntity>(Expression<Func<TEntity, bool>>? predicate = default) where TEntity : ViewEntity, new();
         /// <summary>
-        /// 是否有一项满足条件(条件lambda树)
+        /// 是否有一项满足条件
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="predicate"></param>
         /// <returns></returns>
         bool Any<TEntity>(Expression<Func<TEntity, bool>>? predicate = default) where TEntity : ViewEntity, new();
         /// <summary>
-        /// 计数
+        /// 计数(异步)
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="predicate"></param>

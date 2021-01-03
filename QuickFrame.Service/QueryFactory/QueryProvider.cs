@@ -33,6 +33,18 @@ namespace QuickFrame.Service
             _orderMap = orderMap.Select(item => new SortInput { OrderBy = item }).ToArray();
         }
         /// <summary>
+        /// 构建提供通用的视图查询器
+        /// </summary>
+        /// <param name="repository"></param>
+        /// <param name="qkeyMap"></param>
+        /// <param name="orderMap"></param>
+        public QueryProvider(IQueryRepository repository, string[] qkeyMap, SortInput[] orderMap)
+        {
+            _repository = repository;
+            _qkeyMap = qkeyMap;
+            _orderMap = orderMap;
+        }
+        /// <summary>
         /// 获取单条
         /// </summary>
         /// <param name="qkeyValue"></param>

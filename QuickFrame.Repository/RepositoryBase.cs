@@ -45,7 +45,7 @@ namespace QuickFrame.Repository
         /// </summary>
         public string[] Keys => _keys ??= Work.Context.Model.GetEntityTypes().Where(x => x.ClrType == typeof(TEntity)).First().FindPrimaryKey().Properties.Select(x => x.Name).ToArray();
         /// <summary>
-        /// 包含
+        /// 包含(异步)
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
@@ -57,19 +57,19 @@ namespace QuickFrame.Repository
         /// <returns></returns>
         public virtual bool Contains(TEntity entity) => Set.Contains(entity);
         /// <summary>
-        /// 是否有一项满足条件(条件lambda树)
+        /// 是否有一项满足条件(异步)
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
         public virtual Task<bool> AnyAsync(Expression<Func<TEntity, bool>>? predicate = default) => predicate == default ? Set.AnyAsync(TokenSource.Token) : Set.AnyAsync(predicate, TokenSource.Token);
         /// <summary>
-        /// 是否有一项满足条件(条件lambda树)
+        /// 是否有一项满足条件
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
         public virtual bool Any(Expression<Func<TEntity, bool>>? predicate = default) => predicate == default ? Set.Any() : Set.Any(predicate);
         /// <summary>
-        /// 计数
+        /// 计数(异步)
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
@@ -81,7 +81,7 @@ namespace QuickFrame.Repository
         /// <returns></returns>
         public virtual int Count(Expression<Func<TEntity, bool>>? predicate = default) => predicate == default ? Set.Count() : Set.Count(predicate);
         /// <summary>
-        /// 创建
+        /// 创建(异步)
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
@@ -91,7 +91,7 @@ namespace QuickFrame.Repository
             return await Work.AutoSaveChangesAsync();
         }
         /// <summary>
-        /// 创建(集合)
+        /// 创建(异步)
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entities"></param>
@@ -112,7 +112,7 @@ namespace QuickFrame.Repository
             return Work.AutoSaveChanges();
         }
         /// <summary>
-        /// 创建(集合)
+        /// 创建
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entities"></param>
@@ -123,7 +123,7 @@ namespace QuickFrame.Repository
             return Work.AutoSaveChanges();
         }
         /// <summary>
-        /// 删除
+        /// 删除(异步)
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entity"></param>
@@ -133,7 +133,7 @@ namespace QuickFrame.Repository
             return Work.AutoSaveChangesAsync();
         }
         /// <summary>
-        /// 删除(集合)
+        /// 删除(异步)
         /// </summary>
         /// <param name="entities"></param>
         public virtual Task<int> DeleteAsync(IEnumerable<TEntity> entities)
@@ -142,7 +142,7 @@ namespace QuickFrame.Repository
             return Work.AutoSaveChangesAsync();
         }
         /// <summary>
-        /// 删除(根据主键)
+        /// 根据主键删除(异步)
         /// </summary>
         /// <param name="arrayKeyValue"></param>
         /// <returns></returns>
@@ -157,7 +157,7 @@ namespace QuickFrame.Repository
             return await Work.AutoSaveChangesAsync();
         }
         /// <summary>
-        /// 删除(根据主键)
+        /// 根据主键删除(异步)
         /// </summary>
         /// <param name="keyValue"></param>
         /// <returns></returns>
@@ -173,7 +173,7 @@ namespace QuickFrame.Repository
             return Work.AutoSaveChanges();
         }
         /// <summary>
-        /// 删除(集合)
+        /// 删除
         /// </summary>
         /// <param name="entities"></param>
         public virtual int Delete(IEnumerable<TEntity> entities)
@@ -182,7 +182,7 @@ namespace QuickFrame.Repository
             return Work.AutoSaveChanges();
         }
         /// <summary>
-        /// 删除(根据主键)
+        /// 根据主键删除
         /// </summary>
         /// <param name="arrayKeyValue"></param>
         /// <returns></returns>
@@ -197,13 +197,13 @@ namespace QuickFrame.Repository
             return Work.AutoSaveChanges();
         }
         /// <summary>
-        /// 删除(根据主键)
+        /// 根据主键删除
         /// </summary>
         /// <param name="keyValue"></param>
         /// <returns></returns>
         public virtual int Delete(TKey keyValue) => Delete(new[] { keyValue });
         /// <summary>
-        /// 修改(集合)
+        /// 修改(异步)
         /// </summary>
         /// <param name="entities"></param>
         public virtual async Task<int> UpdateAsync(IEnumerable<TEntity> entities)
@@ -212,7 +212,7 @@ namespace QuickFrame.Repository
             return await Work.AutoSaveChangesAsync();
         }
         /// <summary>
-        /// 修改
+        /// 修改(异步)
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
@@ -222,7 +222,7 @@ namespace QuickFrame.Repository
             return await Work.AutoSaveChangesAsync();
         }
         /// <summary>
-        /// 修改(集合)
+        /// 修改
         /// </summary>
         /// <param name="entities"></param>
         public virtual int Update(IEnumerable<TEntity> entities)
@@ -241,7 +241,7 @@ namespace QuickFrame.Repository
             return Work.AutoSaveChanges();
         }
         /// <summary>
-        /// 根据主键查找
+        /// 根据主键查找(异步)
         /// </summary>
         /// <param name="keyValue"></param>
         /// <returns></returns>
@@ -262,7 +262,7 @@ namespace QuickFrame.Repository
             }
         }
         /// <summary>
-        /// 根据主键查找
+        /// 根据主键查找(异步)
         /// </summary>
         /// <param name="arrayKeyValue"></param>
         /// <returns></returns>

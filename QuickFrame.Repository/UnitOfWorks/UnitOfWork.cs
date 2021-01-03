@@ -56,7 +56,7 @@ namespace QuickFrame.Repository
         /// <returns></returns>
         int IUnitOfWork.AutoSaveChanges() => DisableAutoSave ? 0 : SaveChanges();
         /// <summary>
-        /// 自动保存
+        /// 自动保存(异步)
         /// </summary>
         /// <returns></returns>
         async Task<int> IUnitOfWork.AutoSaveChangesAsync() => DisableAutoSave ? 0 : await SaveChangesAsync();

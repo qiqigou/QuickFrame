@@ -30,13 +30,13 @@ namespace QuickFrame.Repository
         /// <returns></returns>
         IQueryable<TEntity> Select { get; }
         /// <summary>
-        /// 创建
+        /// 创建(异步)
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
         Task<int> CreateAsync(TEntity entity);
         /// <summary>
-        /// 创建(集合)
+        /// 创建(异步)
         /// </summary>
         /// <returns></returns>
         Task<int> CreateAsync(IEnumerable<TEntity> entities);
@@ -47,30 +47,30 @@ namespace QuickFrame.Repository
         /// <returns></returns>
         int Create(TEntity entity);
         /// <summary>
-        /// 创建(集合)
+        /// 创建
         /// </summary>
         /// <returns></returns>
         int Create(IEnumerable<TEntity> entities);
         /// <summary>
-        /// 删除
+        /// 删除(异步)
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
         Task<int> DeleteAsync(TEntity entity);
         /// <summary>
-        /// 删除(集合)
+        /// 删除(异步)
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
         Task<int> DeleteAsync(IEnumerable<TEntity> entities);
         /// <summary>
-        /// 删除(根据主键)
+        /// 根据主键删除(异步)
         /// </summary>
         /// <param name="arrayKeyValue"></param>
         /// <returns></returns>
         Task<int> DeleteAsync(TKey[] arrayKeyValue);
         /// <summary>
-        /// 删除(根据主键)
+        /// 根据主键删除(异步)
         /// </summary>
         /// <param name="keyValue"></param>
         /// <returns></returns>
@@ -82,30 +82,30 @@ namespace QuickFrame.Repository
         /// <returns></returns>
         int Delete(TEntity entity);
         /// <summary>
-        /// 删除(集合)
+        /// 删除
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
         int Delete(IEnumerable<TEntity> entities);
         /// <summary>
-        /// 删除(根据主键)
+        /// 根据主键删除
         /// </summary>
         /// <param name="arrayKeyValue"></param>
         /// <returns></returns>
         int Delete(TKey[] arrayKeyValue);
         /// <summary>
-        /// 删除(根据主键)
+        /// 根据主键删除
         /// </summary>
         /// <param name="keyValue"></param>
         /// <returns></returns>
         int Delete(TKey keyValue);
         /// <summary>
-        /// 修改
+        /// 修改(异步)
         /// </summary>
         /// <param name="entity">待修改实体</param>
         Task<int> UpdateAsync(TEntity entity);
         /// <summary>
-        /// 修改(集合)
+        /// 修改(异步)
         /// </summary>
         /// <param name="entities">待修改实体集合</param>
         Task<int> UpdateAsync(IEnumerable<TEntity> entities);
@@ -115,18 +115,18 @@ namespace QuickFrame.Repository
         /// <param name="entity">待修改实体</param>
         int Update(TEntity entity);
         /// <summary>
-        /// 修改(集合)
+        /// 修改
         /// </summary>
         /// <param name="entities">待修改实体集合</param>
         int Update(IEnumerable<TEntity> entities);
         /// <summary>
-        /// 根据主键查找
+        /// 根据主键查找(异步)
         /// </summary>
         /// <param name="keyValue"></param>
         /// <returns></returns>
         Task<TEntity?> FindAsync(TKey keyValue);
         /// <summary>
-        /// 根据主键查找
+        /// 根据主键查找(异步)
         /// </summary>
         /// <param name="arrayKeyValue"></param>
         /// <returns></returns>
@@ -144,7 +144,7 @@ namespace QuickFrame.Repository
         /// <returns></returns>
         IEnumerable<TEntity>? Find(TKey[] arrayKeyValue);
         /// <summary>
-        /// 包含
+        /// 包含(异步)
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
@@ -156,19 +156,19 @@ namespace QuickFrame.Repository
         /// <returns></returns>
         bool Contains(TEntity entity);
         /// <summary>
-        /// 包含(条件lambda树)
+        /// 是否有一项满足条件(异步)
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
         Task<bool> AnyAsync(Expression<Func<TEntity, bool>>? predicate = default);
         /// <summary>
-        /// 包含(条件lambda树)
+        /// 是否有一项满足条件
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
         bool Any(Expression<Func<TEntity, bool>>? predicate = default);
         /// <summary>
-        /// 计数
+        /// 计数(异步)
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>

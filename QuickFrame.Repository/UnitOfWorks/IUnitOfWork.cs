@@ -36,17 +36,17 @@ namespace QuickFrame.Repository
         /// <returns></returns>
         int SaveChanges();
         /// <summary>
-        /// 保存更改
+        /// 保存更改(异步)
         /// </summary>
         /// <returns></returns>
         Task<int> SaveChangesAsync();
         /// <summary>
-        /// 保存更改
+        /// 自动保存
         /// </summary>
         /// <returns></returns>
         internal int AutoSaveChanges();
         /// <summary>
-        /// 保存更改
+        /// 自动保存(异步)
         /// </summary>
         /// <returns></returns>
         internal Task<int> AutoSaveChangesAsync();

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace QuickFrame.Repository
 {
     /// <summary>
-    /// 表仓储抽象
+    /// 基础仓储抽象
     /// </summary>
     public abstract class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey>
         where TEntity : TableEntity, new()

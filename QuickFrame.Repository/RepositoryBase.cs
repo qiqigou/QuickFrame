@@ -148,12 +148,8 @@ namespace QuickFrame.Repository
         /// <returns></returns>
         public virtual async Task<int> DeleteAsync(TKey[] arrayKeyValue)
         {
-            foreach (var item in arrayKeyValue)
-            {
-                var obj = await FindAsync(item);
-                if (obj != default)
-                    Work.Context.Remove(obj);
-            }
+            var array = await FindAsync(arrayKeyValue);
+            Set.RemoveRange(array);
             return await Work.AutoSaveChangesAsync();
         }
         /// <summary>
@@ -188,12 +184,8 @@ namespace QuickFrame.Repository
         /// <returns></returns>
         public virtual int Delete(TKey[] arrayKeyValue)
         {
-            foreach (var item in arrayKeyValue)
-            {
-                var obj = Find(item);
-                if (obj != default)
-                    Work.Context.Remove(obj);
-            }
+            var array = Find(arrayKeyValue);
+            Set.RemoveRange(array);
             return Work.AutoSaveChanges();
         }
         /// <summary>
@@ -247,14 +239,9 @@ namespace QuickFrame.Repository
         /// <returns></returns>
         public virtual async Task<TEntity?> FindAsync(TKey keyValue)
         {
-            if (keyValue is ITuple tup)
+            if (keyValue is ITuple tuple)
             {
-                var array = new object?[tup.Length];
-                for (int i = 0; i < tup.Length; i++)
-                {
-                    array[i] = tup[i];
-                }
-                return await Set.FindAsync(array, TokenSource.Token);
+                return await Set.FindAsync(tuple.ToArray(), TokenSource.Token);
             }
             else
             {
@@ -278,14 +265,9 @@ namespace QuickFrame.Repository
         /// <returns></returns>
         public virtual TEntity? Find(TKey keyValue)
         {
-            if (keyValue is ITuple tup)
+            if (keyValue is ITuple tuple)
             {
-                var array = new object?[tup.Length];
-                for (int i = 0; i < tup.Length; i++)
-                {
-                    array[i] = tup[i];
-                }
-                return Set.Find(array);
+                return Set.Find(tuple.ToArray());
             }
             else
             {

@@ -18,7 +18,6 @@ namespace QuickFrame.Repository
         where TEntity : TableEntity, new()
         where TKey : notnull
     {
-        private static CancellationTokenSource TokenSource => TaskCancelOption.DbTask;
         private static string[]? _keys;
         private IUnitOfWork? _unitOfWork;
         protected DbSet<TEntity> Set;
@@ -28,6 +27,10 @@ namespace QuickFrame.Repository
             _unitOfWork = unitOfWork;
             Set = _unitOfWork.Context.Set<TEntity>();
         }
+        /// <summary>
+        /// 超时机制
+        /// </summary>
+        protected static CancellationTokenSource TokenSource => TaskCancelOption.DbTask;
         /// <summary>
         /// 工作单元
         /// </summary>

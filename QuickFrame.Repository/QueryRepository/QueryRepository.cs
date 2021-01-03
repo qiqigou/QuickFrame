@@ -15,12 +15,15 @@ namespace QuickFrame.Repository
     internal abstract class QueryRepository : IQueryRepository
     {
         private IUnitOfWork? _unitOfWork;
-        private static CancellationTokenSource TokenSource => TaskCancelOption.DbTask;
 
         public QueryRepository(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
+        /// <summary>
+        /// 超时机制
+        /// </summary>
+        protected static CancellationTokenSource TokenSource => TaskCancelOption.DbTask;
         /// <summary>
         /// 工作单元
         /// </summary>

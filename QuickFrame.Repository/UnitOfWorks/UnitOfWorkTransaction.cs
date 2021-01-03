@@ -46,13 +46,13 @@ namespace QuickFrame.Repository
         /// 提交(异步)
         /// </summary>
         /// <returns></returns>
-        public async Task CommitAsync() => await ContextTran.CommitAsync(TaskCancelOption.DbTask.Token);
+        public Task CommitAsync() => ContextTran.CommitAsync(TaskCancelOption.DbTask.Token);
         /// <summary>
         /// 回滚(异步)
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task RollbackAsync() => await ContextTran.RollbackAsync(TaskCancelOption.DbTask.Token);
+        public Task RollbackAsync() => ContextTran.RollbackAsync(TaskCancelOption.DbTask.Token);
         /// <summary>
         /// 析构
         /// </summary>

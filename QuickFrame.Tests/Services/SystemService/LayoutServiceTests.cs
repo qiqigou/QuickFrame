@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QuickFrame.Model;
+using QuickFrame.Models;
 using QuickFrame.Tests;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuickFrame.Service.Tests
+namespace QuickFrame.Services.Tests
 {
     [TestClass()]
     public class LayoutServiceTests : BaseTest

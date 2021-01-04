@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QuickFrame.Model;
+using QuickFrame.Models;
 using QuickFrame.Tests;
 using System;
 using System.Collections.Generic;

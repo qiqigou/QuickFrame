@@ -22,8 +22,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     });
                 }
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{AssemblyOption.CommonName}.xml"), true);
-                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{AssemblyOption.ModelName}.xml"), true);
-                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{AssemblyOption.ServiceName}.xml"), true);
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{AssemblyOption.ModelsName}.xml"), true);
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{AssemblyOption.ServicesName}.xml"), true);
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{AssemblyOption.ControllersName}.xml"), true);
                 //添加Token按钮
                 if (appConfig.IdentityServer.Enable)

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuickFrame.Common;
-using QuickFrame.Service;
+using QuickFrame.Services;
 
 namespace QuickFrame.Controllers
 {

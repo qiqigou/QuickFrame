@@ -13,7 +13,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\QuickFrame.Service\QuickFrame.Service.csproj" />
+        <ProjectReference Include="..\QuickFrame.Services\QuickFrame.Services.csproj" />
     </ItemGroup>
 
 </Project>

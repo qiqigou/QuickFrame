@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace QuickFrame.Model
+namespace QuickFrame.Models
 {
     /// <summary>
     /// 公司表

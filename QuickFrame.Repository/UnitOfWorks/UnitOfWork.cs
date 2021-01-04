@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QuickFrame.Common;
-using QuickFrame.Model;
+using QuickFrame.Models;
 using System;
 using System.Data;
 using System.Threading.Tasks;

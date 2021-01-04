@@ -1,4 +1,4 @@
-﻿namespace QuickFrame.Model
+﻿namespace QuickFrame.Models
 {
     /// <summary>
     /// 后台库标志

@@ -1,6 +1,6 @@
 ﻿using QuickFrame.Common;
 
-namespace QuickFrame.Model
+namespace QuickFrame.Models
 {
     /// <summary>
     /// 数据库实体标识(含库标志)

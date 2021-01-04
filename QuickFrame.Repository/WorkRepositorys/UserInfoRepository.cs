@@ -1,4 +1,4 @@
-﻿using QuickFrame.Model;
+﻿using QuickFrame.Models;
 
 namespace QuickFrame.Repository
 {

@@ -1,4 +1,4 @@
-﻿using QuickFrame.Model;
+﻿using QuickFrame.Models;
 using System;
 using System.Linq;
 using System.Linq.Expressions;

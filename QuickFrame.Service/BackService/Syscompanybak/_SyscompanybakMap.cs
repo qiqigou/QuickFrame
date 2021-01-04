@@ -1,8 +1,8 @@
 ﻿using Mapster;
-using QuickFrame.Model;
+using QuickFrame.Models;
 using System;
 
-namespace QuickFrame.Service
+namespace QuickFrame.Services
 {
     public class SyscompanybakMap : IRegister
     {

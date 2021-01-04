@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 
-namespace QuickFrame.Model
+namespace QuickFrame.Models
 {
     /// <summary>
     /// 业务库上下文
@@ -43,7 +43,7 @@ namespace QuickFrame.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var types = Assembly.Load(AssemblyOption.ModelName).GetTypes().Where(x => x.IsAssignableTo(typeof(IDbEntity<WorkOption>))).ToArray();
+            var types = Assembly.Load(AssemblyOption.ModelsName).GetTypes().Where(x => x.IsAssignableTo(typeof(IDbEntity<WorkOption>))).ToArray();
             var tables = types.Where(x => x.IsAssignableTo(typeof(TableEntity))).ToArray();
             foreach (var item in tables)
             {

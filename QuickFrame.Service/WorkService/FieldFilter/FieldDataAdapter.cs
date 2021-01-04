@@ -4,7 +4,7 @@ using QuickFrame.Repository;
 using System;
 using System.Linq;
 
-namespace QuickFrame.Service
+namespace QuickFrame.Services
 {
     /// <summary>
     /// 列数据适配器

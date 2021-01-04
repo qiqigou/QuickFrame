@@ -1,6 +1,6 @@
 ﻿using QuickFrame.Common;
 
-namespace QuickFrame.Model
+namespace QuickFrame.Models
 {
     public class v_fieldfilterc : ViewEntity, IDbEntity<WorkOption>
     {

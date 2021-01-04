@@ -1,9 +1,11 @@
 ﻿using QuickFrame.Common;
-using QuickFrame.Model;
+using QuickFrame.IServices;
+using QuickFrame.Models;
+using QuickFrame.Repository;
 using System;
 using System.Threading.Tasks;
 
-namespace QuickFrame.Service
+namespace QuickFrame.Services
 {
     public class UserInfoService : BillServiceBase<userinfo_us, UserInfoInput, UserInfoUpdInput, v_userinfo, int>, IUserInfoService
     {

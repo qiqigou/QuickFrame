@@ -1,4 +1,4 @@
-﻿namespace QuickFrame.Model
+﻿namespace QuickFrame.Models
 {
     /// <summary>
     /// 商场-专卖店视图

@@ -1,6 +1,6 @@
 ﻿using QuickFrame.Common;
 
-namespace QuickFrame.Service
+namespace QuickFrame.Services
 {
     public class TestProxyHandle : IProxyHandle
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace QuickFrame.Model
+namespace QuickFrame.Models
 {
     /// <summary>
     /// 用户信息

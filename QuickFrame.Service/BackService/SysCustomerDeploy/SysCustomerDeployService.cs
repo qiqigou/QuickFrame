@@ -1,6 +1,8 @@
-﻿using QuickFrame.Repository;
+﻿using QuickFrame.IServices;
+using QuickFrame.Models;
+using QuickFrame.Repository;
 
-namespace QuickFrame.Service
+namespace QuickFrame.Services
 {
     public class SysCustomerDeployService : ISysCustomerDeployService
     {

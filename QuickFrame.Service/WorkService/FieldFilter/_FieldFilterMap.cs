@@ -1,7 +1,7 @@
 ﻿using Mapster;
-using QuickFrame.Model;
+using QuickFrame.Models;
 
-namespace QuickFrame.Service
+namespace QuickFrame.Services
 {
     internal class FieldFilterMap : IRegister
     {

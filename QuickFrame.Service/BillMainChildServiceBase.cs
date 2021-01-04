@@ -2,7 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using QuickFrame.Common;
-using QuickFrame.Model;
+using QuickFrame.IServices;
+using QuickFrame.Models;
 using QuickFrame.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace QuickFrame.Service
+namespace QuickFrame.Services
 {
     /// <summary>
     /// 主子表服务抽象类

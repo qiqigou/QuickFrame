@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace QuickFrame.Model
+namespace QuickFrame.Models
 {
     public class v_syscompanybak : WithStampView, IDbEntity<BackOption>
     {

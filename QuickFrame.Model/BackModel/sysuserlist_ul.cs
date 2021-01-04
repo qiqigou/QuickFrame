@@ -1,7 +1,7 @@
 ﻿using QuickFrame.Common;
 using System.ComponentModel.DataAnnotations;
 
-namespace QuickFrame.Model
+namespace QuickFrame.Models
 {
     /// <summary>
     /// 用户表

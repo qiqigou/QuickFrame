@@ -1,4 +1,4 @@
-﻿using QuickFrame.Model;
+﻿using QuickFrame.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

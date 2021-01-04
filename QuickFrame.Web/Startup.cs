@@ -11,9 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QuickFrame.Common;
-using QuickFrame.Model;
+using QuickFrame.IServices;
+using QuickFrame.Models;
 using QuickFrame.Repository;
-using QuickFrame.Service;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Reflection;
@@ -114,7 +114,7 @@ namespace QuickFrame.Web
         /// <param name="builder"></param>
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            var assemblyServices = Assembly.Load(AssemblyOption.ServiceName);
+            var assemblyServices = Assembly.Load(AssemblyOption.ServicesName);
             var assemblyCommon = Assembly.Load(AssemblyOption.CommonName);
             var assemblyRepository = Assembly.Load(AssemblyOption.RepositoryName);
 

@@ -1,12 +1,14 @@
 ﻿using QuickFrame.Common;
-using QuickFrame.Model;
+using QuickFrame.IServices;
+using QuickFrame.Models;
+using QuickFrame.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace QuickFrame.Service
+namespace QuickFrame.Services
 {
     /// <summary>
     /// 字段过滤器服务

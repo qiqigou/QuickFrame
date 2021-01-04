@@ -1,7 +1,9 @@
-﻿using QuickFrame.Model;
+﻿using QuickFrame.IServices;
+using QuickFrame.Models;
+using QuickFrame.Repository;
 using System;
 
-namespace QuickFrame.Service
+namespace QuickFrame.Services
 {
     /// <summary>
     /// 商场表服务

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using QuickFrame.Model;
+using QuickFrame.Models;
 using System.Linq;
 
 namespace QuickFrame.Repository

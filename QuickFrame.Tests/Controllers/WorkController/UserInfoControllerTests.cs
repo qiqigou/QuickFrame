@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickFrame.Common;
-using QuickFrame.Model;
-using QuickFrame.Service;
+using QuickFrame.Models;
+using QuickFrame.Services;
 using System.Net;
 using System.Threading.Tasks;
 

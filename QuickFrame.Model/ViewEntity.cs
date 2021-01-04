@@ -1,6 +1,6 @@
 ﻿using QuickFrame.Common;
 
-namespace QuickFrame.Model
+namespace QuickFrame.Models
 {
     /// <summary>
     /// 视图实体

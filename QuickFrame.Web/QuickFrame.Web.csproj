@@ -19,6 +19,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\QuickFrame.Controllers\QuickFrame.Controllers.csproj" />
+        <ProjectReference Include="..\QuickFrame.Repository\QuickFrame.Repository.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace QuickFrame.Model
+﻿namespace QuickFrame.Models
 {
     public class v_syscompany : WithStampView, IDbEntity<BackOption>
     {

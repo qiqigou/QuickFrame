@@ -1,13 +1,14 @@
 ﻿using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
 using QuickFrame.Common;
-using QuickFrame.Model;
+using QuickFrame.IServices;
+using QuickFrame.Models;
 using QuickFrame.Repository;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace QuickFrame.Service
+namespace QuickFrame.Services
 {
     /// <summary>
     /// 单表服务抽象类

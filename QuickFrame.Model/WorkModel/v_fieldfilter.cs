@@ -1,4 +1,4 @@
-﻿namespace QuickFrame.Model
+﻿namespace QuickFrame.Models
 {
     public class v_fieldfilter : WithStampView, IDbEntity<WorkOption>
     {

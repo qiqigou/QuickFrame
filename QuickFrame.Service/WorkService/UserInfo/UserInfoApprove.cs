@@ -1,8 +1,8 @@
 ﻿using QuickFrame.Common;
-using QuickFrame.Model;
+using QuickFrame.Models;
 using System.Threading.Tasks;
 
-namespace QuickFrame.Service
+namespace QuickFrame.Services
 {
     /// <summary>
     /// 用户审批

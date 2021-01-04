@@ -13,7 +13,7 @@ using Microsoft.Extensions.Hosting;
 using QuickFrame.Common;
 using QuickFrame.IServices;
 using QuickFrame.Models;
-using QuickFrame.Repository;
+using QuickFrame.Repositorys;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Reflection;
@@ -116,7 +116,7 @@ namespace QuickFrame.Web
         {
             var assemblyServices = Assembly.Load(AssemblyOption.ServicesName);
             var assemblyCommon = Assembly.Load(AssemblyOption.CommonName);
-            var assemblyRepository = Assembly.Load(AssemblyOption.RepositoryName);
+            var assemblyRepository = Assembly.Load(AssemblyOption.RepositorysName);
 
             //服务注入
             builder.RegisterAssemblyTypes(assemblyServices)

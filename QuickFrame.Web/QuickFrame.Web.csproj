@@ -19,7 +19,8 @@
 
     <ItemGroup>
         <ProjectReference Include="..\QuickFrame.Controllers\QuickFrame.Controllers.csproj" />
-        <ProjectReference Include="..\QuickFrame.Repository\QuickFrame.Repository.csproj" />
+        <ProjectReference Include="..\QuickFrame.Repositorys\QuickFrame.Repositorys.csproj" />
+        <ProjectReference Include="..\QuickFrame.Services\QuickFrame.Services.csproj" />
     </ItemGroup>
 
 </Project>

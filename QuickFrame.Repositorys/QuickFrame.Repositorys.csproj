@@ -7,13 +7,8 @@
         <Version>1.0.1</Version>
     </PropertyGroup>
 
-    <PropertyGroup>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <NoWarn>1701;1702;1591</NoWarn>
-    </PropertyGroup>
-
     <ItemGroup>
-      <ProjectReference Include="..\QuickFrame.IServices\QuickFrame.IServices.csproj" />
+      <ProjectReference Include="..\QuickFrame.Models\QuickFrame.Models.csproj" />
     </ItemGroup>
 
 </Project>

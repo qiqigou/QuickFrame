@@ -1,3 +1,3 @@
 cd ../QuickFrame.Web
-dotnet ef database drop --context workdbcontext --project ../QuickFrame.Model -f
+dotnet ef database drop --context workdbcontext --project ../QuickFrame.Models -f
 pause

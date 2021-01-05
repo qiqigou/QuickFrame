@@ -12,8 +12,8 @@ namespace QuickFrame.EventBus
         /// <summary>
         /// 处理方法
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="e"></param>
         /// <returns></returns>
-        Task Handle(TIntegrationEvent model);
+        Task Handle(TIntegrationEvent e);
     }
 }

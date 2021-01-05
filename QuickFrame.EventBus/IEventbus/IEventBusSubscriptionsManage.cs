@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace QuickFrame.EventBus
 {
@@ -36,8 +37,14 @@ namespace QuickFrame.EventBus
         /// </summary>
         /// <typeparam name="TEvent">事件模型</typeparam>
         /// <returns></returns>
-        bool HasSubscriptionsForEvent<TEvent>() 
+        bool HasSubscriptionsForEvent<TEvent>()
             where TEvent : IntegrationEvent;
+        /// <summary>
+        /// 是否含有事件的订阅
+        /// </summary>
+        /// <param name="eventName"></param>
+        /// <returns></returns>
+        bool HasSubscriptionsForEvent(string eventName);
         /// <summary>
         /// 根据事件名获取事件模型
         /// </summary>
@@ -50,6 +57,12 @@ namespace QuickFrame.EventBus
         /// <typeparam name="TEvent">事件模型</typeparam>
         /// <returns></returns>
         string GetEventKey<TEvent>();
+        /// <summary>
+        /// 根据事件模型获取事件处理程序
+        /// </summary>
+        /// <param name="eventName"></param>
+        /// <returns></returns>
+        IEnumerable<Type> GetHandlesForEvent(string eventName);
         /// <summary>
         /// 清空订阅
         /// </summary>

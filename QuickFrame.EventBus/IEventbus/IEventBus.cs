@@ -8,8 +8,8 @@
         /// <summary>
         /// 发布
         /// </summary>
-        /// <param name="model">事件模型</param>
-        void Publish(IntegrationEvent model);
+        /// <param name="e">事件模型</param>
+        void Publish(IntegrationEvent e);
         /// <summary>
         /// 订阅
         /// </summary>

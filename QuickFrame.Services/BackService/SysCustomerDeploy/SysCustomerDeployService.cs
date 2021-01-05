@@ -1,4 +1,6 @@
-﻿using QuickFrame.Repositorys;
+﻿using QuickFrame.IServices;
+using QuickFrame.Models;
+using QuickFrame.Repositorys;
 
 namespace QuickFrame.Services
 {

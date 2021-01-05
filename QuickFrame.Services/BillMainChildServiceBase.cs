@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using QuickFrame.Common;
+using QuickFrame.IServices;
 using QuickFrame.Models;
 using QuickFrame.Repositorys;
 using System;

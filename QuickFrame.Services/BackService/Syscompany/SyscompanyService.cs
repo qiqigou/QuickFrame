@@ -1,4 +1,5 @@
-﻿using QuickFrame.Models;
+﻿using QuickFrame.IServices;
+using QuickFrame.Models;
 using QuickFrame.Repositorys;
 using System;
 

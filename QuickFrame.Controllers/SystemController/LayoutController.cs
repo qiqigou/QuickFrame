@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuickFrame.Common;
-using QuickFrame.Services;
+using QuickFrame.IServices;
+using QuickFrame.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

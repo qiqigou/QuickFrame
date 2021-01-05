@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuickFrame.Common;
-using QuickFrame.Services;
+using QuickFrame.IServices;
+using QuickFrame.Models;
 
 namespace QuickFrame.Controllers
 {

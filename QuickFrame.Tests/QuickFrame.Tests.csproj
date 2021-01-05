@@ -8,6 +8,11 @@
         <IsPackable>false</IsPackable>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>1701;1702;1591</NoWarn>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="5.0.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
@@ -17,9 +22,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\QuickFrame.Common\QuickFrame.Common.csproj" />
-        <ProjectReference Include="..\QuickFrame.Controllers\QuickFrame.Controllers.csproj" />
-        <ProjectReference Include="..\QuickFrame.Services\QuickFrame.Services.csproj" />
         <ProjectReference Include="..\QuickFrame.Web\QuickFrame.Web.csproj" />
     </ItemGroup>
 

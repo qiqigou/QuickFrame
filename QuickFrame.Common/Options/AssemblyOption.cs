@@ -10,6 +10,8 @@
         public const string ModelsName = "QuickFrame.Models";
         public const string RepositorysName = "QuickFrame.Repositorys";
         public const string ServicesName = "QuickFrame.Services";
+        public const string IServicesName = "QuickFrame.IServices";
+        public const string TestsName = "QuickFrame.Tests";
         public const string WebName = "QuickFrame.Web";
         public const string ControllersName = "QuickFrame.Controllers";
     }

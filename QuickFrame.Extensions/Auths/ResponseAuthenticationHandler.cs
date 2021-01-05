@@ -10,7 +10,7 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace QuickFrame.Web
+namespace QuickFrame.Extensions
 {
     /// <summary>
     /// 认证结果处理

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuickFrame.Web
+namespace QuickFrame.Extensions
 {
     /// <summary>
     /// 预设角色授权策略

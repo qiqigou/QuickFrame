@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using QuickFrame.Common;
-using QuickFrame.Web;
+using QuickFrame.Extensions;
 using System;
 using System.Text;
 

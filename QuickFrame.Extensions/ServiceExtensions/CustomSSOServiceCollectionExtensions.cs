@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using QuickFrame.Common;
-using QuickFrame.Web;
+using QuickFrame.Extensions;
 using System;
 
 namespace Microsoft.Extensions.DependencyInjection

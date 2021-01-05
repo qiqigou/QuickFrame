@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
 
-namespace QuickFrame.Web
+namespace QuickFrame.Extensions
 {
     /// <summary>
     /// 基于权限授权

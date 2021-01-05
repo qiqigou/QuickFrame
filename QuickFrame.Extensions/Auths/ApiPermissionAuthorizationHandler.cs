@@ -4,7 +4,7 @@ using QuickFrame.Common;
 using System;
 using System.Threading.Tasks;
 
-namespace QuickFrame.Web
+namespace QuickFrame.Extensions
 {
     /// <summary>
     /// API权限授权策略

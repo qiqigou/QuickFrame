@@ -12,20 +12,18 @@ using System.Threading.Tasks;
 namespace QuickFrame.Repositorys
 {
     /// <summary>
-    /// 基础仓储抽象
+    /// 表仓储抽象
     /// </summary>
-    public abstract class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey>
+    internal abstract class RepositoryBase<TEntity, TKey> : Repository, IRepositoryBase<TEntity, TKey>
         where TEntity : TableEntity, new()
         where TKey : notnull
     {
         private static string[]? _keys;
-        private IUnitOfWork? _unitOfWork;
         protected DbSet<TEntity> Set;
 
-        protected RepositoryBase(IUnitOfWork unitOfWork)
+        protected RepositoryBase(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            _unitOfWork = unitOfWork;
-            Set = _unitOfWork.Context.Set<TEntity>();
+            Set = unitOfWork.Context.Set<TEntity>();
         }
         /// <summary>
         /// 超时机制
@@ -284,47 +282,5 @@ namespace QuickFrame.Repositorys
         /// 析构
         /// </summary>
         ~RepositoryBase() => Dispose();
-        /// <summary>
-        /// 释放
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        /// <summary>
-        /// 释放(异步)
-        /// </summary>
-        /// <returns></returns>
-        public async ValueTask DisposeAsync()
-        {
-            await DisposeAsyncCore();
-            Dispose(false);
-            GC.SuppressFinalize(this);
-        }
-        /// <summary>
-        /// 实现释放资源
-        /// </summary>
-        /// <param name="disposing"></param>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _unitOfWork?.Dispose();
-            }
-            _unitOfWork = default;
-        }
-        /// <summary>
-        /// 实现异步释放资源
-        /// </summary>
-        /// <returns></returns>
-        protected virtual async ValueTask DisposeAsyncCore()
-        {
-            if (_unitOfWork != null)
-            {
-                await _unitOfWork.DisposeAsync().ConfigureAwait(false);
-            }
-            _unitOfWork = default;
-        }
     }
 }

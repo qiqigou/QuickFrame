@@ -12,14 +12,9 @@ namespace QuickFrame.Repositorys
     /// <summary>
     /// 视图仓储抽象(只读仓储)
     /// </summary>
-    internal abstract class QueryRepository : IQueryRepository
+    internal abstract class QueryRepository : Repository, IQueryRepository
     {
-        private IUnitOfWork? _unitOfWork;
-
-        public QueryRepository(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
+        public QueryRepository(IUnitOfWork unitOfWork) : base(unitOfWork) { }
         /// <summary>
         /// 超时机制
         /// </summary>
@@ -67,48 +62,6 @@ namespace QuickFrame.Repositorys
         /// 析构
         /// </summary>
         ~QueryRepository() => Dispose();
-        /// <summary>
-        /// 释放
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        /// <summary>
-        /// 释放(异步)
-        /// </summary>
-        /// <returns></returns>
-        public async ValueTask DisposeAsync()
-        {
-            await DisposeAsyncCore();
-            Dispose(false);
-            GC.SuppressFinalize(this);
-        }
-        /// <summary>
-        /// 实现释放资源
-        /// </summary>
-        /// <param name="disposing"></param>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _unitOfWork?.Dispose();
-            }
-            _unitOfWork = default;
-        }
-        /// <summary>
-        /// 实现异步释放资源
-        /// </summary>
-        /// <returns></returns>
-        protected virtual async ValueTask DisposeAsyncCore()
-        {
-            if (_unitOfWork != null)
-            {
-                await _unitOfWork.DisposeAsync().ConfigureAwait(false);
-            }
-            _unitOfWork = default;
-        }
     }
     /// <summary>
     /// 后端库视图仓储

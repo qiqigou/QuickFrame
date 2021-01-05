@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace QuickFrame.Repositorys
 {
     /// <summary>
-    /// 基础仓储接口
+    /// 表仓储接口
     /// </summary>
     /// <typeparam name="TEntity">表类型</typeparam>
     /// <typeparam name="TKey">主键类型</typeparam>

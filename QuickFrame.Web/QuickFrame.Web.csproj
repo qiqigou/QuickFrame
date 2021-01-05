@@ -8,6 +8,11 @@
         <UserSecretsId>7c532a46-68c8-4d7f-bc37-bc0348b79d30</UserSecretsId>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>1701;1702;1591</NoWarn>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="[5.0.1]">
             <PrivateAssets>all</PrivateAssets>

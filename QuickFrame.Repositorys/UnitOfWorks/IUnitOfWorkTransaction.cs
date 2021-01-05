@@ -34,7 +34,6 @@ namespace QuickFrame.Repositorys
         /// <summary>
         /// 回滚事务(异步)
         /// </summary>
-        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task RollbackAsync();
     }

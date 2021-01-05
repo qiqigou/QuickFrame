@@ -50,7 +50,6 @@ namespace QuickFrame.Repositorys
         /// <summary>
         /// 回滚(异步)
         /// </summary>
-        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task RollbackAsync() => ContextTran.RollbackAsync(TaskCancelOption.DbTask.Token);
         /// <summary>

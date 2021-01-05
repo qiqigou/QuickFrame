@@ -93,7 +93,6 @@ namespace QuickFrame.Repositorys
         /// <summary>
         /// 创建(异步)
         /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
         /// <param name="entities"></param>
         /// <returns></returns>
         public virtual async Task<int> CreateAsync(IEnumerable<TEntity> entities)
@@ -114,7 +113,6 @@ namespace QuickFrame.Repositorys
         /// <summary>
         /// 创建
         /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
         /// <param name="entities"></param>
         /// <returns></returns>
         public virtual int Create(IEnumerable<TEntity> entities)
@@ -125,7 +123,6 @@ namespace QuickFrame.Repositorys
         /// <summary>
         /// 删除(异步)
         /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
         /// <param name="entity"></param>
         public virtual Task<int> DeleteAsync(TEntity entity)
         {
@@ -161,7 +158,6 @@ namespace QuickFrame.Repositorys
         /// <summary>
         /// 删除
         /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
         /// <param name="entity"></param>
         public virtual int Delete(TEntity entity)
         {

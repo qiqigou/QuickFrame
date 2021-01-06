@@ -168,13 +168,20 @@ namespace QuickFrame.Common
                 }
                 return typeName switch
                 {
-                    ConstantOptions.BaseDataTypeConstant.DateTime => Convert.ToDateTime(value),
+                    ConstantOptions.BaseDataTypeConstant.Int16 => Convert.ToInt16(value),
                     ConstantOptions.BaseDataTypeConstant.Int32 => Convert.ToInt32(value),
                     ConstantOptions.BaseDataTypeConstant.Int64 => Convert.ToInt64(value),
-                    ConstantOptions.BaseDataTypeConstant.Bool => Convert.ToBoolean(value),
-                    ConstantOptions.BaseDataTypeConstant.Decimal => Convert.ToDecimal(value),
+                    ConstantOptions.BaseDataTypeConstant.UInt16 => Convert.ToUInt16(value),
+                    ConstantOptions.BaseDataTypeConstant.UInt32 => Convert.ToUInt32(value),
+                    ConstantOptions.BaseDataTypeConstant.UInt64 => Convert.ToUInt64(value),
+                    ConstantOptions.BaseDataTypeConstant.Byte => Convert.ToByte(value),
+                    ConstantOptions.BaseDataTypeConstant.SByte => Convert.ToSByte(value),
                     ConstantOptions.BaseDataTypeConstant.Double => Convert.ToDouble(value),
                     ConstantOptions.BaseDataTypeConstant.Float => Convert.ToSingle(value),
+                    ConstantOptions.BaseDataTypeConstant.Decimal => Convert.ToDecimal(value),
+                    ConstantOptions.BaseDataTypeConstant.Bool => Convert.ToBoolean(value),
+                    ConstantOptions.BaseDataTypeConstant.Char => Convert.ToChar(value),
+                    ConstantOptions.BaseDataTypeConstant.DateTime => Convert.ToDateTime(value),
                     _ => value,
                 };
             }

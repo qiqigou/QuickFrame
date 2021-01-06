@@ -40,7 +40,7 @@ namespace QuickFrame.Common
             public const string DbFalse = "0";
         }
         /// <summary>
-        /// 模块名常量(业务模块)
+        /// 模块名常量
         /// </summary>
         public static class ModulesConstant
         {
@@ -114,18 +114,25 @@ namespace QuickFrame.Common
             public const string Or = "or";
         }
         /// <summary>
-        /// 基础数据类型名常量
+        /// 常用数据类型名常量
         /// </summary>
         public static class BaseDataTypeConstant
         {
-            public const string DateTime = nameof(System.DateTime);
+            public const string Int16 = nameof(System.Int16);
             public const string Int32 = nameof(System.Int32);
             public const string Int64 = nameof(System.Int64);
-            public const string String = nameof(System.String);
-            public const string Bool = nameof(Boolean);
-            public const string Decimal = nameof(System.Decimal);
+            public const string UInt16 = nameof(System.UInt16);
+            public const string UInt32 = nameof(System.UInt32);
+            public const string UInt64 = nameof(System.UInt64);
+            public const string Byte = nameof(System.Byte);
+            public const string SByte = nameof(System.SByte);
             public const string Double = nameof(System.Double);
             public const string Float = nameof(Single);
+            public const string Decimal = nameof(System.Decimal);
+            public const string Bool = nameof(Boolean);
+            public const string Char = nameof(System.Char);
+            public const string DateTime = nameof(System.DateTime);
+            public const string String = nameof(System.String);
         }
     }
 }

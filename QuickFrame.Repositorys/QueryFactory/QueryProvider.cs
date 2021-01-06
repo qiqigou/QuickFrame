@@ -61,7 +61,7 @@ namespace QuickFrame.Repositorys
         public async Task<IEnumerable<TView>> QueryAsync(TQKey qkeyValue)
         {
             var whereExpr = ExpressionHelper.WhereLambda<TView, TQKey>(_qkeyMap, qkeyValue);
-            return await ObjFilterConvertHelper.ConvertSortInput(_repository.Select<TView>(), _orderMap).Where(whereExpr).ToArrayAsync();
+            return await ObjFilterConvertHelper.OrderBySortInput(_repository.Select<TView>(), _orderMap).Where(whereExpr).ToArrayAsync();
         }
         /// <summary>
         /// 获取集合
@@ -71,7 +71,7 @@ namespace QuickFrame.Repositorys
         public async Task<IEnumerable<TView>> QueryAsync(TQKey[] arrayKeyValue)
         {
             var whereExpr = ExpressionHelper.WhereEqualOr<TView, TQKey>(_qkeyMap, arrayKeyValue);
-            return await ObjFilterConvertHelper.ConvertSortInput(_repository.Select<TView>(), _orderMap).Where(whereExpr).ToArrayAsync();
+            return await ObjFilterConvertHelper.OrderBySortInput(_repository.Select<TView>(), _orderMap).Where(whereExpr).ToArrayAsync();
         }
         /// <summary>
         /// 条件查询

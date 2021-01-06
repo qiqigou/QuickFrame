@@ -242,7 +242,7 @@ namespace QuickFrame.Common.Tests
                 new SortInput{  OrderBy = nameof(userinfo_us.age),Desc = true },
                 new SortInput{  OrderBy = nameof(userinfo_us.birthday),Desc = false },
             };
-            var query1 = ObjFilterConvertHelper.ConvertSortInput(_data.AsQueryable(), sorts).ToArray();
+            var query1 = ObjFilterConvertHelper.OrderBySortInput(_data.AsQueryable(), sorts).ToArray();
             var query2 = _data.AsQueryable().OrderByDescending(px => px.name).ThenByDescending(px => px.age).ThenBy(px => px.birthday).ToArray();
             for (int i = 0; i < query1.Length; i++)
             {

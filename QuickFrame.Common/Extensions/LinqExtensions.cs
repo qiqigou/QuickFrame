@@ -43,7 +43,7 @@ namespace System.Linq
         public static IQueryable<TSource> QueryByPageInput<TSource>(this IQueryable<TSource> source, PageInput page)
             where TSource : class, new()
         {
-            return ObjFilterConvertHelper.ConvertSortInput(source, page.Sort).Page(page.Index, page.Size);
+            return ObjFilterConvertHelper.OrderBySortInput(source, page.Sort).Page(page.Index, page.Size);
         }
         /// <summary>
         /// 分页查询

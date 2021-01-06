@@ -7,13 +7,13 @@ namespace QuickFrame.Common
     public class ObjFilterConvertHelper
     {
         /// <summary>
-        /// 排序转换
+        /// 应用SortInput排序
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="source"></param>
         /// <param name="sorts"></param>
         /// <returns></returns>
-        public static IQueryable<TEntity> ConvertSortInput<TEntity>(IQueryable<TEntity> source, SortInput[]? sorts)
+        public static IQueryable<TEntity> OrderBySortInput<TEntity>(IQueryable<TEntity> source, SortInput[]? sorts)
             where TEntity : class, new()
         {
             try
@@ -64,8 +64,6 @@ namespace QuickFrame.Common
             try
             {
                 if (input == default) return px => true;
-                input.Groups = input.Groups?.RemoveNull();
-                input.Items = input.Items?.RemoveNull();
                 var px = Expression.Parameter(typeof(TEntity), "px");
                 var expression = ConvertToExpression(px, input);
                 if (expression == default) return px => true;
@@ -84,18 +82,20 @@ namespace QuickFrame.Common
         /// 转为Lambda条件树
         /// </summary>
         /// <param name="px"></param>
-        /// <param name="group"></param>
+        /// <param name="input"></param>
         /// <returns></returns>
-        private static Expression? ConvertToExpression(ParameterExpression px, GroupInput group)
+        private static Expression? ConvertToExpression(ParameterExpression px, GroupInput input)
         {
             Expression? itemExpress = default;
             Expression? groupExpress = default;
+            input.Groups = input.Groups?.RemoveNull();
+            input.Items = input.Items?.RemoveNull();
 
-            if (group.Items != default && group.Items.Any())
+            if (input.Items != default && input.Items.Any())
             {
-                var binarys = new Expression[group.Items.Length];
+                var binarys = new Expression[input.Items.Length];
                 var idx = 0;
-                foreach (var item in group.Items)
+                foreach (var item in input.Items)
                 {
                     var left = Expression.Property(px, item.Field);
                     var right = Expression.Constant(ConvertObject(left.Type, item.Value), left.Type);
@@ -114,16 +114,16 @@ namespace QuickFrame.Common
                 }
                 foreach (var item in binarys[1..])
                 {
-                    binarys[0] = BinaryLogic(group.Logic, binarys[0], item);
+                    binarys[0] = BinaryLogic(input.Logic, binarys[0], item);
                 }
                 itemExpress = binarys.Length > 0 ? binarys[0] : default;
             }
 
-            if (group.Groups != default && group.Groups.Any())
+            if (input.Groups != default && input.Groups.Any())
             {
-                var binarys = new Expression[group.Groups.Length];
+                var binarys = new Expression[input.Groups.Length];
                 var idx = 0;
-                foreach (var item in group.Groups)
+                foreach (var item in input.Groups)
                 {
                     var binary = ConvertToExpression(px, item);
                     if (binary != null)
@@ -131,11 +131,11 @@ namespace QuickFrame.Common
                 }
                 foreach (var item in binarys[1..])
                 {
-                    binarys[0] = BinaryLogic(group.Logic, binarys[0], item);
+                    binarys[0] = BinaryLogic(input.Logic, binarys[0], item);
                 }
                 groupExpress = binarys.Length > 0 ? binarys[0] : default;
             }
-            if (itemExpress != default && groupExpress != default) return BinaryLogic(group.Logic, itemExpress, groupExpress);
+            if (itemExpress != default && groupExpress != default) return BinaryLogic(input.Logic, itemExpress, groupExpress);
             if (itemExpress == default && groupExpress == default) return default;
             if (itemExpress == default) return groupExpress;
             if (groupExpress == default) return itemExpress;

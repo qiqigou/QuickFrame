@@ -52,14 +52,13 @@ namespace QuickFrame.Repositorys
         /// <param name="qkeys">查询键</param>
         /// <param name="orderkeys">排序键</param>
         /// <returns></returns>
-        public IQueryProvider<TView, TQKey> Create<IOption, TView, TQKey>(Expression<Func<TView, TQKey>> qkeys, SortInput[]? orderkeys = default)
+        public IQueryProvider<TView, TQKey> Create<IOption, TView, TQKey>(Expression<Func<TView, TQKey>> qkeys, SortInput[] orderkeys)
             where IOption : IContextOption
             where TView : ViewEntity, new()
             where TQKey : notnull
         {
             var queryRepository = _serviceProvider.GetRequiredService<IQueryRepository<IOption>>();
             var qkeyNames = ExpressionHelper.GetMemberNames(qkeys);
-            if (orderkeys == default) return new QueryProvider<TView, TQKey>(queryRepository, qkeyNames, qkeyNames);
             return new QueryProvider<TView, TQKey>(queryRepository, qkeyNames, orderkeys);
         }
     }

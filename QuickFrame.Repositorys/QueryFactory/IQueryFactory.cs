@@ -32,7 +32,7 @@ namespace QuickFrame.Repositorys
         /// <param name="qkeys">查询键</param>
         /// <param name="orderkeys">排序键</param>
         /// <returns></returns>
-        IQueryProvider<TView, TQKey> Create<IOption, TView, TQKey>(Expression<Func<TView, TQKey>> qkeys, SortInput[]? orderkeys = default)
+        IQueryProvider<TView, TQKey> Create<IOption, TView, TQKey>(Expression<Func<TView, TQKey>> qkeys, SortInput[] orderkeys)
             where IOption : IContextOption
             where TView : ViewEntity, new()
             where TQKey : notnull;

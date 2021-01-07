@@ -1,13 +1,18 @@
 {
-    "profiles": {
-        "QuickFrame": {
-            "commandName": "Project",
-            "launchBrowser": true,
-            "launchUrl": "",
-            "applicationUrl": "http://localhost:8000",
-            "environmentVariables": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            }
-        }
+  "profiles": {
+    "QuickFrame": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:8000"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "publishAllPorts": true
     }
+  }
 }

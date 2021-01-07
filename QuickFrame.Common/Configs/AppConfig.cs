@@ -43,6 +43,11 @@ namespace QuickFrame.Common
         /// 唯一ID的提供方式
         /// </summary>
         public IdWorkerProvidType IdWorkerProvid { get; set; }
+        /// <summary>
+        /// 服务ID
+        /// </summary>
+        /// <value></value>
+        public string ServerId { get; set; } = string.Empty;
     }
     /// <summary>
     /// 统一认证授权服务器配置

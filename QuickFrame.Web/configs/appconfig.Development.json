@@ -1,5 +1,5 @@
 {
-    "CorUrls": [ "http://localhost:3343" ],
+    "CorUrls": ["http://localhost:3343"],
     "IdentityServer": {
         "Enable": true,
         "ApiName": "quickframe_api",
@@ -9,7 +9,7 @@
     },
     "Swagger": true,
     "SwaggerScope": "quickframe",
-    "SwaggerScopeName": "quickframe WebAPIÏîÄ¿",
+    "SwaggerScopeName": "quickframe WebAPIé¡¹ç›®",
     "Test": {
         "UserName": "admin",
         "PassWord": "123123",
@@ -20,5 +20,6 @@
     },
     "MachineId": 5,
     "DatacenterId": 6,
-    "IdWorkerProvid": 0
+    "IdWorkerProvid": 0,
+    "ServerId": "server1"
 }

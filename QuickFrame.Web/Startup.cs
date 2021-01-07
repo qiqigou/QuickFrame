@@ -180,6 +180,7 @@ namespace QuickFrame.Web
             {
                 app.UseCustomSwagger();//文档中间件
             }
+            app.UseServerIdMildd(_configuration);//服务ID中间件
             app.UseRouting();//路由中间件
             app.UseCors();//跨域中间件
             app.UseAuthentication();//认证中间件

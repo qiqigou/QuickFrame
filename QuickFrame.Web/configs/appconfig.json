@@ -20,5 +20,6 @@
     },
     "MachineId": 5,
     "DatacenterId": 6,
-    "IdWorkerProvid": 0
+    "IdWorkerProvid": 0,
+    "ServerId": "quickframe"
 }

@@ -1,6 +1,6 @@
 {
     "Work": "mysql_workdb",
-    "Back": "mssql_backdb",
+    "Back": "mysql_backdb",
     "ConnStrings": [
         {
             "Name": "(local)mssql_workdb",
@@ -25,12 +25,12 @@
         {
             "Name": "mysql_workdb",
             "Type": 2,
-            "ConnectionString": "server=localhost;user=root;password=123123;database=workdb;Connection Timeout=30;"
+            "ConnectionString": "server=172.18.0.2;user=root;password=123123;database=workdb;Connection Timeout=30;"
         },
         {
             "Name": "mysql_backdb",
             "Type": 2,
-            "ConnectionString": "server=localhost;user=root;password=123123;database=backdb;Connection Timeout=30;"
+            "ConnectionString": "server=172.18.0.2;user=root;password=123123;database=backdb;Connection Timeout=30;"
         }
     ]
 }

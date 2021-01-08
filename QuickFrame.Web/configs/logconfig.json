@@ -9,7 +9,7 @@
                 "Microsoft.AspNetCore.StaticFiles": "Fatal"
             }
         },
-        "FilePath": "logs\\log-.log",
+        "FilePath": "logs/log-.log",
         "ConsoleTemplate": "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}",
         "FileTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}",
         "RollingInterval": 3,

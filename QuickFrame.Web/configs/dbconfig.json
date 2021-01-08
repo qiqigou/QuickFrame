@@ -1,6 +1,6 @@
 {
-    "Work": "(local)mssql_workdb",
-    "Back": "(local)mssql_backdb",
+    "Work": "mysql_workdb",
+    "Back": "mssql_backdb",
     "ConnStrings": [
         {
             "Name": "(local)mssql_workdb",

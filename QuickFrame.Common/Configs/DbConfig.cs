@@ -56,5 +56,6 @@ namespace QuickFrame.Common
     {
         MSSQL = 0,
         SQLite = 1,
+        MYSQL = 2,
     }
 }

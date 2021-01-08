@@ -22,14 +22,13 @@ namespace QuickFrame.Models
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var conn = _dbConfig.GetBackString();
-            if (conn.Type == DbType.MSSQL)
+            _ = conn.Type switch
             {
-                optionsBuilder.UseSqlServer(conn.ConnectionString);
-            }
-            else
-            {
-                optionsBuilder.UseSqlite(conn.ConnectionString);
-            }
+                DbType.MSSQL => optionsBuilder.UseSqlServer(conn.ConnectionString),
+                DbType.SQLite => optionsBuilder.UseSqlite(conn.ConnectionString),
+                DbType.MYSQL => optionsBuilder.UseMySql(conn.ConnectionString, ServerVersion.FromString("8.0.22")),
+                _ => throw new AmbiguousMatchException($"{conn.Type}不是受支持的数据库类型")
+            };
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

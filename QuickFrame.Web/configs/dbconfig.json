@@ -21,6 +21,16 @@
             "Name": "mssql_backdb",
             "Type": 0,
             "ConnectionString": "server=localhost\\SQLEXPRESS;database=backdb;Trusted_Connection=True;Connection Timeout=30;"
+        },
+        {
+            "Name": "mysql_workdb",
+            "Type": 2,
+            "ConnectionString": "server=localhost;user=root;password=123123;database=workdb;Connection Timeout=30;"
+        },
+        {
+            "Name": "mysql_backdb",
+            "Type": 2,
+            "ConnectionString": "server=localhost;user=root;password=123123;database=backdb;Connection Timeout=30;"
         }
     ]
 }

@@ -31,14 +31,13 @@ namespace QuickFrame.Models
             {
                 builder.InitialCatalog = _user.DBName;
             }
-            if (conn.Type == DbType.MSSQL)
+            _ = conn.Type switch
             {
-                optionsBuilder.UseSqlServer(builder.ConnectionString);
-            }
-            else
-            {
-                optionsBuilder.UseSqlite(builder.ConnectionString);
-            }
+                DbType.MSSQL => optionsBuilder.UseSqlServer(builder.ConnectionString),
+                DbType.SQLite => optionsBuilder.UseSqlite(builder.ConnectionString),
+                DbType.MYSQL => optionsBuilder.UseMySql(builder.ConnectionString, ServerVersion.FromString("8.0.22")),
+                _ => throw new AmbiguousMatchException($"{conn.Type}不是受支持的数据库类型")
+            };
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -16,6 +16,7 @@
         <PackageReference Include="DynamicTypeMap" Version="[1.1.4]" />
         <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="[5.0.1]" />
         <PackageReference Include="Polly" Version="[7.2.1]" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.0-alpha.2" />
         <PackageReference Include="Qiqigou.Mapster" Version="[6.5.1]" />
         <PackageReference Include="Mapster.DependencyInjection" Version="[1.0.0]" />
         <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="[3.0.1]" />

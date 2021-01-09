@@ -1,6 +1,6 @@
 {
-    "Type": 0,
+    "Type": 1,
     "Redis": {
-        "ConnectionString": "127.0.0.1:6379,password=,defaultDatabase=2"
+        "ConnectionString": "custnet_redis:6379,password=,defaultDatabase=2"
     }
 }

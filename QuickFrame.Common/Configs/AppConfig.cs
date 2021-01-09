@@ -48,6 +48,11 @@ namespace QuickFrame.Common
         /// </summary>
         /// <value></value>
         public string ServerId { get; set; } = string.Empty;
+        /// <summary>
+        /// RabbitMQ配置
+        /// </summary>
+        /// <returns></returns>
+        public RabbitMQConfig RabbitMQ = new RabbitMQConfig();
     }
     /// <summary>
     /// 统一认证授权服务器配置
@@ -104,6 +109,37 @@ namespace QuickFrame.Common
         /// 访问范围
         /// </summary>
         public string Scope { get; set; } = string.Empty;
+    }
+    /// <summary>
+    /// rabbitmq配置
+    /// </summary>
+    public class RabbitMQConfig
+    {
+        /// <summary>
+        /// 启用
+        /// </summary>
+        /// <value></value>
+        public bool Enabled { get; set; }
+        /// <summary>
+        /// 连接字符串
+        /// </summary>
+        /// <value></value>
+        public string HostName { get; set; } = string.Empty;
+        /// <summary>
+        /// 用户名
+        /// </summary>
+        /// <value></value>
+        public string UserName { get; set; } = string.Empty;
+        /// <summary>
+        /// 密码
+        /// </summary>
+        /// <value></value>
+        public string PassWork { get; set; } = string.Empty;
+        /// <summary>
+        /// 重试次数(默认5)
+        /// </summary>
+        /// <value></value>
+        public int RetryCount { get; set; } = 5;
     }
     /// <summary>
     /// 唯一ID的提供方式

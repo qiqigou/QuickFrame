@@ -19,6 +19,7 @@
     <ItemGroup>
         <ProjectReference Include="..\QuickFrame.EventBus\QuickFrame.EventBus.csproj" />
         <ProjectReference Include="..\QuickFrame.IServices\QuickFrame.IServices.csproj" />
+        <ProjectReference Include="..\QuickFrame.Repositorys\QuickFrame.Repositorys.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,6 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using QuickFrame.Common;
 using System;
 using System.Collections.Generic;
@@ -7,10 +9,21 @@ using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class CustomSwaggerServiceCollectionExtensions
+    /// <summary>
+    /// swagger配置
+    /// </summary>
+    public static class SwaggerSetup
     {
-        public static IServiceCollection AddCustomSwagger(this IServiceCollection services, AppConfig appConfig)
+        /// <summary>
+        /// 注入swagger配置
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="environment"></param>
+        /// <param name="appConfig"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddSwaggerSetup(this IServiceCollection services, IWebHostEnvironment environment, AppConfig appConfig)
         {
+            if (!environment.IsDevelopment() && !appConfig.Swagger) return services;
             return services.AddSwaggerGen(options =>
             {
                 foreach (var item in ConstantOptions.ModulesConstant.Modules)

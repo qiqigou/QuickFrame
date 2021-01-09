@@ -1,5 +1,5 @@
 {
-    "CorUrls": [ "http://localhost:3343" ],
+    "CorUrls": ["http://localhost:3343"],
     "IdentityServer": {
         "Enable": true,
         "ApiName": "quickframe_api",
@@ -17,6 +17,13 @@
         "ClientId": "quickframe_test",
         "ClientSecret": "quickframe_test",
         "Scope": "quickframe"
+    },
+    "RabbitMQ": {
+        "Enabled": true,
+        "HostName": "localhost",
+        "UserName": "admin",
+        "Password": "123123",
+        "RetryCount": 3
     },
     "MachineId": 5,
     "DatacenterId": 6,

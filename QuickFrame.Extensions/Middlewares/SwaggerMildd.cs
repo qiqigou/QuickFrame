@@ -1,12 +1,27 @@
-﻿using QuickFrame.Common;
+﻿using Microsoft.AspNetCore.Hosting;
+using QuickFrame.Common;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Builder
 {
-    public static class CustomSwaggerBuilderExtensions
+    /// <summary>
+    /// swagger文档中间件
+    /// </summary>
+    public static class SwaggerMildd
     {
-        public static IApplicationBuilder UseCustomSwagger(this IApplicationBuilder app)
+        /// <summary>
+        /// swagger文档中间件
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="environment"></param>
+        /// <returns></returns>
+        public static IApplicationBuilder UseCustomSwagger(this IApplicationBuilder app, IWebHostEnvironment environment)
         {
+            var appconfig = app.ApplicationServices.GetRequiredService<IOptions<AppConfig>>().Value;
+            if (!environment.IsDevelopment() && !appconfig.Swagger) return app;
             app.UseSwagger();
             app.UseSwaggerUI(doc =>
             {

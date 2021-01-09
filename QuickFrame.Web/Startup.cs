@@ -1,9 +1,4 @@
 ﻿using Autofac;
-using Autofac.Extras.DynamicProxy;
-using CSRedis;
-using Mapster;
-using MapsterMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,11 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QuickFrame.Common;
 using QuickFrame.Extensions;
-using QuickFrame.IServices;
-using QuickFrame.Models;
-using QuickFrame.Repositorys;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Reflection;
 
 namespace QuickFrame.Web
@@ -44,28 +35,24 @@ namespace QuickFrame.Web
             services.Configure<AppConfig>(_configuration);//注入app配置
             services.Configure<DbConfig>(_configuration);//注入db配置
             services.Configure<CacheConfig>(_configuration);//注入cache配置
+
             var jwtconfig = _configuration.Get<JwtConfig>();//获取jwt配置
             var appconfig = _configuration.Get<AppConfig>();//获取app配置
             var dbconfig = _configuration.Get<DbConfig>();//获取db配置
             var cacheconfig = _configuration.Get<CacheConfig>();//获取cache配置
-            if (_environment.IsDevelopment() || appconfig.Swagger)
-            {
-                services.AddCustomSwagger(appconfig);//注入文档配置
-            }
+
+            services.AddDbContextSetup();//注入数据库上下文
+            services.AddCorsSetup(appconfig);//注入跨域配置
+            services.AddRabbitMQSetup(appconfig);//注入RabbitMQ配置
+            services.AddAuthorizationPolicySetup();//注入授权策略配置
+            services.AddIdWorkerSetup(appconfig);//注入唯一ID服务
+            services.AddCacheSetup(cacheconfig);//注入缓存配置
+            services.AddAuthenticationSetup(appconfig, jwtconfig);//注入认证配置
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();//注入身份信息解析器
-            services.AddDbContext<BackDbContext>(ServiceLifetime.Scoped, ServiceLifetime.Scoped);//注入后台库
-            services.AddDbContext<WorkDbContext>(ServiceLifetime.Scoped, ServiceLifetime.Scoped);//注入业务库
-            services.AddCustomCors(appconfig);//注入跨域配置
-            if (appconfig.IdentityServer.Enable)
-            {
-                services.AddCustomSSOAuthentication(appconfig);//注入SSO认证配置
-            }
-            else
-            {
-                services.AddCustomJWTAuthentication(jwtconfig);//注入JWT认证配置
-            }
-            services.AddSingleton<IAuthorizationHandler, RootPermissionAuthorizationHandler>();//预设角色授权策略
-            services.AddScoped<IAuthorizationHandler, ApiPermissionAuthorizationHandler>();//API权限授权策略
+            services.AddHealthChecksSetup();//注入健康检查服务
+            services.AddSwaggerSetup(_environment, appconfig);//注入文档配置
+            services.AddAssignProviderSetup();//注入赋值器
+
             //注入控制器并且设置过滤器
             services.AddControllers(options =>
             {
@@ -75,39 +62,14 @@ namespace QuickFrame.Web
                 options.MaxModelValidationErrors = 10;//模型验证最大错误数
                 options.MaxValidationDepth = 20;//最大递归验证层数
             })
-            .AddApplicationPart(Assembly.Load(AssemblyOption.ControllersName))
             .AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                 options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicyConfig.LowerCase;
                 options.JsonSerializerOptions.IgnoreNullValues = true;
                 options.JsonSerializerOptions.Converters.Add(new TupleJsonConverter());
-            });
-            //注入赋值器
-            services.AddSingleton(provider => provider.GetRequiredService<IAssignProvider>().CreateAssign());
-            //注入健康检查服务
-            services.AddHealthChecks().AddDbContextCheck<BackDbContext>().AddDbContextCheck<WorkDbContext>();
-            if (cacheconfig.Type == CacheType.Redis)
-            {
-                //Redis缓存
-                RedisHelper.Initialization(new CSRedisClient(cacheconfig.Redis.ConnectionString));
-                services.AddSingleton<ICache, RedisCache>();
-            }
-            else
-            {
-                //内存缓存
-                services.AddMemoryCache();
-                services.AddSingleton<ICache, MemorysCache>();
-            }
-            //注入唯一ID服务
-            if (appconfig.IdWorkerProvid == IdWorkerProvidType.Redis)
-            {
-                services.AddSingleton<IIdWorker, RedisIdWorker>();
-            }
-            else
-            {
-                services.AddSingleton<IIdWorker, SnowflakeIdWorker>();
-            }
+            })
+            .AddApplicationPart(Assembly.Load(AssemblyOption.ControllersName));
         }
         /// <summary>
         /// 注入到AutoFac
@@ -119,52 +81,12 @@ namespace QuickFrame.Web
             var assemblyCommon = Assembly.Load(AssemblyOption.CommonName);
             var assemblyRepository = Assembly.Load(AssemblyOption.RepositorysName);
 
-            //服务注入
-            builder.RegisterAssemblyTypes(assemblyServices)
-            .Where(x => x.IsAssignableTo<IService>())
-            .AsImplementedInterfaces()
-            .InstancePerLifetimeScope()
-            .InterceptedBy(typeof(IProxyInterceptor))
-            .EnableInterfaceInterceptors();//启用动态代理
-
-            //仓储注入
-            builder.RegisterAssemblyTypes(assemblyRepository)
-            .Where(x => x.IsAssignableTo<IRepository>())
-            .AsImplementedInterfaces()
-            .InstancePerLifetimeScope();
-
-            //单例注入
-            builder.RegisterAssemblyTypes(assemblyServices, assemblyCommon, assemblyRepository)
-            .Where(x => x.GetCustomAttribute<SingletonInjectionAttribute>() != null)
-            .AsImplementedInterfaces()
-            .SingleInstance();
-
-            //范围注入
-            builder.RegisterAssemblyTypes(assemblyServices, assemblyCommon, assemblyRepository)
-            .Where(x => x.GetCustomAttribute<ScopeInjectionAttribute>() != null)
-            .AsImplementedInterfaces()
-            .InstancePerLifetimeScope();
-
-            //瞬态注入
-            builder.RegisterAssemblyTypes(assemblyServices, assemblyCommon, assemblyRepository)
-            .Where(x => x.GetCustomAttribute<TransientInjectionAttribute>() != null)
-            .AsImplementedInterfaces()
-            .InstancePerDependency();
-
-            //映射器注入
-            var config = new TypeAdapterConfig();
-            config.Default.NameMatchingStrategy(NameMatchingStrategy.Flexible)
-            .ShallowCopyForSameType(false)
-            .IgnoreNullValues(true)
-            .Config
-            .Scan(assemblyServices, assemblyCommon, assemblyRepository);
-            builder.RegisterInstance(config).SingleInstance();
-            builder.RegisterType<ServiceMapper>().As<IMapper>().InstancePerLifetimeScope();
-
-            //动态代理注入
-            assemblyServices.GetTypes()
-            .Where(x => x.IsAssignableTo(typeof(IProxyHandle)))
-            .ForEach(item => builder.RegisterType(item).Named<IProxyHandle>(item.Name).InstancePerLifetimeScope());
+            //注入服务和仓储
+            builder.AddRegisterServicesAndRepository(assemblyServices, assemblyRepository);
+            //注入被特性标记的类型
+            builder.AddRegisterAttributeSetup(assemblyServices, assemblyCommon, assemblyRepository);
+            //注入映射器配置
+            builder.AddRegisterMapsterMapper(assemblyServices, assemblyCommon, assemblyRepository);
         }
         /// <summary>
         /// 中间件管道
@@ -176,10 +98,7 @@ namespace QuickFrame.Web
             {
                 app.UseDeveloperExceptionPage();//开发模式下的错误处理页面
             }
-            if (_environment.IsDevelopment() || _configuration.Get<AppConfig>().Swagger)
-            {
-                app.UseCustomSwagger();//文档中间件
-            }
+            app.UseCustomSwagger(_environment);//文档中间件
             app.UseServerIdMildd(_configuration);//服务ID中间件
             app.UseRouting();//路由中间件
             app.UseCors();//跨域中间件

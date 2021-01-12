@@ -48,9 +48,8 @@ namespace QuickFrame.Common
         /// </summary>
         /// <param name="bytes"></param>
         /// <returns></returns>
-        public static string? ToBase64(this byte[]? bytes)
+        public static string ToBase64(this byte[] bytes)
         {
-            if (bytes == default) return default;
             return Convert.ToBase64String(bytes);
         }
         /// <summary>
@@ -75,7 +74,8 @@ namespace QuickFrame.Common
         /// <typeparam name="TValue"></typeparam>
         /// <param name="array"></param>
         /// <returns></returns>
-        public static TValue[]? RemoveNull<TValue>(this TValue[]? array) where TValue : notnull => array?.Where(x => x != null)?.ToArray();
+        public static TValue[]? RemoveNull<TValue>(this TValue[]? array)
+            where TValue : notnull => array?.Where(x => x != null)?.ToArray();
         /// <summary>
         /// 获取枚举的Options
         /// </summary>
@@ -86,11 +86,9 @@ namespace QuickFrame.Common
         {
             var enumType = typeof(TEnum);
             if (!enumType.IsEnum) Array.Empty<OptionOutput<int>>();
-            return Enum.GetValues(enumType).Cast<Enum>().Select(x => new OptionOutput<int>
-            {
-                Label = x.GetDescription(),
-                Value = Convert.ToInt32(x)
-            }).ToArray();
+            return Enum.GetValues(enumType).Cast<Enum>()
+                .Select(x => new OptionOutput<int>(x.GetDescription(), Convert.ToInt32(x)))
+                .ToArray();
         }
     }
 }

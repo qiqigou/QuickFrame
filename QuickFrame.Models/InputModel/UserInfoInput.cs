@@ -30,7 +30,7 @@ namespace QuickFrame.Models
     /// <summary>
     /// 修改用户
     /// </summary>
-    public class UserInfoUpdInput : WithStampDataInput
+    public class UserInfoUpdInput : IDataInput
     {
         /// <summary>
         /// 用户名

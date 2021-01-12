@@ -1,4 +1,5 @@
-﻿using QuickFrame.Common;
+﻿using Microsoft.Extensions.Configuration;
+using QuickFrame.Common;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -11,10 +12,11 @@ namespace Microsoft.Extensions.DependencyInjection
         /// 注入唯一ID服务配置
         /// </summary>
         /// <param name="services"></param>
-        /// <param name="appconfig"></param>
+        /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddIdWorkerSetup(this IServiceCollection services, AppConfig appconfig)
+        public static IServiceCollection AddIdWorkerSetup(this IServiceCollection services, IConfiguration configuration)
         {
+            var appconfig = configuration.Get<AppConfig>();
             if (appconfig.IdWorkerProvid == IdWorkerProvidType.Redis)
             {
                 services.AddSingleton<IIdWorker, RedisIdWorker>();

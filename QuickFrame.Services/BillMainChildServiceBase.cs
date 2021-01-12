@@ -30,7 +30,7 @@ namespace QuickFrame.Services
         where TMain : WithStampTable, new()
         where TChild : TableEntity, new()
         where TMainInput : IDataInput, new()
-        where TMainUpdInput : WithStampDataInput, new()
+        where TMainUpdInput : IDataInput, new()
         where TChildInput : IDataInput, new()
         where TChildUpdInput : IDataInput, new()
         where TMainView : WithStampView, new()
@@ -131,13 +131,24 @@ namespace QuickFrame.Services
         /// <summary>
         /// 删除主子表
         /// </summary>
-        /// <param name="arrayKeyValue"></param>
+        /// <remarks>
+        /// 如果使用EFCore创建数据库，则会配置级联删除
+        /// </remarks>
+        /// <param name="arrayKeyStamp"></param>
         /// <returns></returns>
-        public virtual async Task<int> DeleteMainChildAsync(TKey[] arrayKeyValue)
+        public virtual async Task<int> DeleteMainChildAsync(KeyStamp<TKey>[] arrayKeyStamp)
         {
-            //如果使用EFCore创建数据库，则会配置级联删除
-            var count = await _mainRepository.DeleteAsync(arrayKeyValue);
-            return count > 0 ? count : throw new HandelException(MessageCodeOption.Bad_Delete, arrayKeyValue);
+            var keys = arrayKeyStamp.Select(x => x.Key).ToArray();
+            var array = await _mainRepository.FindAsync(keys);
+            _ = array ?? throw new HandelArrayException(MessageCodeOption.Bad_Delete, keys);
+            var bad_keys = array
+                .Join(arrayKeyStamp, MainKeyFunc, y => y.Key, (x, y) => new { y.Key, y.Timpstamp, x?.timestamp })
+                .Where(x => x.Timpstamp.ToBase64() != x.timestamp.ToBase64())
+                .Select(x => x.Key)
+                .ToArray();
+            _ = bad_keys.Any() ? throw new HandelArrayException(MessageCodeOption.Bad_Update, bad_keys) : true;
+            var count = await _mainRepository.DeleteAsync(keys);
+            return count > 0 ? count : throw new HandelArrayException(MessageCodeOption.Bad_Delete, keys);
         }
         /// <summary>
         /// 创建主子表
@@ -161,14 +172,15 @@ namespace QuickFrame.Services
         /// 3.如果传入的某个字段值为空,则不会修改该字段的值(可以在对应的Map映射中禁用该策略)
         /// </remarks>
         /// <param name="keyValue"></param>
+        /// <param name="timestamp"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        public virtual async Task<int> UpdateMainChildAsync(TKey keyValue, MainChildInput<TMainUpdInput, TChildUpdInput> input)
+        public virtual async Task<int> UpdateMainChildAsync(TKey keyValue, byte[] timestamp, MainChildInput<TMainUpdInput, TChildUpdInput> input)
         {
             var whereExpr = ExpressionHelper.WhereLambda<TMain, TKey>(_mainRepository.Keys, keyValue);
             var res = await _mainRepository.Select.Include(ChildTable).SingleOrDefaultAsync(whereExpr);
             _ = res ?? throw new HandelException(MessageCodeOption.Bad_Delete, keyValue);
-            _ = input.Main.Timestamp.ToBase64() == res.timestamp.ToBase64() ? true : throw new HandelException(MessageCodeOption.Bad_Update, keyValue);
+            _ = res.timestamp.ToBase64() == timestamp.ToBase64() ? true : throw new HandelException(MessageCodeOption.Bad_Update, keyValue);
             _mapper.Map(input.Main, res);
             var child = ChildTableFunc.Invoke(res)?.ToList();
             if (input.Child.Any())

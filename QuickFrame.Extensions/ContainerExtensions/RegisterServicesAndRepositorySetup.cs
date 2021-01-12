@@ -16,8 +16,13 @@ namespace QuickFrame.Extensions
         /// <summary>
         /// 注入服务和仓储配置
         /// </summary>
-        public static ContainerBuilder AddRegisterServicesAndRepository(this ContainerBuilder builder, Assembly assemblyServices, Assembly assemblyRepository)
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public static ContainerBuilder AddRegisterServicesAndRepository(this ContainerBuilder builder)
         {
+            var assemblyServices = Assembly.Load(AssemblyOption.ServicesName);
+            var assemblyRepository = Assembly.Load(AssemblyOption.RepositorysName);
+
             //服务注入
             builder.RegisterAssemblyTypes(assemblyServices)
             .Where(x => x.IsAssignableTo<IService>())

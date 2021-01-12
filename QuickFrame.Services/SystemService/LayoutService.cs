@@ -60,10 +60,20 @@ namespace QuickFrame.Services
                 return members.Select(x => new MemberItem
                 {
                     Name = x?.Attribute("name")?.Value ?? string.Empty,
-                    Param = x?.Elements("param")?.Select(m => new NameValueItem<string> { Name = m?.Attribute("name")?.Value ?? string.Empty, Value = m?.Value.Trim() ?? string.Empty }).ToArray() ?? Array.Empty<NameValueItem<string>>(),
+                    Param = x?.Elements("param")?.Select(m =>
+                    new NameValueItem<string>
+                    (
+                        name: m?.Attribute("name")?.Value ?? string.Empty,
+                        value: m?.Value.Trim() ?? string.Empty
+                    )).ToArray() ?? Array.Empty<NameValueItem<string>>(),
                     Returns = x?.Element("returns")?.Value.Trim() ?? string.Empty,
                     Summary = x?.Element("summary")?.Value.Trim() ?? string.Empty,
-                    TypeParam = x?.Elements("typeparam")?.Select(m => new NameValueItem<string> { Name = m?.Attribute("name")?.Value ?? string.Empty, Value = m?.Value.Trim() ?? string.Empty }).ToArray() ?? Array.Empty<NameValueItem<string>>(),
+                    TypeParam = x?.Elements("typeparam")?.Select(m =>
+                    new NameValueItem<string>
+                    (
+                        name: m?.Attribute("name")?.Value ?? string.Empty,
+                        value: m?.Value.Trim() ?? string.Empty
+                    )).ToArray() ?? Array.Empty<NameValueItem<string>>(),
                 });
             }
             static async Task<XElement> LoadXmlAsync(string path)

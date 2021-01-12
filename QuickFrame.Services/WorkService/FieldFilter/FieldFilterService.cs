@@ -4,7 +4,6 @@ using QuickFrame.Models;
 using QuickFrame.Repositorys;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -40,24 +39,27 @@ namespace QuickFrame.Services
             return res;
         }
 
-        public override async Task<int> UpdateMainChildAsync(long keyValue, MainChildInput<FieldFilterUpdInput, FieldFiltercUpdInput> input)
+        public override async Task<int> UpdateMainChildAsync(long keyValue, byte[] timestamp, MainChildInput<FieldFilterUpdInput, FieldFiltercUpdInput> input)
         {
-            var res = await base.UpdateMainChildAsync(keyValue, input);
+            var res = await base.UpdateMainChildAsync(keyValue, timestamp, input);
             _filterProvider.RemoveNewType(input.Main.FgSource ?? string.Empty, input.Main.FgDest);
             return res;
         }
 
-        public override async Task<int> DeleteMainChildAsync(long[] arrayKeyValue)
+        public override async Task<int> DeleteMainChildAsync(KeyStamp<long>[] arrayKeyStamp)
         {
-            var array = await _mainRepository.FindAsync(arrayKeyValue);
-            _ = array?.Any() ?? false ? true : throw new HandelException(MessageCodeOption.Bad_Delete, arrayKeyValue);
-            var count = await _mainRepository.DeleteAsync(array);
-            _ = count > 0 ? true : throw new HandelException(MessageCodeOption.Bad_Delete, arrayKeyValue);
-            foreach (var item in array)
-            {
-                _filterProvider.RemoveNewType(item.fg_source, item.fg_dest);
-            }
+            _mainRepository.DeletedByKey += RemoveNewTypes;
+            var count = await base.DeleteMainChildAsync(arrayKeyStamp);
+            _mainRepository.DeletedByKey -= RemoveNewTypes;
             return count;
+
+            void RemoveNewTypes(object? sender, IEnumerable<fieldfilter_fg> e)
+            {
+                e.ForEach(item =>
+                {
+                    _filterProvider.RemoveNewType(item.fg_source, item.fg_dest);
+                });
+            }
         }
     }
 }

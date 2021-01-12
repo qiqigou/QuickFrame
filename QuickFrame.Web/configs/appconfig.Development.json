@@ -1,7 +1,7 @@
 {
     "CorUrls": ["http://localhost:3343"],
     "IdentityServer": {
-        "Enable": true,
+        "Enable": false,
         "ApiName": "quickframe_api",
         "ApiSecret": "quickframe_api_secrets",
         "RequireHttps": false,

@@ -28,7 +28,7 @@ namespace QuickFrame.Repositorys
         /// <summary>
         /// 仓储层内部访问上下文
         /// </summary>
-        DbContext IUnitOfWork.Context => CurrentContext;
+        public DbContext Context => CurrentContext;
         /// <summary>
         /// 禁用自动保存
         /// </summary>

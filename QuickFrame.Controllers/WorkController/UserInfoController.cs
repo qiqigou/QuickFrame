@@ -36,10 +36,11 @@ namespace QuickFrame.Controllers
         /// 删除用户
         /// </summary>
         /// <returns></returns>
-        [HttpDelete("{id:int}")]
-        public async Task<MsgOutput> DeleteAsync([FromRoute] int id)
+        [HttpDelete("{id:int}/{timestamp}")]
+        public async Task<MsgOutput> DeleteAsync([FromRoute] int id, [FromRoute] byte[] timestamp)
         {
-            await _userinfoService.DeleteAsync(new[] { id });
+            var key = new KeyStamp<int>(id, timestamp);
+            await _userinfoService.DeleteAsync(new[] { key });
             return MsgOutputOption.OkMsg;
         }
         /// <summary>
@@ -57,12 +58,13 @@ namespace QuickFrame.Controllers
         /// 修改用户
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="timestamp"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        [HttpPut("{id:int}")]
-        public async Task<MsgOutput> UpdateAsync([FromRoute] int id, [FromBody] UserInfoUpdInput input)
+        [HttpPut("{id:int}/{timestamp}")]
+        public async Task<MsgOutput> UpdateAsync([FromRoute] int id, [FromRoute] byte[] timestamp, [FromBody] UserInfoUpdInput input)
         {
-            await _userinfoService.UpdateAsync(id, input);
+            await _userinfoService.UpdateAsync(id, timestamp, input);
             return MsgOutputOption.OkMsg;
         }
         /// <summary>
@@ -94,9 +96,9 @@ namespace QuickFrame.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("{id:int}/{timestamp}")]
-        public async Task<MsgOutput> AudtAsync([FromRoute] int id, [FromRoute] byte[] timestamp)
+        public async Task<MsgOutput> AudtAsync([FromRoute] int id)
         {
-            await _userinfoService.AudtRangeAsync(new[] { new AudtInput<int> { KeyValue = id, Timestamp = timestamp } });
+            await _userinfoService.AudtRangeAsync(new[] { id });
             return MsgOutputOption.OkMsg;
         }
         /// <summary>
@@ -104,9 +106,9 @@ namespace QuickFrame.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("{id:int}/{timestamp}")]
-        public async Task<MsgOutput> UnAudtAsync([FromRoute] int id, [FromRoute] byte[] timestamp)
+        public async Task<MsgOutput> UnAudtAsync([FromRoute] int id)
         {
-            await _userinfoService.UnAudtRangeAsync(new[] { new AudtInput<int> { KeyValue = id, Timestamp = timestamp } });
+            await _userinfoService.UnAudtRangeAsync(new[] { id });
             return MsgOutputOption.OkMsg;
         }
         /// <summary>
@@ -114,9 +116,9 @@ namespace QuickFrame.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("{id:int}/{timestamp}")]
-        public async Task<MsgOutput> ApproveAsync([FromRoute] int id, [FromRoute] byte[] timestamp)
+        public async Task<MsgOutput> ApproveAsync([FromRoute] int id)
         {
-            await _userinfoService.ApproveRangeAsync(new[] { new AudtInput<int> { KeyValue = id, Timestamp = timestamp } });
+            await _userinfoService.ApproveRangeAsync(new[] { id });
             return MsgOutputOption.OkMsg;
         }
         /// <summary>
@@ -124,9 +126,9 @@ namespace QuickFrame.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("{id:int}/{timestamp}")]
-        public async Task<MsgOutput> UnApproveAsync([FromRoute] int id, [FromRoute] byte[] timestamp)
+        public async Task<MsgOutput> UnApproveAsync([FromRoute] int id)
         {
-            await _userinfoService.UnApproveRangeAsync(new[] { new AudtInput<int> { KeyValue = id, Timestamp = timestamp } });
+            await _userinfoService.UnApproveRangeAsync(new[] { id });
             return MsgOutputOption.OkMsg;
         }
     }

@@ -8,7 +8,7 @@ namespace QuickFrame.IServices
     /// </summary>
     public interface IHandle<TInput, TUpdInput, TKey>
         where TInput : IDataInput, new()
-        where TUpdInput : WithStampDataInput, new()
+        where TUpdInput : IDataInput, new()
         where TKey : notnull
     {
         /// <summary>
@@ -21,14 +21,15 @@ namespace QuickFrame.IServices
         /// 修改
         /// </summary>
         /// <param name="keyValue">主键</param>
+        /// <param name="timestamp"></param>
         /// <param name="input">数据</param>
         /// <returns></returns>
-        Task<int> UpdateAsync(TKey keyValue, TUpdInput input);
+        Task<int> UpdateAsync(TKey keyValue, byte[] timestamp, TUpdInput input);
         /// <summary>
         /// 删除(根据主键)
         /// </summary>
-        /// <param name="arrayKeyValue"></param>
+        /// <param name="arrayKeyStamp"></param>
         /// <returns></returns>
-        Task<int> DeleteAsync(TKey[] arrayKeyValue);
+        Task<int> DeleteAsync(KeyStamp<TKey>[] arrayKeyStamp);
     }
 }

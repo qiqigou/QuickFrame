@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using QuickFrame.Common;
 using QuickFrame.EventBus;
 using RabbitMQ.Client;
@@ -14,9 +15,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// 注入Rabbitmq配置
         /// </summary>
         /// <param name="services"></param>
-        /// <param name="appconfig"></param>
-        public static IServiceCollection AddRabbitMQSetup(this IServiceCollection services, AppConfig appconfig)
+        /// <param name="configuration"></param>
+        public static IServiceCollection AddRabbitMQSetup(this IServiceCollection services, IConfiguration configuration)
         {
+            var appconfig = configuration.Get<AppConfig>();
             if (!appconfig.RabbitMQ.Enabled) return services;
             return services.AddSingleton<IRabbitMQPersistentConnection>(provder =>
             {

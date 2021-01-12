@@ -25,18 +25,20 @@ namespace QuickFrame.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var conn = _dbConfig.GetWorkString();
-            var builder = new SqlConnectionStringBuilder(conn.ConnectionString);
+            optionsBuilder.UseLoggerFactory(BackDbContext.ConsoleloggerFactoryToSql);
+            var conn = _dbConfig.GetConnString();
+            var builder = new SqlConnectionStringBuilder(conn.WorkDb);
             if (_user.DBName.NotNull())
             {
                 builder.InitialCatalog = _user.DBName;
             }
-            _ = conn.Type switch
+            _ = _dbConfig.EnableConnName switch
             {
-                DbType.MSSQL => optionsBuilder.UseSqlServer(builder.ConnectionString),
-                DbType.SQLite => optionsBuilder.UseSqlite(builder.ConnectionString),
-                DbType.MYSQL => optionsBuilder.UseMySql(builder.ConnectionString, ServerVersion.FromString("8.0.22")),
-                _ => throw new AmbiguousMatchException($"{conn.Type}不是受支持的数据库类型")
+                nameof(DbConnectionConfig.MsSQLLocal) => optionsBuilder.UseSqlServer(conn.WorkDb),
+                nameof(DbConnectionConfig.MsSQLExpress) => optionsBuilder.UseSqlServer(conn.WorkDb),
+                nameof(DbConnectionConfig.MySQL) => optionsBuilder.UseMySql(conn.WorkDb, ServerVersion.FromString("8.0.22")),
+                nameof(DbConnectionConfig.SQLite) => optionsBuilder.UseSqlite(conn.WorkDb),
+                _ => optionsBuilder.UseSqlite(conn.WorkDb),
             };
         }
 

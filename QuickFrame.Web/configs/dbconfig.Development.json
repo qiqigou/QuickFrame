@@ -1,36 +1,21 @@
 {
-    "Work": "mysql_workdb",
-    "Back": "mysql_backdb",
-    "ConnStrings": [
-        {
-            "Name": "(local)mssql_workdb",
-            "Type": 0,
-            "ConnectionString": "server=(localdb)\\MSSQLLocalDB;database=workdb;Trusted_Connection=True;Connection Timeout=30;"
+    "EnableConnName": "MySQL",
+    "DbConnStrings": {
+        "MsSQLLocal": {
+            "WorkDb": "server=(localdb)\\MSSQLLocalDB;database=workdb;Trusted_Connection=True;Connection Timeout=30;",
+            "BackDb": "server=(localdb)\\MSSQLLocalDB;database=backdb;Trusted_Connection=True;Connection Timeout=30;"
         },
-        {
-            "Name": "(local)mssql_backdb",
-            "Type": 0,
-            "ConnectionString": "server=(localdb)\\MSSQLLocalDB;database=backdb;Trusted_Connection=True;Connection Timeout=30;"
+        "MsSQLExpress": {
+            "WorkDb": "server=localhost\\SQLEXPRESS;database=workdb;Trusted_Connection=True;Connection Timeout=30;",
+            "BackDb": "server=localhost\\SQLEXPRESS;database=backdb;Trusted_Connection=True;Connection Timeout=30;"
         },
-        {
-            "Name": "sqlite_workdb",
-            "Type": 1,
-            "ConnectionString": "Data Source=bin\\Debug\\net5.0\\workdb.db"
+        "MySQL": {
+            "WorkDb": "server=localhost;user=root;password=123123;database=workdb;Connection Timeout=30;",
+            "BackDb": "server=localhost;user=root;password=123123;database=backdb;Connection Timeout=30;"
         },
-        {
-            "Name": "sqlite_backdb",
-            "Type": 1,
-            "ConnectionString": "Data Source=bin\\Debug\\net5.0\\backdb.db"
-        },
-        {
-            "Name": "mysql_workdb",
-            "Type": 2,
-            "ConnectionString": "server=localhost;user=root;password=123123;database=workdb;Connection Timeout=30;"
-        },
-        {
-            "Name": "mysql_backdb",
-            "Type": 2,
-            "ConnectionString": "server=localhost;user=root;password=123123;database=backdb;Connection Timeout=30;"
+        "SQLite": {
+            "WorkDb": "Data Source=bin\\Debug\\net5.0\\workdb.db;Connection Timeout=30;",
+            "BackDb": "Data Source=bin\\Debug\\net5.0\\backdb.db;Connection Timeout=30;"
         }
-    ]
+    }
 }

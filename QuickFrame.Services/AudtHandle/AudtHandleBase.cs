@@ -10,7 +10,7 @@ namespace QuickFrame.Services
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TKey"></typeparam>
     public abstract class AudtHandleBase<TEntity, TKey> : IAudtHandle<TEntity, TKey>
-        where TEntity : WithStampTable, new()
+        where TEntity : TableEntity, new()
         where TKey : notnull
     {
         protected readonly string code = string.Empty;
@@ -59,26 +59,26 @@ namespace QuickFrame.Services
         /// <summary>
         /// 审核
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="key"></param>
         /// <returns></returns>
-        protected abstract Task AudtAsync(AudtInput<TKey> input);
+        protected abstract Task AudtAsync(TKey key);
         /// <summary>
         /// 审核(集合)
         /// </summary>
-        /// <param name="inputs"></param>
+        /// <param name="keys"></param>
         /// <returns></returns>
-        public Task AudtRangeAsync(AudtInput<TKey>[] inputs) => Task.CompletedTask;
+        public Task AudtRangeAsync(TKey[] keys) => Task.CompletedTask;
         /// <summary>
         /// 弃审
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="key"></param>
         /// <returns></returns>
-        protected abstract Task UnAudtAsync(AudtInput<TKey> input);
+        protected abstract Task UnAudtAsync(TKey key);
         /// <summary>
         /// 弃审(集合)
         /// </summary>
-        /// <param name="inputs"></param>
+        /// <param name="keys"></param>
         /// <returns></returns>
-        public Task UnAudtRangeAsync(AudtInput<TKey>[] inputs) => Task.CompletedTask;
+        public Task UnAudtRangeAsync(TKey[] keys) => Task.CompletedTask;
     }
 }

@@ -6,6 +6,7 @@ using QuickFrame.Models;
 using QuickFrame.Repositorys;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace QuickFrame.Services
@@ -21,7 +22,7 @@ namespace QuickFrame.Services
     public abstract class BillServiceBase<TEntity, TInput, TUpdInput, TView, TKey> : IHandle<TInput, TUpdInput, TKey>, IQuery<TView, TKey>
         where TEntity : WithStampTable, new()
         where TInput : IDataInput, new()
-        where TUpdInput : WithStampDataInput, new()
+        where TUpdInput : IDataInput, new()
         where TView : WithStampView, new()
         where TKey : notnull
     {
@@ -72,25 +73,35 @@ namespace QuickFrame.Services
         /// 修改
         /// </summary>
         /// <param name="keyValue"></param>
+        /// <param name="timestamp"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        public virtual async Task<int> UpdateAsync(TKey keyValue, TUpdInput input)
+        public virtual async Task<int> UpdateAsync(TKey keyValue, byte[] timestamp, TUpdInput input)
         {
             var res = await _repository.FindAsync(keyValue);
             _ = res ?? throw new HandelException(MessageCodeOption.Bad_Delete, keyValue);
-            _ = input.Timestamp.ToBase64() == res.timestamp.ToBase64() ? true : throw new HandelException(MessageCodeOption.Bad_Update, keyValue);
+            _ = res.timestamp.ToBase64() == timestamp.ToBase64() ? true : throw new HandelException(MessageCodeOption.Bad_Update, keyValue);
             _mapper.Map(input, res);
             return await _repository.UpdateAsync(res);
         }
         /// <summary>
         /// 删除
         /// </summary>
-        /// <param name="arrayKeyValue"></param>
+        /// <param name="arrayKeyStamp"></param>
         /// <returns></returns>
-        public virtual async Task<int> DeleteAsync(TKey[] arrayKeyValue)
+        public virtual async Task<int> DeleteAsync(KeyStamp<TKey>[] arrayKeyStamp)
         {
-            var count = await _repository.DeleteAsync(arrayKeyValue);
-            return count > 0 ? count : throw new HandelException(MessageCodeOption.Bad_Delete, arrayKeyValue);
+            var keys = arrayKeyStamp.Select(x => x.Key).ToArray();
+            var array = await _repository.FindAsync(keys);
+            _ = array ?? throw new HandelArrayException(MessageCodeOption.Bad_Delete, keys);
+            var bad_keys = array
+                .Join(arrayKeyStamp, KeyFunc, y => y.Key, (x, y) => new { y.Key, y.Timpstamp, x?.timestamp })
+                .Where(x => x.Timpstamp.ToBase64() != x.timestamp.ToBase64())
+                .Select(x => x.Key)
+                .ToArray();
+            _ = bad_keys.Any() ? throw new HandelArrayException(MessageCodeOption.Bad_Update, bad_keys) : true;
+            var count = await _repository.DeleteAsync(keys);
+            return count > 0 ? count : throw new HandelArrayException(MessageCodeOption.Bad_Delete, keys);
         }
         /// <summary>
         /// 获取

@@ -2,6 +2,7 @@
 using QuickFrame.Common;
 using QuickFrame.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -19,12 +20,18 @@ namespace QuickFrame.Repositorys
         where TKey : notnull
     {
         private static string[]? _keys;
+        private static Func<TEntity, TKey>? _keyFunc;
         protected DbSet<TEntity> Set;
+        public event EventHandler<IEnumerable<TEntity>>? DeletedByKey;
 
         protected RepositoryBase(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
             Set = unitOfWork.Context.Set<TEntity>();
         }
+        /// <summary>
+        /// 主表主键取值委托
+        /// </summary>
+        protected Func<TEntity, TKey> KeyFunc => _keyFunc ??= ExpressionHelper.MemberLambda<TEntity, TKey>(Keys).Compile();
         /// <summary>
         /// 超时机制
         /// </summary>
@@ -121,46 +128,67 @@ namespace QuickFrame.Repositorys
         /// <summary>
         /// 删除(异步)
         /// </summary>
-        /// <param name="entity"></param>
-        public virtual Task<int> DeleteAsync(TEntity entity)
+        /// <param name="entities"></param>
+        public virtual async Task<int> DeleteAsync(IEnumerable<TEntity> entities)
         {
-            Set.Remove(entity);
-            return Work.AutoSaveChangesAsync();
+            Set.RemoveRange(entities);
+            int count;
+            try
+            {
+                count = await Work.AutoSaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                var keys = GetKeysByDbUpdateConcurrencyException(ex);
+                throw new HandelArrayException(MessageCodeOption.Bad_Update, keys);
+            }
+            return count;
         }
         /// <summary>
         /// 删除(异步)
         /// </summary>
-        /// <param name="entities"></param>
-        public virtual Task<int> DeleteAsync(IEnumerable<TEntity> entities)
-        {
-            Set.RemoveRange(entities);
-            return Work.AutoSaveChangesAsync();
-        }
+        /// <param name="entity"></param>
+        public virtual Task<int> DeleteAsync(TEntity entity) => DeleteAsync(new[] { entity });
         /// <summary>
         /// 根据主键删除(异步)
         /// </summary>
         /// <param name="arrayKeyValue"></param>
+        /// <param name="deletedCallback"></param>
         /// <returns></returns>
-        public virtual async Task<int> DeleteAsync(TKey[] arrayKeyValue)
+        public virtual async Task<int> DeleteAsync(TKey[] arrayKeyValue, Action<IEnumerable<TEntity>>? deletedCallback = default)
         {
             var array = await FindAsync(arrayKeyValue);
             Set.RemoveRange(array);
-            return await Work.AutoSaveChangesAsync();
+            int count;
+            try
+            {
+                count = await Work.AutoSaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                var keys = GetKeysByDbUpdateConcurrencyException(ex);
+                throw new HandelArrayException(MessageCodeOption.Bad_Update, keys);
+            }
+            if ((array?.Any() ?? false) && count > 0)
+            {
+                deletedCallback?.Invoke(array);
+                DeletedByKey?.Invoke(this, array);
+            }
+            return count;
         }
         /// <summary>
         /// 根据主键删除(异步)
         /// </summary>
         /// <param name="keyValue"></param>
+        /// <param name="deletedCallback"></param>
         /// <returns></returns>
-        public virtual Task<int> DeleteAsync(TKey keyValue) => DeleteAsync(new[] { keyValue });
-        /// <summary>
-        /// 删除
-        /// </summary>
-        /// <param name="entity"></param>
-        public virtual int Delete(TEntity entity)
+        public virtual Task<int> DeleteAsync(TKey keyValue, Action<TEntity>? deletedCallback = default)
         {
-            Set.Remove(entity);
-            return Work.AutoSaveChanges();
+            if (deletedCallback != default)
+            {
+                return DeleteAsync(new[] { keyValue }, array => array.ForEach(deletedCallback));
+            }
+            return DeleteAsync(new[] { keyValue });
         }
         /// <summary>
         /// 删除
@@ -169,25 +197,64 @@ namespace QuickFrame.Repositorys
         public virtual int Delete(IEnumerable<TEntity> entities)
         {
             Set.RemoveRange(entities);
-            return Work.AutoSaveChanges();
+            int count;
+            try
+            {
+                count = Work.AutoSaveChanges();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                var keys = GetKeysByDbUpdateConcurrencyException(ex);
+                throw new HandelArrayException(MessageCodeOption.Bad_Update, keys);
+            }
+            return count;
         }
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="entity"></param>
+        public virtual int Delete(TEntity entity) => Delete(new[] { entity });
         /// <summary>
         /// 根据主键删除
         /// </summary>
         /// <param name="arrayKeyValue"></param>
+        /// <param name="deletedCallback">删除后的回调</param>
         /// <returns></returns>
-        public virtual int Delete(TKey[] arrayKeyValue)
+        public virtual int Delete(TKey[] arrayKeyValue, Action<IEnumerable<TEntity>>? deletedCallback = default)
         {
             var array = Find(arrayKeyValue);
             Set.RemoveRange(array);
-            return Work.AutoSaveChanges();
+            int count;
+            try
+            {
+                count = Work.AutoSaveChanges();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                var keys = GetKeysByDbUpdateConcurrencyException(ex);
+                throw new HandelArrayException(MessageCodeOption.Bad_Update, keys);
+            }
+            if ((array?.Any() ?? false) && count > 0)
+            {
+                deletedCallback?.Invoke(array);
+                DeletedByKey?.Invoke(this, array);
+            }
+            return count;
         }
         /// <summary>
         /// 根据主键删除
         /// </summary>
         /// <param name="keyValue"></param>
+        /// <param name="deletedCallback"></param>
         /// <returns></returns>
-        public virtual int Delete(TKey keyValue) => Delete(new[] { keyValue });
+        public virtual int Delete(TKey keyValue, Action<TEntity>? deletedCallback = default)
+        {
+            if (deletedCallback != default)
+            {
+                return Delete(new[] { keyValue }, array => array.ForEach(deletedCallback));
+            }
+            return Delete(new[] { keyValue });
+        }
         /// <summary>
         /// 修改(异步)
         /// </summary>
@@ -195,18 +262,25 @@ namespace QuickFrame.Repositorys
         public virtual async Task<int> UpdateAsync(IEnumerable<TEntity> entities)
         {
             Set.UpdateRange(entities);
-            return await Work.AutoSaveChangesAsync();
+            int count;
+            try
+            {
+                count = await Work.AutoSaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                var keys = GetKeysByDbUpdateConcurrencyException(ex);
+                throw new HandelArrayException(MessageCodeOption.Bad_Update, keys);
+                throw;
+            }
+            return count;
         }
         /// <summary>
         /// 修改(异步)
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual async Task<int> UpdateAsync(TEntity entity)
-        {
-            Set.Update(entity);
-            return await Work.AutoSaveChangesAsync();
-        }
+        public virtual Task<int> UpdateAsync(TEntity entity) => UpdateAsync(new[] { entity });
         /// <summary>
         /// 修改
         /// </summary>
@@ -214,18 +288,24 @@ namespace QuickFrame.Repositorys
         public virtual int Update(IEnumerable<TEntity> entities)
         {
             Set.UpdateRange(entities);
-            return Work.AutoSaveChanges();
+            int count;
+            try
+            {
+                count = Work.AutoSaveChanges();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                var keys = GetKeysByDbUpdateConcurrencyException(ex);
+                throw new HandelArrayException(MessageCodeOption.Bad_Update, keys);
+            }
+            return count;
         }
         /// <summary>
         /// 修改
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual int Update(TEntity entity)
-        {
-            Set.Update(entity);
-            return Work.AutoSaveChanges();
-        }
+        public virtual int Update(TEntity entity) => Update(new[] { entity });
         /// <summary>
         /// 根据主键查找(异步)
         /// </summary>
@@ -277,6 +357,24 @@ namespace QuickFrame.Repositorys
         {
             var whereExp = ExpressionHelper.WhereEqualOr<TEntity, TKey>(Keys, arrayKeyValue);
             return Set.Where(whereExp).ToArray();
+        }
+        /// <summary>
+        /// 获取并发乐观锁异常的数据Key集合
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <returns></returns>
+        private ArrayList GetKeysByDbUpdateConcurrencyException(DbUpdateConcurrencyException ex)
+        {
+            var keyarray = new ArrayList(ex.Entries.Count);
+            foreach (var item in ex.Entries)
+            {
+                if (item.Entity is TEntity entity)
+                {
+                    var key = KeyFunc.Invoke(entity);
+                    keyarray.Add(key);
+                }
+            }
+            return keyarray;
         }
         /// <summary>
         /// 析构

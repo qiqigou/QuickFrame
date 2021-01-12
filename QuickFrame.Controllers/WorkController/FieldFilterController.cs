@@ -44,23 +44,26 @@ namespace QuickFrame.Controllers
         /// 修改
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="timestamp"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        [HttpPut("{id:long}")]
-        public async Task<MsgOutput> UpdateMainChildAsync([FromRoute] long id, [FromBody] MainChildInput<FieldFilterUpdInput, FieldFiltercUpdInput> input)
+        [HttpPut("{id:long}/{timestamp}")]
+        public async Task<MsgOutput> UpdateMainChildAsync([FromRoute] long id, [FromRoute] byte[] timestamp, [FromBody] MainChildInput<FieldFilterUpdInput, FieldFiltercUpdInput> input)
         {
-            await _fieldFilterService.UpdateMainChildAsync(id, input);
+            await _fieldFilterService.UpdateMainChildAsync(id, timestamp, input);
             return MsgOutputOption.OkMsg;
         }
         /// <summary>
         /// 删除
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="timestamp"></param>
         /// <returns></returns>
-        [HttpDelete("{id:long}")]
-        public async Task<MsgOutput> DeleteMainChildAsync([FromRoute] long id)
+        [HttpDelete("{id:long}/{timestamp}")]
+        public async Task<MsgOutput> DeleteMainChildAsync([FromRoute] long id, [FromRoute] byte[] timestamp)
         {
-            await _fieldFilterService.DeleteMainChildAsync(new[] { id });
+            var key = new KeyStamp<long>(id, timestamp);
+            await _fieldFilterService.DeleteMainChildAsync(new[] { key });
             return MsgOutputOption.OkMsg;
         }
         /// <summary>

@@ -81,7 +81,7 @@ namespace System
             if (s.IsNull())
                 return string.Empty;
             var bytes = encoding.GetBytes(s);
-            return UtilConvert.ToBase64(bytes) ?? string.Empty;
+            return UtilConvert.ToBase64(bytes);
         }
         /// <summary>
         /// 替换路径中的斜杠

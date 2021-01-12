@@ -28,12 +28,12 @@ namespace QuickFrame.Services
         [AutoProxy(nameof(TestProxyHandle), nameof(Test1ProxyHandle))]
         public override Task<int> CreateAsync(UserInfoInput input) => base.CreateAsync(input);
 
-        public Task AudtRangeAsync(AudtInput<int>[] inputs) => _audtHandle.AudtRangeAsync(inputs);
+        public Task AudtRangeAsync(int[] keys) => _audtHandle.AudtRangeAsync(keys);
 
-        public Task UnAudtRangeAsync(AudtInput<int>[] inputs) => _audtHandle.UnAudtRangeAsync(inputs);
+        public Task UnAudtRangeAsync(int[] keys) => _audtHandle.UnAudtRangeAsync(keys);
 
-        public Task ApproveRangeAsync(AudtInput<int>[] inputs) => _approveHandle.ApproveRangeAsync(inputs);
+        public Task ApproveRangeAsync(int[] keys) => _approveHandle.ApproveRangeAsync(keys);
 
-        public Task UnApproveRangeAsync(AudtInput<int>[] inputs) => _approveHandle.UnApproveRangeAsync(inputs);
+        public Task UnApproveRangeAsync(int[] keys) => _approveHandle.UnApproveRangeAsync(keys);
     }
 }

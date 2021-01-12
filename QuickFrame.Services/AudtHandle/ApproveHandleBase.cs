@@ -1,5 +1,4 @@
-﻿using QuickFrame.Common;
-using QuickFrame.Models;
+﻿using QuickFrame.Models;
 using System.Threading.Tasks;
 
 namespace QuickFrame.Services
@@ -8,16 +7,16 @@ namespace QuickFrame.Services
     /// 审批抽象类
     /// </summary>
     public abstract class ApproveHandleBase<TEntity, TKey> : IApproveHandle<TEntity, TKey>
-        where TEntity : WithStampTable, new()
+        where TEntity : TableEntity, new()
         where TKey : notnull
     {
-        protected abstract Task ApproveAsync(AudtInput<TKey> input);
+        protected abstract Task ApproveAsync(TKey key);
 
-        public Task ApproveRangeAsync(AudtInput<TKey>[] inputs) => Task.CompletedTask;
+        public Task ApproveRangeAsync(TKey[] keys) => Task.CompletedTask;
 
-        protected abstract Task UnApproveAsync(AudtInput<TKey> input);
+        protected abstract Task UnApproveAsync(TKey key);
 
-        public Task UnApproveRangeAsync(AudtInput<TKey>[] inputs) => Task.CompletedTask;
+        public Task UnApproveRangeAsync(TKey[] keys) => Task.CompletedTask;
 
         protected abstract Task HandleAsync();
     }

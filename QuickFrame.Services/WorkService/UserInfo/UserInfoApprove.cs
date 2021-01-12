@@ -10,12 +10,12 @@ namespace QuickFrame.Services
     [TransientInjection]
     public class UserInfoApprove : ApproveHandleBase<userinfo_us, int>
     {
-        protected override Task ApproveAsync(AudtInput<int> input)
+        protected override Task ApproveAsync(int key)
         {
             throw new System.NotImplementedException();
         }
 
-        protected override Task UnApproveAsync(AudtInput<int> input)
+        protected override Task UnApproveAsync(int key)
         {
             throw new System.NotImplementedException();
         }

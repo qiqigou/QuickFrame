@@ -1,4 +1,6 @@
 ﻿using QuickFrame.Common;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace QuickFrame.IServices
@@ -13,7 +15,7 @@ namespace QuickFrame.IServices
     /// <typeparam name="TKey">主表主键</typeparam>
     public interface IHandleMainChild<TMainInput, TMainUpdInput, TChildInput, TChildUpdInput, TKey>
         where TMainInput : IDataInput, new()
-        where TMainUpdInput : WithStampDataInput, new()
+        where TMainUpdInput : IDataInput, new()
         where TChildInput : IDataInput, new()
         where TChildUpdInput : IDataInput, new()
         where TKey : notnull
@@ -28,14 +30,15 @@ namespace QuickFrame.IServices
         /// 修改
         /// </summary>
         /// <param name="keyValue"></param>
+        /// <param name="timestamp"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<int> UpdateMainChildAsync(TKey keyValue, MainChildInput<TMainUpdInput, TChildUpdInput> input);
+        Task<int> UpdateMainChildAsync(TKey keyValue, byte[] timestamp, MainChildInput<TMainUpdInput, TChildUpdInput> input);
         /// <summary>
         /// 根据主键删除(支持批量)
         /// </summary>
-        /// <param name="arrayKeyValue"></param>
+        /// <param name="arrayKeyStamp"></param>
         /// <returns></returns>
-        Task<int> DeleteMainChildAsync(TKey[] arrayKeyValue);
+        Task<int> DeleteMainChildAsync(KeyStamp<TKey>[] arrayKeyStamp);
     }
 }

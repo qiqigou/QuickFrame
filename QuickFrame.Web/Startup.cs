@@ -2,12 +2,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QuickFrame.Common;
 using QuickFrame.Extensions;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Reflection;
 
 namespace QuickFrame.Web
@@ -35,22 +38,16 @@ namespace QuickFrame.Web
             services.Configure<AppConfig>(_configuration);//注入app配置
             services.Configure<DbConfig>(_configuration);//注入db配置
             services.Configure<CacheConfig>(_configuration);//注入cache配置
-
-            var jwtconfig = _configuration.Get<JwtConfig>();//获取jwt配置
-            var appconfig = _configuration.Get<AppConfig>();//获取app配置
-            var dbconfig = _configuration.Get<DbConfig>();//获取db配置
-            var cacheconfig = _configuration.Get<CacheConfig>();//获取cache配置
-
             services.AddDbContextSetup();//注入数据库上下文
-            services.AddCorsSetup(appconfig);//注入跨域配置
-            services.AddRabbitMQSetup(appconfig);//注入RabbitMQ配置
+            services.AddCorsSetup(_configuration);//注入跨域配置
+            services.AddRabbitMQSetup(_configuration);//注入RabbitMQ配置
             services.AddAuthorizationPolicySetup();//注入授权策略配置
-            services.AddIdWorkerSetup(appconfig);//注入唯一ID服务
-            services.AddCacheSetup(cacheconfig);//注入缓存配置
-            services.AddAuthenticationSetup(appconfig, jwtconfig);//注入认证配置
+            services.AddIdWorkerSetup(_configuration);//注入唯一ID服务
+            services.AddCacheSetup(_configuration);//注入缓存配置
+            services.AddAuthenticationSetup(_configuration);//注入认证配置
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();//注入身份信息解析器
             services.AddHealthChecksSetup();//注入健康检查服务
-            services.AddSwaggerSetup(_environment, appconfig);//注入文档配置
+            services.AddSwaggerSetup(_environment, _configuration);//注入文档配置
             services.AddAssignProviderSetup();//注入赋值器
 
             //注入控制器并且设置过滤器
@@ -61,6 +58,8 @@ namespace QuickFrame.Web
                 options.Filters.Add<ApiExceptionFilter>();
                 options.MaxModelValidationErrors = 10;//模型验证最大错误数
                 options.MaxValidationDepth = 20;//最大递归验证层数
+                //设置自定义的模型绑定提供器,提供对byte[]的转换
+                options.ModelBinderProviders.Insert(0, new MyByteArrayModelBinderProvider());
             })
             .AddJsonOptions(options =>
             {
@@ -77,16 +76,9 @@ namespace QuickFrame.Web
         /// <param name="builder"></param>
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            var assemblyServices = Assembly.Load(AssemblyOption.ServicesName);
-            var assemblyCommon = Assembly.Load(AssemblyOption.CommonName);
-            var assemblyRepository = Assembly.Load(AssemblyOption.RepositorysName);
-
-            //注入服务和仓储
-            builder.AddRegisterServicesAndRepository(assemblyServices, assemblyRepository);
-            //注入被特性标记的类型
-            builder.AddRegisterAttributeSetup(assemblyServices, assemblyCommon, assemblyRepository);
-            //注入映射器配置
-            builder.AddRegisterMapsterMapper(assemblyServices, assemblyCommon, assemblyRepository);
+            builder.AddRegisterServicesAndRepository();//注入服务和仓储
+            builder.AddRegisterAttributeSetup();//注入被特性标记的类型
+            builder.AddRegisterMapsterMapper();//注入映射器配置
         }
         /// <summary>
         /// 中间件管道
@@ -98,7 +90,7 @@ namespace QuickFrame.Web
             {
                 app.UseDeveloperExceptionPage();//开发模式下的错误处理页面
             }
-            app.UseCustomSwagger(_environment);//文档中间件
+            app.UseSwaggerMildd(_environment);//文档中间件
             app.UseServerIdMildd(_configuration);//服务ID中间件
             app.UseRouting();//路由中间件
             app.UseCors();//跨域中间件

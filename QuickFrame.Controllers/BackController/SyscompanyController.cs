@@ -34,11 +34,13 @@ namespace QuickFrame.Controllers
         /// 删除
         /// </summary>
         /// <param name="id">公司编号</param>
+        /// <param name="timestamp">时间戳</param>
         /// <returns></returns>
-        [HttpDelete("{id}")]
-        public async Task<MsgOutput> DeleteAsync([FromRoute] string id)
+        [HttpDelete("{id}/{timestamp}")]
+        public async Task<MsgOutput> DeleteAsync([FromRoute] string id, [FromRoute] byte[] timestamp)
         {
-            await _sysCompanyService.DeleteAsync(new[] { id });
+            var key = new KeyStamp<string>(id, timestamp);
+            await _sysCompanyService.DeleteAsync(new[] { key });
             return MsgOutputOption.OkMsg;
         }
         /// <summary>
@@ -55,12 +57,13 @@ namespace QuickFrame.Controllers
         /// 修改
         /// </summary>
         /// <param name="id">公司编号</param>
+        /// <param name="timestamp"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
-        public async Task<MsgOutput> UpdateAsync([FromRoute] string id, [FromBody] SysCompanyUpdInput input)
+        [HttpPut("{id}/{timestamp}")]
+        public async Task<MsgOutput> UpdateAsync([FromRoute] string id, [FromRoute] byte[] timestamp, [FromBody] SysCompanyUpdInput input)
         {
-            await _sysCompanyService.UpdateAsync(id, input);
+            await _sysCompanyService.UpdateAsync(id, timestamp, input);
             return MsgOutputOption.OkMsg;
         }
         /// <summary>

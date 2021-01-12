@@ -3,6 +3,7 @@ using QuickFrame.Models;
 using QuickFrame.Tests;
 using System;
 using System.Linq.Expressions;
+using System.Net;
 
 namespace QuickFrame.Common.Tests
 {
@@ -83,6 +84,42 @@ namespace QuickFrame.Common.Tests
             Assert.AreEqual(array[0], "name");
             array = ExpressionHelper.GetMemberNames<userinfo_us, int>(px => px.age);
             Assert.AreEqual(array[0], "age");
+        }
+
+        [TestMethod()]
+        public void Test()
+        {
+            var type = typeof(userinfo_us);
+            var propName = nameof(userinfo_us.name);
+            var lab = Expression.Label(typeof(string));
+            var px = Expression.Parameter(type, "px");
+
+            var key_var = Expression.Variable(typeof(string), "key");
+            var prop = Expression.Property(px, type, propName);
+            var assign = Expression.Assign(key_var, prop);
+            var notequal = Expression.NotEqual(px, Expression.Default(type));
+            var iftrue = Expression.IfThen(notequal, assign);
+
+            var ret = Expression.Return(lab, key_var);
+            var labExpr = Expression.Label(lab, Expression.Default(typeof(string)));
+            var block = Expression.Block(new[] { key_var }, new Expression[] { iftrue, ret, labExpr });
+            var express = Expression.Lambda<Func<userinfo_us?, string?>>(block, px);
+            var func = express.Compile();
+
+            var user = new userinfo_us { name = "wwww" };
+            var key = func.Invoke(user);
+            Assert.AreEqual(key, "wwww");
+            user = default;
+            key = func.Invoke(user);
+            Assert.IsNull(key);
+        }
+
+        [TestMethod()]
+        public void UrlTest()
+        {
+            var msg = "CNi3GvXDL%2FA=";
+            msg = WebUtility.UrlDecode(msg);
+            Assert.AreEqual(msg, "CNi3GvXDL/A=");
         }
     }
 }

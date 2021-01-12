@@ -1,4 +1,5 @@
 ﻿using CSRedis;
+using Microsoft.Extensions.Configuration;
 using QuickFrame.Common;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -12,10 +13,11 @@ namespace Microsoft.Extensions.DependencyInjection
         /// 注入缓存配置
         /// </summary>
         /// <param name="services"></param>
-        /// <param name="cacheconfig"></param>
+        /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddCacheSetup(this IServiceCollection services, CacheConfig cacheconfig)
+        public static IServiceCollection AddCacheSetup(this IServiceCollection services, IConfiguration configuration)
         {
+            var cacheconfig = configuration.Get<CacheConfig>();
             if (cacheconfig.Type == CacheType.Redis)
             {
                 //Redis缓存

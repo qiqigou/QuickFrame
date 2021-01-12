@@ -44,10 +44,9 @@ namespace QuickFrame.Controllers.Tests
             var output = JSONDeserialize<v_userinfo>(json);
             Assert.IsNotNull(output);
             //修改
-            api = WorkUrl(nameof(UserInfoController), nameof(UserInfoController.UpdateAsync), keyvalue);
+            api = WorkUrl(nameof(UserInfoController), nameof(UserInfoController.UpdateAsync), keyvalue, output.timestamp.ToBase64());
             var updinput = new UserInfoUpdInput
             {
-                Timestamp = output.timestamp,
                 Age = 21,
                 Sex = "男"
             };
@@ -69,7 +68,7 @@ namespace QuickFrame.Controllers.Tests
             Assert.AreEqual(output.age, updinput.Age);
             Assert.AreEqual(output.sex, updinput.Sex);
             //删除
-            api = WorkUrl(nameof(UserInfoController), nameof(UserInfoController.DeleteAsync), keyvalue);
+            api = WorkUrl(nameof(UserInfoController), nameof(UserInfoController.DeleteAsync), keyvalue, output.timestamp.ToBase64());
             res = await _client.DeleteAsync(api);
             if (!res.IsSuccessStatusCode)
             {

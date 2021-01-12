@@ -2,7 +2,6 @@
 using Newtonsoft.Json.Linq;
 using QuickFrame.Common;
 using QuickFrame.Models;
-using QuickFrame.Services;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -23,7 +22,7 @@ namespace QuickFrame.Controllers.Tests
             var api = BackUrl(nameof(SysCompanybakController), nameof(SysCompanybakController.CreateAsync));
             var input = new SysCompanybakInput
             {
-                ScbCorder = 992,
+                ScbCorder = 2992,
                 ScyCcompanyid = "xxxeee",
                 ScbCtype = "备份名xxxx",
                 ScsCshopid = "ooooo"
@@ -50,10 +49,9 @@ namespace QuickFrame.Controllers.Tests
             var output = JSONDeserialize<v_syscompanybak>(json);
             Assert.IsNotNull(output);
             //修改
-            api = BackUrl(nameof(SysCompanybakController), nameof(SysCompanybakController.UpdateAsync), part0, part1);
+            api = BackUrl(nameof(SysCompanybakController), nameof(SysCompanybakController.UpdateAsync), part0, part1, output.timestamp.ToBase64());
             var updinput = new SysCompanybakUpdInput
             {
-                Timestamp = output.timestamp,
                 ScbCtype = "eeeeeeee",
                 ScsCshopid = "yyyyyyyy"
             };
@@ -75,7 +73,7 @@ namespace QuickFrame.Controllers.Tests
             Assert.AreEqual(output.scb_ctype, updinput.ScbCtype);
             Assert.AreEqual(output.scs_cshopid, updinput.ScsCshopid);
             //删除
-            api = BackUrl(nameof(SysCompanybakController), nameof(SysCompanybakController.DeleteAsync), part0, part1);
+            api = BackUrl(nameof(SysCompanybakController), nameof(SysCompanybakController.DeleteAsync), part0, part1, output.timestamp.ToBase64());
             res = await _client.DeleteAsync(api);
             if (!res.IsSuccessStatusCode)
             {

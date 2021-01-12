@@ -23,7 +23,7 @@ namespace QuickFrame.Controllers.Tests
             var api = BackUrl(nameof(SyscompanyController), nameof(SyscompanyController.CreateAsync));
             var input = new SysCompanyInput
             {
-                ScyCcompanyid = "9953",
+                ScyCcompanyid = "3953",
                 ScyCadr = "esdf",
                 ScyCcompanyname = "士大夫撒地方",
                 ScyCemail = "efsdf",
@@ -53,10 +53,9 @@ namespace QuickFrame.Controllers.Tests
             var output = JSONDeserialize<v_syscompany>(json);
             Assert.IsNotNull(output);
             //修改
-            api = BackUrl(nameof(SyscompanyController), nameof(SyscompanyController.UpdateAsync), keyvalue);
+            api = BackUrl(nameof(SyscompanyController), nameof(SyscompanyController.UpdateAsync), keyvalue, output.timestamp.ToBase64());
             var updinput = new SysCompanyUpdInput
             {
-                Timestamp = output.timestamp,
                 ScyCadr = "pppppppppp",
                 ScyCcompanyname = "xxxxxxx"
             };
@@ -80,7 +79,7 @@ namespace QuickFrame.Controllers.Tests
             Assert.AreEqual(output.scy_cemail, input.ScyCemail);//验证输入空值是否会被修改
             Assert.AreEqual(output.scy_cfax, input.ScyCfax);
             //删除
-            api = BackUrl(nameof(SyscompanyController), nameof(SyscompanyController.DeleteAsync), keyvalue);
+            api = BackUrl(nameof(SyscompanyController), nameof(SyscompanyController.DeleteAsync), keyvalue, output.timestamp.ToBase64());
             res = await _client.DeleteAsync(api);
             if (!res.IsSuccessStatusCode)
             {

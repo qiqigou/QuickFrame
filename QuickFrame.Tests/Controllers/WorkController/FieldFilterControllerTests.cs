@@ -2,7 +2,6 @@
 using Newtonsoft.Json.Linq;
 using QuickFrame.Common;
 using QuickFrame.Models;
-using QuickFrame.Services;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -55,13 +54,10 @@ namespace QuickFrame.Controllers.Tests
             var output = JSONDeserialize<MainChildOutput<v_fieldfilter, v_fieldfilterc>>(json);
             Assert.IsNotNull(output);
             //修改
-            api = WorkUrl(nameof(FieldFilterController), nameof(FieldFilterController.UpdateMainChildAsync), keyvalue);
+            api = WorkUrl(nameof(FieldFilterController), nameof(FieldFilterController.UpdateMainChildAsync), keyvalue, output.Main.timestamp.ToBase64());
             var updinput = new MainChildInput<FieldFilterUpdInput, FieldFiltercUpdInput>
             {
-                Main = new FieldFilterUpdInput
-                {
-                    Timestamp = output.Main.timestamp
-                },
+                Main = new FieldFilterUpdInput(),
                 Child = new[]
                 {
                     new FieldFiltercUpdInput{ FgcField = nameof(userinfo_us.name),FgcIorder = 2 },
@@ -89,7 +85,7 @@ namespace QuickFrame.Controllers.Tests
             Assert.AreEqual(output.Child.Count(), 4);
             Assert.AreEqual(output.Child.Where(x => x.fgc_iorder == 1).Count(), 0);
             //删除
-            api = WorkUrl(nameof(FieldFilterController), nameof(FieldFilterController.DeleteMainChildAsync), keyvalue);
+            api = WorkUrl(nameof(FieldFilterController), nameof(FieldFilterController.DeleteMainChildAsync), keyvalue, output.Main.timestamp.ToBase64());
             res = await _client.DeleteAsync(api);
             if (!res.IsSuccessStatusCode)
             {

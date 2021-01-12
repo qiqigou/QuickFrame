@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using QuickFrame.Common;
@@ -19,10 +20,11 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="services"></param>
         /// <param name="environment"></param>
-        /// <param name="appConfig"></param>
+        /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddSwaggerSetup(this IServiceCollection services, IWebHostEnvironment environment, AppConfig appConfig)
+        public static IServiceCollection AddSwaggerSetup(this IServiceCollection services, IWebHostEnvironment environment, IConfiguration configuration)
         {
+            var appConfig = configuration.Get<AppConfig>();
             if (!environment.IsDevelopment() && !appConfig.Swagger) return services;
             return services.AddSwaggerGen(options =>
             {

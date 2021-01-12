@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using QuickFrame.Common;
 using QuickFrame.Extensions;
@@ -21,11 +22,12 @@ namespace Microsoft.Extensions.DependencyInjection
         /// 注入认证配置
         /// </summary>
         /// <param name="services"></param>
-        /// <param name="appconfig"></param>
-        /// <param name="jwtconfig"></param>
+        /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddAuthenticationSetup(this IServiceCollection services, AppConfig appconfig, JwtConfig jwtconfig)
+        public static IServiceCollection AddAuthenticationSetup(this IServiceCollection services, IConfiguration configuration)
         {
+            var appconfig = configuration.Get<AppConfig>();
+            var jwtconfig = configuration.Get<JwtConfig>();
             if (appconfig.IdentityServer.Enable)
             {
                 AddSSOSetup(services, appconfig);

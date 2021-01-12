@@ -24,7 +24,13 @@
         /// <summary>
         /// 消息内容
         /// </summary>
-        public string Message => MsgArgs?.Length > 0 ? string.Format(MsgTemplate ?? string.Empty, MsgArgs) : MsgTemplate ?? string.Empty;
+        public string Message
+        {
+            get
+            {
+                return MsgArgs?.Length > 0 ? string.Format(MsgTemplate ?? string.Empty, MsgArgs) : MsgTemplate ?? string.Empty;
+            }
+        }
 
         public MessageCode(int code, string title, string? msgtemplate = default, object[]? msgargs = default)
         {

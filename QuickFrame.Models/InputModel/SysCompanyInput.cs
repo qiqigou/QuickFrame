@@ -56,7 +56,7 @@ namespace QuickFrame.Models
     /// <summary>
     /// 公司表修改模型
     /// </summary>
-    public class SysCompanyUpdInput : WithStampDataInput
+    public class SysCompanyUpdInput : IDataInput
     {
         /// <summary>
         /// 公司名称

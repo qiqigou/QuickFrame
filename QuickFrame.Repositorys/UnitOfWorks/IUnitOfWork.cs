@@ -19,7 +19,7 @@ namespace QuickFrame.Repositorys
         /// <summary>
         /// 上下文
         /// </summary>
-        internal DbContext Context { get; }
+        DbContext Context { get; }
         /// <summary>
         /// 禁用自动保存
         /// </summary>

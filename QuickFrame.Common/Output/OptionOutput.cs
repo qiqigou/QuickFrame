@@ -9,14 +9,20 @@
         /// <summary>
         /// 显示名
         /// </summary>
-        public string Label { get; set; } = string.Empty;
+        public string Label { get; set; }
         /// <summary>
         /// 真实值
         /// </summary>
-        public TValue Value { get; set; } = default!;
+        public TValue Value { get; set; }
         /// <summary>
         /// 禁用
         /// </summary>
         public bool Disabled { get; set; }
+
+        public OptionOutput(string lable, TValue value)
+        {
+            Label = lable;
+            Value = value;
+        }
     }
 }

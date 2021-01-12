@@ -18,7 +18,7 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="app"></param>
         /// <param name="environment"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseCustomSwagger(this IApplicationBuilder app, IWebHostEnvironment environment)
+        public static IApplicationBuilder UseSwaggerMildd(this IApplicationBuilder app, IWebHostEnvironment environment)
         {
             var appconfig = app.ApplicationServices.GetRequiredService<IOptions<AppConfig>>().Value;
             if (!environment.IsDevelopment() && !appconfig.Swagger) return app;
@@ -28,7 +28,7 @@ namespace Microsoft.AspNetCore.Builder
                 doc.DocumentTitle = $"{AssemblyOption.RootName} {Assembly.GetEntryAssembly()?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion}";
                 foreach (var item in ConstantOptions.ModulesConstant.Modules)
                 {
-                    doc.SwaggerEndpoint($"/swagger/{item}/swagger.json", $"api-{item}");
+                    doc.SwaggerEndpoint($"swagger/{item}/swagger.json", $"api-{item}");
                 }
                 doc.RoutePrefix = string.Empty;//设置swagger页面访问别名
                 doc.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);//折叠Api

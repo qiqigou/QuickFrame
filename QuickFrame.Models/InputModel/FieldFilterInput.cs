@@ -21,7 +21,7 @@ namespace QuickFrame.Models
     /// <summary>
     /// 修改字段过滤规则
     /// </summary>
-    public class FieldFilterUpdInput : WithStampDataInput
+    public class FieldFilterUpdInput : IDataInput
     {
         /// <summary>
         /// 源类型名称

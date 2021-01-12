@@ -1,5 +1,4 @@
-﻿using QuickFrame.Common;
-using QuickFrame.Models;
+﻿using QuickFrame.Models;
 using System.Threading.Tasks;
 
 namespace QuickFrame.IServices
@@ -8,20 +7,20 @@ namespace QuickFrame.IServices
     /// 审批弃审批
     /// </summary>
     public interface IApprove<TEntity, TKey>
-        where TEntity : WithStampTable, new()
+        where TEntity : TableEntity, new()
         where TKey : notnull
     {
         /// <summary>
         /// 审批
         /// </summary>
-        /// <param name="inputs"></param>
+        /// <param name="keys"></param>
         /// <returns></returns>
-        Task ApproveRangeAsync(AudtInput<TKey>[] inputs);
+        Task ApproveRangeAsync(TKey[] keys);
         /// <summary>
         /// 弃批
         /// </summary>
-        /// <param name="inputs"></param>
+        /// <param name="keys"></param>
         /// <returns></returns>
-        Task UnApproveRangeAsync(AudtInput<TKey>[] inputs);
+        Task UnApproveRangeAsync(TKey[] keys);
     }
 }

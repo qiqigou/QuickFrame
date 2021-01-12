@@ -66,7 +66,7 @@ namespace QuickFrame.Models
     /// <summary>
     /// 专卖店修改模型
     /// </summary>
-    public class SysCompanyshopUpdInput : WithStampDataInput
+    public class SysCompanyshopUpdInput : IDataInput
     {
         /// <summary>
         /// 商场名称

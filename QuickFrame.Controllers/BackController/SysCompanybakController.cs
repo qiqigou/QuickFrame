@@ -2,6 +2,7 @@
 using QuickFrame.Common;
 using QuickFrame.IServices;
 using QuickFrame.Models;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace QuickFrame.Controllers
@@ -35,11 +36,13 @@ namespace QuickFrame.Controllers
         /// </summary>
         /// <param name="part0">商场ID</param>
         /// <param name="part1">公司编号</param>
+        /// <param name="timestamp">时间戳</param>
         /// <returns></returns>
-        [HttpDelete("{part0:int}/{part1}")]
-        public async Task<MsgOutput> DeleteAsync([FromRoute] int part0, [FromRoute] string part1)
+        [HttpDelete("{part0:int}/{part1}/{timestamp}")]
+        public async Task<MsgOutput> DeleteAsync([FromRoute] int part0, [FromRoute] string part1, [FromRoute] byte[] timestamp)
         {
-            await _syscompanybakService.DeleteAsync(new[] { (part0, part1) });
+            var key = new KeyStamp<(int, string)>((part0, part1), timestamp);
+            await _syscompanybakService.DeleteAsync(new[] { key });
             return MsgOutputOption.OkMsg;
         }
         /// <summary>
@@ -58,12 +61,13 @@ namespace QuickFrame.Controllers
         /// </summary>
         /// <param name="part0">商场ID</param>
         /// <param name="part1">公司编号</param>
+        /// <param name="timestamp">时间戳</param>
         /// <param name="input">输入模型</param>
         /// <returns></returns>
-        [HttpPut("{part0:int}/{part1}")]
-        public async Task<MsgOutput> UpdateAsync([FromRoute] int part0, [FromRoute] string part1, [FromBody] SysCompanybakUpdInput input)
+        [HttpPut("{part0:int}/{part1}/{timestamp}")]
+        public async Task<MsgOutput> UpdateAsync([FromRoute] int part0, [FromRoute] string part1, [FromRoute] byte[] timestamp, [FromBody] SysCompanybakUpdInput input)
         {
-            await _syscompanybakService.UpdateAsync((part0, part1), input);
+            await _syscompanybakService.UpdateAsync((part0, part1), timestamp, input);
             return MsgOutputOption.OkMsg;
         }
         /// <summary>

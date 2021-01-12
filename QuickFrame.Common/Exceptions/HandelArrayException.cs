@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,16 +10,23 @@ namespace QuickFrame.Common
     /// </summary>
     public class HandelArrayException : ApplicationException
     {
-        private readonly List<HandelException> _handelExceptions;
+        private readonly List<HandelException> _handelExceptions = new List<HandelException>(5);
         public IReadOnlyList<HandelException> Exceptions => _handelExceptions;
 
-        public HandelArrayException(HandelException exception)
+        public HandelArrayException(IEnumerable<HandelException> exceptions)
         {
-            _handelExceptions = new List<HandelException>
-            {
-                exception
-            };
+            _handelExceptions.AddRange(exceptions);
         }
+
+        public HandelArrayException(MessageCode messageCode, IEnumerable ages)
+        {
+            foreach (var item in ages)
+            {
+                var exception = new HandelException(messageCode, item);
+                _handelExceptions.Add(exception);
+            }
+        }
+
         /// <summary>
         /// 添加异常
         /// </summary>

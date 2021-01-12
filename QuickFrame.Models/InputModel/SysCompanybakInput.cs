@@ -30,7 +30,7 @@ namespace QuickFrame.Models
     /// <summary>
     /// 商场表修改模型
     /// </summary>
-    public class SysCompanybakUpdInput : WithStampDataInput
+    public class SysCompanybakUpdInput : IDataInput
     {
         /// <summary>
         /// 商场编号

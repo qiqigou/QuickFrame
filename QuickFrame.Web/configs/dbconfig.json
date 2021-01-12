@@ -1,36 +1,21 @@
 {
-    "Work": "mysql_workdb",
-    "Back": "mysql_backdb",
-    "ConnStrings": [
-        {
-            "Name": "(local)mssql_workdb",
-            "Type": 0,
-            "ConnectionString": "server=(localdb)\\MSSQLLocalDB;database=workdb;Trusted_Connection=True;Connection Timeout=30;"
+    "EnableConnName": "MySQL",
+    "DbConnStrings": {
+        "MsSQLLocal": {
+            "WorkDb": "server=(localdb)\\MSSQLLocalDB;database=workdb;Trusted_Connection=True;Connection Timeout=30;",
+            "BackDb": "server=(localdb)\\MSSQLLocalDB;database=backdb;Trusted_Connection=True;Connection Timeout=30;"
         },
-        {
-            "Name": "(local)mssql_backdb",
-            "Type": 0,
-            "ConnectionString": "server=(localdb)\\MSSQLLocalDB;database=backdb;Trusted_Connection=True;Connection Timeout=30;"
+        "MsSQLExpress": {
+            "WorkDb": "server=115.28.104.25\\SQLEXPRESS;database=workdb;Trusted_Connection=True;Connection Timeout=30;",
+            "BackDb": "server=115.28.104.25\\SQLEXPRESS;database=backdb;Trusted_Connection=True;Connection Timeout=30;"
         },
-        {
-            "Name": "mssql_workdb",
-            "Type": 0,
-            "ConnectionString": "server=localhost\\SQLEXPRESS;database=workdb;Trusted_Connection=True;Connection Timeout=30;"
+        "MySQL": {
+            "WorkDb": "server=custnet_mysql;user=root;password=123123;database=workdb;Connection Timeout=30;",
+            "BackDb": "server=custnet_mysql;user=root;password=123123;database=backdb;Connection Timeout=30;"
         },
-        {
-            "Name": "mssql_backdb",
-            "Type": 0,
-            "ConnectionString": "server=localhost\\SQLEXPRESS;database=backdb;Trusted_Connection=True;Connection Timeout=30;"
-        },
-        {
-            "Name": "mysql_workdb",
-            "Type": 2,
-            "ConnectionString": "server=custnet_mysql;user=root;password=123123;database=workdb;Connection Timeout=30;"
-        },
-        {
-            "Name": "mysql_backdb",
-            "Type": 2,
-            "ConnectionString": "server=custnet_mysql;user=root;password=123123;database=backdb;Connection Timeout=30;"
+        "SQLite": {
+            "WorkDb": "Data Source=workdb;Connection Timeout=30;",
+            "BackDb": "Data Source=backdb;Connection Timeout=30;"
         }
-    ]
+    }
 }

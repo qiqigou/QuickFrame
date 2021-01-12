@@ -25,6 +25,10 @@ namespace QuickFrame.Repositorys
         /// </summary>
         string[] Keys { get; }
         /// <summary>
+        /// 根据主键删除实体并保存后事件
+        /// </summary>
+        event EventHandler<IEnumerable<TEntity>>? DeletedByKey;
+        /// <summary>
         /// 查询
         /// </summary>
         /// <returns></returns>
@@ -67,14 +71,16 @@ namespace QuickFrame.Repositorys
         /// 根据主键删除(异步)
         /// </summary>
         /// <param name="arrayKeyValue"></param>
+        /// <param name="deletedCallback"></param>
         /// <returns></returns>
-        Task<int> DeleteAsync(TKey[] arrayKeyValue);
+        Task<int> DeleteAsync(TKey[] arrayKeyValue, Action<IEnumerable<TEntity>>? deletedCallback = default);
         /// <summary>
         /// 根据主键删除(异步)
         /// </summary>
         /// <param name="keyValue"></param>
+        /// <param name="deletedCallback"></param>
         /// <returns></returns>
-        Task<int> DeleteAsync(TKey keyValue);
+        Task<int> DeleteAsync(TKey keyValue, Action<TEntity>? deletedCallback = default);
         /// <summary>
         /// 删除
         /// </summary>
@@ -91,14 +97,16 @@ namespace QuickFrame.Repositorys
         /// 根据主键删除
         /// </summary>
         /// <param name="arrayKeyValue"></param>
+        /// <param name="deletedCallback"></param>
         /// <returns></returns>
-        int Delete(TKey[] arrayKeyValue);
+        int Delete(TKey[] arrayKeyValue, Action<IEnumerable<TEntity>>? deletedCallback = default);
         /// <summary>
         /// 根据主键删除
         /// </summary>
         /// <param name="keyValue"></param>
+        /// <param name="deletedCallback"></param>
         /// <returns></returns>
-        int Delete(TKey keyValue);
+        int Delete(TKey keyValue, Action<TEntity>? deletedCallback = default);
         /// <summary>
         /// 修改(异步)
         /// </summary>

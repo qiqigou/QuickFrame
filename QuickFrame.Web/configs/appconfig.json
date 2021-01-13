@@ -1,11 +1,11 @@
 {
     "CorUrls": ["http://localhost:3343"],
     "IdentityServer": {
-        "Enable": false,
+        "Enable": true,
         "ApiName": "quickframe_api",
         "ApiSecret": "quickframe_api_secrets",
-        "RequireHttps": false,
-        "Url": "http://localhost:5080"
+        "RequireHttps": true,
+        "Url": "https://onlyoned.com:5050"
     },
     "Swagger": true,
     "SwaggerScope": "quickframe",

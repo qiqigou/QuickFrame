@@ -4,8 +4,8 @@
         "Enable": true,
         "ApiName": "quickframe_api",
         "ApiSecret": "quickframe_api_secrets",
-        "RequireHttps": false,
-        "Url": "https://localhost:5050"
+        "RequireHttps": true,
+        "Url": "https://onlyoned.com:5050"
     },
     "Swagger": true,
     "SwaggerScope": "quickframe",

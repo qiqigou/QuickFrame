@@ -63,6 +63,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.NameClaimType = JwtClaimTypes.Name;//指定映射到用户名的Claim
                 options.RoleClaimType = JwtClaimTypes.Role;//指定映射到角色的Claim
                 options.JwtValidationClockSkew = TimeSpan.Zero;//设置Token有效期验证的时间偏移量为0
+                options.ClaimsIssuer = appConfig.IdentityServer.Issuer;//颁发者
             })
             .AddScheme<AuthenticationSchemeOptions, ResponseAuthenticationHandler>(nameof(ResponseAuthenticationHandler), o => { });
             //设置授权配置

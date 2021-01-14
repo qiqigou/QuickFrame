@@ -79,6 +79,10 @@ namespace QuickFrame.Common
         /// 要求使用HTTPS
         /// </summary>
         public bool RequireHttps { get; set; }
+        /// <summary>
+        /// 颁发者
+        /// </summary>
+        public string Issuer { get; set; } = string.Empty;
     }
     /// <summary>
     /// 测试项目配置

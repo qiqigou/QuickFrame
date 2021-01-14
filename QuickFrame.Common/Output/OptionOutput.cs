@@ -1,28 +1,34 @@
-﻿namespace QuickFrame.Common
+﻿using System;
+using System.Collections.Generic;
+
+namespace QuickFrame.Common
 {
     /// <summary>
-    /// 下拉选项输出
+    /// 普通下拉选项输出
     /// </summary>
-    public class OptionOutput<TValue> : IMEntity
-        where TValue : notnull
+    public class OptionOutput : IMEntity
     {
         /// <summary>
         /// 显示名
         /// </summary>
-        public string Label { get; set; }
+        public string Label { get; set; } = string.Empty;
         /// <summary>
         /// 真实值
         /// </summary>
-        public TValue Value { get; set; }
+        public object Value { get; set; } = new();
         /// <summary>
         /// 禁用
         /// </summary>
         public bool Disabled { get; set; }
-
-        public OptionOutput(string lable, TValue value)
-        {
-            Label = lable;
-            Value = value;
-        }
+    }
+    /// <summary>
+    /// 级联下拉值选项输出
+    /// </summary>
+    public class CascaderOptionOutput : OptionOutput
+    {
+        /// <summary>
+        /// 子集
+        /// </summary>
+        public IEnumerable<OptionOutput> Children { get; set; } = Array.Empty<OptionOutput>();
     }
 }

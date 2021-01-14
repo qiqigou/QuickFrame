@@ -1,6 +1,4 @@
 ﻿using QuickFrame.Common;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace QuickFrame.IServices
@@ -21,13 +19,13 @@ namespace QuickFrame.IServices
         where TKey : notnull
     {
         /// <summary>
-        /// 新增
+        /// 新增主子表
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<TKey> CreateMainChildAsync(MainChildInput<TMainInput, TChildInput> input);
         /// <summary>
-        /// 修改
+        /// 修改主子表
         /// </summary>
         /// <param name="keyValue"></param>
         /// <param name="timestamp"></param>
@@ -35,7 +33,7 @@ namespace QuickFrame.IServices
         /// <returns></returns>
         Task<int> UpdateMainChildAsync(TKey keyValue, byte[] timestamp, MainChildInput<TMainUpdInput, TChildUpdInput> input);
         /// <summary>
-        /// 根据主键删除(支持批量)
+        /// 根据主键删除主子表(支持批量)
         /// </summary>
         /// <param name="arrayKeyStamp"></param>
         /// <returns></returns>

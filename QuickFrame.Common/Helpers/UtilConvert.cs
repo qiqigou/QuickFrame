@@ -81,14 +81,18 @@ namespace QuickFrame.Common
         /// </summary>
         /// <typeparam name="TEnum"></typeparam>
         /// <returns></returns>
-        public static IEnumerable<OptionOutput<int>> GetOptions<TEnum>()
+        public static IEnumerable<OptionOutput> GetOptions<TEnum>()
             where TEnum : Enum
         {
             var enumType = typeof(TEnum);
-            if (!enumType.IsEnum) Array.Empty<OptionOutput<int>>();
+            if (!enumType.IsEnum) Array.Empty<OptionOutput>();
             return Enum.GetValues(enumType).Cast<Enum>()
-                .Select(x => new OptionOutput<int>(x.GetDescription(), Convert.ToInt32(x)))
-                .ToArray();
+                .Select(x => new OptionOutput
+                {
+                    Label = x.GetDescription(),
+                    Value = Convert.ToInt32(x),
+                    Disabled = false
+                }).ToArray();
         }
     }
 }

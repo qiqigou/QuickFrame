@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
@@ -18,8 +18,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\QuickFrame.EventBus\QuickFrame.EventBus.csproj" />
-        <ProjectReference Include="..\QuickFrame.IServices\QuickFrame.IServices.csproj" />
-        <ProjectReference Include="..\QuickFrame.Repositorys\QuickFrame.Repositorys.csproj" />
+        <ProjectReference Include="..\QuickFrame.Services\QuickFrame.Services.csproj" />
     </ItemGroup>
 
 </Project>

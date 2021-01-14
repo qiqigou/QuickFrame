@@ -2,15 +2,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QuickFrame.Common;
 using QuickFrame.Extensions;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Reflection;
 
 namespace QuickFrame.Web

@@ -48,7 +48,7 @@ namespace QuickFrame.Repositorys
         /// <summary>
         /// 主键
         /// </summary>
-        public string[] Keys => _keys ??= Work.Context.Model.GetEntityTypes().Where(x => x.ClrType == typeof(TEntity)).First().FindPrimaryKey().Properties.Select(x => x.Name).ToArray();
+        public string[] Keys => _keys ??= Work.Context.Model.FindEntityType(typeof(TEntity)).FindPrimaryKey().Properties.Select(x => x.Name).ToArray();
         /// <summary>
         /// 包含(异步)
         /// </summary>

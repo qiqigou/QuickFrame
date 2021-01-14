@@ -142,7 +142,7 @@ namespace QuickFrame.Services
             var array = await _mainRepository.FindAsync(keys);
             _ = array ?? throw new HandelArrayException(MessageCodeOption.Bad_Delete, keys);
             var bad_keys = array
-                .Join(arrayKeyStamp, MainKeyFunc, y => y.Key, (x, y) => new { y.Key, y.Timpstamp, x?.timestamp })
+                .Join(arrayKeyStamp, MainKeyFunc, y => y.Key, (x, y) => new { y.Key, y.Timpstamp, x.timestamp })
                 .Where(x => x.Timpstamp.ToBase64() != x.timestamp.ToBase64())
                 .Select(x => x.Key)
                 .ToArray();

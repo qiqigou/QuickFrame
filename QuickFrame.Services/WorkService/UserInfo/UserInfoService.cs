@@ -1,9 +1,9 @@
-﻿using QuickFrame.Common;
+﻿using System;
+using System.Threading.Tasks;
+using QuickFrame.Common;
 using QuickFrame.IServices;
 using QuickFrame.Models;
 using QuickFrame.Repositorys;
-using System;
-using System.Threading.Tasks;
 
 namespace QuickFrame.Services
 {

@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using System;
+﻿using System;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace QuickFrame.Common
 {

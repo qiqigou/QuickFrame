@@ -1,8 +1,8 @@
-﻿using Autofac;
+﻿using System.Reflection;
+using Autofac;
 using Mapster;
 using MapsterMapper;
 using QuickFrame.Common;
-using System.Reflection;
 
 namespace QuickFrame.Extensions
 {

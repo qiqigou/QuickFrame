@@ -1,11 +1,11 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System;
+using System.Net.Sockets;
+using Microsoft.Extensions.Logging;
 using Polly;
 using QuickFrame.Common;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Exceptions;
-using System;
-using System.Net.Sockets;
 
 namespace QuickFrame.EventBus
 {

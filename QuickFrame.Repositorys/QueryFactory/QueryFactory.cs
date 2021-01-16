@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using System.Linq.Expressions;
+using Microsoft.Extensions.DependencyInjection;
 using QuickFrame.Common;
 using QuickFrame.Models;
-using System;
-using System.Linq.Expressions;
 
 namespace QuickFrame.Repositorys
 {

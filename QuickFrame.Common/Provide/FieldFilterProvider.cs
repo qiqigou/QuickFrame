@@ -1,8 +1,8 @@
-﻿using DynamicTypeMap;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using DynamicTypeMap;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace QuickFrame.Common
 {

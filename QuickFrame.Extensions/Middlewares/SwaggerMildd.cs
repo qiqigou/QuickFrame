@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using QuickFrame.Common;
-using System.Reflection;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using QuickFrame.Common;
 
 namespace Microsoft.AspNetCore.Builder
 {

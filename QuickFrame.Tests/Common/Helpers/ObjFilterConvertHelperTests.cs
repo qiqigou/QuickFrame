@@ -1,9 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QuickFrame.Models;
-using QuickFrame.Tests;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using QuickFrame.Models;
+using QuickFrame.Tests;
 
 namespace QuickFrame.Common.Tests
 {

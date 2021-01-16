@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickFrame.Tests;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace QuickFrame.Common.Tests
 {

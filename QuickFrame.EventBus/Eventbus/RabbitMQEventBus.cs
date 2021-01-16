@@ -1,15 +1,15 @@
-﻿using Autofac;
+﻿using System;
+using System.Net.Sockets;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Autofac;
 using Microsoft.Extensions.Logging;
 using Polly;
 using QuickFrame.Common;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Exceptions;
-using System;
-using System.Net.Sockets;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace QuickFrame.EventBus
 {

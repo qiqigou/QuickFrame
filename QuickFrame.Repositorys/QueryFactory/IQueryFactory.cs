@@ -1,7 +1,7 @@
-﻿using QuickFrame.Common;
-using QuickFrame.Models;
-using System;
+﻿using System;
 using System.Linq.Expressions;
+using QuickFrame.Common;
+using QuickFrame.Models;
 
 namespace QuickFrame.Repositorys
 {

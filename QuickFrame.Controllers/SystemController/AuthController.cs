@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuickFrame.Common;
 using QuickFrame.IServices;
 using QuickFrame.Models;
-using System.Threading.Tasks;
 
 namespace QuickFrame.Controllers
 {

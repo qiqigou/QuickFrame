@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using QuickFrame.Common;
-using System;
+﻿using System;
 using System.Data.Common;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Storage;
+using QuickFrame.Common;
 
 namespace QuickFrame.Repositorys
 {

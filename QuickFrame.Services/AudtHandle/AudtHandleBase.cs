@@ -1,6 +1,6 @@
-﻿using QuickFrame.Common;
+﻿using System.Threading.Tasks;
+using QuickFrame.Common;
 using QuickFrame.Models;
-using System.Threading.Tasks;
 
 namespace QuickFrame.Services
 {

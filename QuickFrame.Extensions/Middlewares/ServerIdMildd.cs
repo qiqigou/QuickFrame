@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.IO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using QuickFrame.Common;
-using System.IO;
 
 namespace Microsoft.AspNetCore.Builder
 {

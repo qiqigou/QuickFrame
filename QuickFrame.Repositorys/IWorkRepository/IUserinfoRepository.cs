@@ -1,5 +1,5 @@
-﻿using QuickFrame.Models;
-using System;
+﻿using System;
+using QuickFrame.Models;
 
 namespace QuickFrame.Repositorys
 {

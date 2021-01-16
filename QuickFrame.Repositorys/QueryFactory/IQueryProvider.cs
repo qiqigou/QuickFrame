@@ -1,7 +1,7 @@
-﻿using QuickFrame.Common;
-using QuickFrame.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using QuickFrame.Common;
+using QuickFrame.Models;
 
 namespace QuickFrame.Repositorys
 {

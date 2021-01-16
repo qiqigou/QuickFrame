@@ -1,10 +1,10 @@
-﻿using QuickFrame.Common;
-using QuickFrame.IServices;
-using QuickFrame.Models;
-using System;
+﻿using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using QuickFrame.Common;
+using QuickFrame.IServices;
+using QuickFrame.Models;
 
 namespace QuickFrame.Services
 {

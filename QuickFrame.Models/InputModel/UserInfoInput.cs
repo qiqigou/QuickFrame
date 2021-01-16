@@ -1,5 +1,5 @@
-﻿using QuickFrame.Common;
-using System;
+﻿using System;
+using QuickFrame.Common;
 
 namespace QuickFrame.Models
 {

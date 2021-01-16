@@ -1,8 +1,8 @@
-﻿using Mapster;
+﻿using System;
+using Mapster;
 using QuickFrame.IServices;
 using QuickFrame.Models;
 using QuickFrame.Repositorys;
-using System;
 
 namespace QuickFrame.Services
 {

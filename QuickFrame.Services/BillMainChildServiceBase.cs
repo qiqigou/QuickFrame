@@ -1,15 +1,15 @@
-﻿using MapsterMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using QuickFrame.Common;
 using QuickFrame.IServices;
 using QuickFrame.Models;
 using QuickFrame.Repositorys;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace QuickFrame.Services
 {

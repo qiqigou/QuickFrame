@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using QuickFrame.Common;
-using QuickFrame.Models;
-using System;
+﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using QuickFrame.Common;
+using QuickFrame.Models;
 
 namespace QuickFrame.Repositorys
 {

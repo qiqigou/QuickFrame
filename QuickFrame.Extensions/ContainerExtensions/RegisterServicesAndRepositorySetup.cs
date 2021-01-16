@@ -1,10 +1,10 @@
-﻿using Autofac;
+﻿using System.Linq;
+using System.Reflection;
+using Autofac;
 using Autofac.Extras.DynamicProxy;
 using QuickFrame.Common;
 using QuickFrame.IServices;
 using QuickFrame.Repositorys;
-using System.Linq;
-using System.Reflection;
 
 namespace QuickFrame.Extensions
 {

@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using System;
+using System.Net.Mime;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using QuickFrame.Common;
-using System;
-using System.Net.Mime;
-using System.Text.Encodings.Web;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace QuickFrame.Extensions
 {

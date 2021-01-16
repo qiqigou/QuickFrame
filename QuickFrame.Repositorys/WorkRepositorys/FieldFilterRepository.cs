@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using QuickFrame.Models;
-using System.Linq;
 
 namespace QuickFrame.Repositorys
 {

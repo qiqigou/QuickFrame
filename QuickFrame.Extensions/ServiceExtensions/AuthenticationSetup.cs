@@ -1,4 +1,6 @@
-﻿using IdentityModel;
+﻿using System;
+using System.Text;
+using IdentityModel;
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -8,8 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using QuickFrame.Common;
 using QuickFrame.Extensions;
-using System;
-using System.Text;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

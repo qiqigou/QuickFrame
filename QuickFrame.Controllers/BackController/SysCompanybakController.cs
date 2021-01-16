@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using QuickFrame.Common;
 using QuickFrame.IServices;
 using QuickFrame.Models;
-using System.Net;
-using System.Threading.Tasks;
 
 namespace QuickFrame.Controllers
 {

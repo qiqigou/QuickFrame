@@ -1,7 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QuickFrame.Tests;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Claims;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using QuickFrame.Tests;
 
 namespace QuickFrame.Common.Tests
 {

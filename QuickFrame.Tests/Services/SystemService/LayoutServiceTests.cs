@@ -1,9 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickFrame.IServices;
 using QuickFrame.Models;
 using QuickFrame.Tests;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace QuickFrame.Services.Tests
 {

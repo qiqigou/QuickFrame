@@ -1,5 +1,5 @@
-﻿using ObjAssignMap;
-using System;
+﻿using System;
+using ObjAssignMap;
 
 namespace QuickFrame.Common
 {

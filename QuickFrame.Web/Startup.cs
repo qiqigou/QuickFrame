@@ -1,4 +1,6 @@
-﻿using Autofac;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
+using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -7,8 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QuickFrame.Common;
 using QuickFrame.Extensions;
-using System.IdentityModel.Tokens.Jwt;
-using System.Reflection;
 
 namespace QuickFrame.Web
 {

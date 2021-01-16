@@ -1,6 +1,6 @@
-﻿using Mapster;
+﻿using System;
+using Mapster;
 using QuickFrame.Models;
-using System;
 
 namespace QuickFrame.Services
 {

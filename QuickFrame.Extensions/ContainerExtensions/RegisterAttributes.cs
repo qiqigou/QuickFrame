@@ -1,7 +1,7 @@
-﻿using Autofac;
-using QuickFrame.Common;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
+using Autofac;
+using QuickFrame.Common;
 
 namespace QuickFrame.Extensions
 {

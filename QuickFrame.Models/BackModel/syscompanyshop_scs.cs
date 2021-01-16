@@ -1,6 +1,6 @@
-﻿using QuickFrame.Common;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using QuickFrame.Common;
 
 namespace QuickFrame.Models
 {

@@ -1,8 +1,8 @@
-﻿using DynamicTypeMap;
+﻿using System;
+using System.Linq;
+using DynamicTypeMap;
 using QuickFrame.Common;
 using QuickFrame.Repositorys;
-using System;
-using System.Linq;
 
 namespace QuickFrame.Services
 {

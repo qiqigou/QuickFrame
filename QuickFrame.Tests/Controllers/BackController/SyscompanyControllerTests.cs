@@ -1,10 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Net;
+using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using QuickFrame.Common;
 using QuickFrame.Models;
-using QuickFrame.Services;
-using System.Net;
-using System.Threading.Tasks;
 
 namespace QuickFrame.Controllers.Tests
 {

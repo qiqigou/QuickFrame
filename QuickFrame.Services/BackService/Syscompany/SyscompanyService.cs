@@ -1,7 +1,7 @@
-﻿using QuickFrame.IServices;
+﻿using System;
+using QuickFrame.IServices;
 using QuickFrame.Models;
 using QuickFrame.Repositorys;
-using System;
 
 namespace QuickFrame.Services
 {

@@ -49,7 +49,8 @@ namespace QuickFrame.Web
             try
             {
                 //解决时间戳转换失败的问题
-                value = WebUtility.UrlDecode(value);
+                //value = WebUtility.UrlDecode(value);
+                value = value.Replace("%2f", "/");
                 var model = Convert.FromBase64String(value);
                 bindingContext.Result = ModelBindingResult.Success(model);
             }

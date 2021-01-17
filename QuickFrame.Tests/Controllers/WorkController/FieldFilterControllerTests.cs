@@ -1,10 +1,12 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using QuickFrame.Common;
 using QuickFrame.Models;
+using QuickFrame.Repositorys;
 
 namespace QuickFrame.Controllers.Tests
 {
@@ -19,6 +21,9 @@ namespace QuickFrame.Controllers.Tests
         [TestMethod()]
         public async Task UpdateMainChildAsyncTest()
         {
+            //清空
+            var repository = _serviceProvider.GetRequiredService<IFieldFilterRepository>();
+            await repository.ExecuteSqlRawAsync($"delete from {nameof(fieldfilter_fg)} where 1=1");
             //创建
             var api = WorkUrl(nameof(FieldFilterController), nameof(FieldFilterController.CreateMainChildAsync));
             var input = new MainChildInput<FieldFilterInput, FieldFiltercInput>

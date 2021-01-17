@@ -52,7 +52,7 @@ namespace QuickFrame.Tests
             configBilder.AddJsonFile("configs/jwtconfig.json", true, true);
             configBilder.AddJsonFile("configs/appconfig.json", true, true);
             configBilder.AddJsonFile("configs/dbconfig.json", true, true);
-            configBilder.AddJsonFile($"configs/cacheconfig.json", true, true);
+            configBilder.AddJsonFile("configs/cacheconfig.json", true, true);
 #if DEBUG
             configBilder.AddJsonFile($"appsettings.{Environments.Development}.json", true, true);
             configBilder.AddJsonFile($"configs/jwtconfig.{Environments.Development}.json", true, true);

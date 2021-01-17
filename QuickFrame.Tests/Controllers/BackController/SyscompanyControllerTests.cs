@@ -1,9 +1,11 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using QuickFrame.Common;
 using QuickFrame.Models;
+using QuickFrame.Repositorys;
 
 namespace QuickFrame.Controllers.Tests
 {
@@ -18,6 +20,9 @@ namespace QuickFrame.Controllers.Tests
         [TestMethod()]
         public async Task UpdateAsyncTest()
         {
+            //清空
+            var repository = _serviceProvider.GetRequiredService<ISysCompanyRepository>();
+            await repository.ExecuteSqlRawAsync($"delete from {nameof(syscompany_scy)} where 1=1");
             //创建
             var api = BackUrl(nameof(SyscompanyController), nameof(SyscompanyController.CreateAsync));
             var input = new SysCompanyInput

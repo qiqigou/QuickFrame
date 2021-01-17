@@ -128,6 +128,20 @@ namespace QuickFrame.Repositorys
         /// <param name="entities">待修改实体集合</param>
         int Update(IEnumerable<TEntity> entities);
         /// <summary>
+        /// 执行SQL语句
+        /// </summary>
+        /// <param name="sql">SQL</param>
+        /// <param name="parameters">基本类型或者SqlParameter参数</param>
+        /// <returns></returns>
+        int ExecuteSqlRaw(string sql, params object[] parameters);
+        /// <summary>
+        /// 执行SQL语句(异步)
+        /// </summary>
+        /// <param name="sql">SQL</param>
+        /// <param name="parameters">基本类型或者SqlParameter参数</param>
+        /// <returns></returns>
+        Task<int> ExecuteSqlRawAsync(string sql, params object[] parameters);
+        /// <summary>
         /// 根据主键查找(异步)
         /// </summary>
         /// <param name="keyValue"></param>

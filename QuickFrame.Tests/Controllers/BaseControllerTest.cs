@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -14,7 +16,12 @@ namespace QuickFrame.Controllers.Tests
 {
     public class BaseControllerTest : BaseTest
     {
-        private static string JoinParams(object[] query) => query.Any() ? "/" + string.Join('/', query) : string.Empty;
+        private static string JoinParams(object[] query)
+        {
+            if (!query.Any()) return string.Empty;
+            var array = query.Select(x => WebUtility.UrlEncode(x.ToString() ?? string.Empty));
+            return "/" + string.Join('/', array);
+        }
         protected string SystemUrl(string controller, string action, params object[] query)
             => $"/api/{ConstantOptions.ModulesConstant.System}/{controller.Replace("Controller", "")}/{action.Replace("Async", "")}{JoinParams(query)}";
         protected string WorkUrl(string controller, string action, params object[] query)

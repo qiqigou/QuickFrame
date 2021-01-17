@@ -1,8 +1,10 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickFrame.Common;
 using QuickFrame.Models;
+using QuickFrame.Repositorys;
 
 namespace QuickFrame.Controllers.Tests
 {
@@ -17,6 +19,9 @@ namespace QuickFrame.Controllers.Tests
         [TestMethod()]
         public async Task UpdateAsyncTest()
         {
+            //清空
+            var repository = _serviceProvider.GetRequiredService<IUserinfoRepository>();
+            await repository.ExecuteSqlRawAsync($"delete from {nameof(userinfo_us)} where 1=1");
             //创建
             var api = WorkUrl(nameof(UserInfoController), nameof(UserInfoController.CreateAsync));
             var input = new UserInfoInput

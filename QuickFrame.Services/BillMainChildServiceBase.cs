@@ -147,7 +147,7 @@ namespace QuickFrame.Services
                 .Select(x => x.Key)
                 .ToArray();
             _ = bad_keys.Any() ? throw new HandelArrayException(MessageCodeOption.Bad_Update, bad_keys) : true;
-            var count = await _mainRepository.DeleteAsync(keys);
+            var count = await _mainRepository.DeleteAsync(array);
             return count > 0 ? count : throw new HandelArrayException(MessageCodeOption.Bad_Delete, keys);
         }
         /// <summary>

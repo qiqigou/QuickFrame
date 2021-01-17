@@ -359,6 +359,26 @@ namespace QuickFrame.Repositorys
             return Set.Where(whereExp).ToArray();
         }
         /// <summary>
+        /// 执行SQL语句
+        /// </summary>
+        /// <param name="sql">SQL</param>
+        /// <param name="parameters">基本类型或者SqlParameter参数</param>
+        /// <returns></returns>
+        public virtual int ExecuteSqlRaw(string sql, params object[] parameters)
+        {
+            return Work.Context.Database.ExecuteSqlRaw(sql, parameters);
+        }
+        /// <summary>
+        /// 执行SQL语句(异步)
+        /// </summary>
+        /// <param name="sql">SQL</param>
+        /// <param name="parameters">基本类型或者SqlParameter参数</param>
+        /// <returns></returns>
+        public virtual Task<int> ExecuteSqlRawAsync(string sql, params object[] parameters)
+        {
+            return Work.Context.Database.ExecuteSqlRawAsync(sql, parameters, TokenSource.Token);
+        }
+        /// <summary>
         /// 获取并发乐观锁异常的数据Key集合
         /// </summary>
         /// <param name="ex"></param>

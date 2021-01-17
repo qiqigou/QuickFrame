@@ -10,8 +10,8 @@
             "BackDb": "server=localhost\\SQLEXPRESS;database=backdb;Trusted_Connection=True;Connection Timeout=30;"
         },
         "MySQL": {
-            "WorkDb": "server=39.107.117.104;user=root;password=123123;database=workdb;Connection Timeout=30;",
-            "BackDb": "server=39.107.117.104;user=root;password=123123;database=backdb;Connection Timeout=30;"
+            "WorkDb": "server=onlyoned.com;user=root;password=123123;database=workdb;Connection Timeout=30;",
+            "BackDb": "server=onlyoned.com;user=root;password=123123;database=backdb;Connection Timeout=30;"
         },
         "SQLite": {
             "WorkDb": "Data Source=bin\\Debug\\net5.0\\workdb.db;Connection Timeout=30;",

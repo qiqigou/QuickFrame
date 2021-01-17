@@ -1,6 +1,6 @@
 {
-    "Type": 0,
+    "Type": 1,
     "Redis": {
-        "ConnectionString": "39.107.117.104:6379,password=,defaultDatabase=2"
+        "ConnectionString": "onlyoned.com:6379,password=,defaultDatabase=2"
     }
 }
